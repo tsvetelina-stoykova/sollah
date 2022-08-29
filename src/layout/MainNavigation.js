@@ -4,7 +4,7 @@ import { NavLink } from 'react-router-dom'
 const MainNavigation = () => {
 	
 	return(
-		<header className={classes.header}>
+		<header className={classes.primaryHeader}>
 			<div className={classes.logo}>
 				<h3>Sollah</h3>
 			</div>
