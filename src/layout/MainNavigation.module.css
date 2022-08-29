@@ -1,4 +1,46 @@
+/*---------------------*/
+/*       NAVIGATION    */
+/*---------------------*/
 .primaryHeader {
+	padding-top: var(--size-700);
+}
+
+.navContainer {
+	--max-width: 1110px;
+	--padding: 1rem;
+
+	width: min(var(--max-width), 100% - (var(--padding) * 2));
+	margin-inline: auto;
+}
+
+.navWrapper {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+
+.mobileNavToggle {
+	display: none;
+}
+
+.navList {
+	font-size: var(--fs-nav);
+	font-weight: var(--fw-semi-bold);
+	display: flex;
+	gap: clamp(var(--size-500), 5vw, var(--size-800));
+}
+
+.primaryNavigation > ul > li > a {
+	text-decoration: none;
+	color: var(--clr-neutral-400);
+}
+
+.primaryNavigation > ul > li > a:hover, 
+.primaryNavigation > ul > li > a:focus {
+	color: var(--clr-accent-400)
+}
+
+/* .primaryHeader {
 	height: 6.2rem;
 	display: flex;
 	padding: 0 10%;
@@ -33,5 +75,5 @@
 .nav a:active,
 .nav a.active {
 	color: hsl(0, 0%, 100%);
-}
+} */
   

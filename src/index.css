@@ -162,42 +162,6 @@ body {
 
 
 /*---------------------*/
-/*       NAVIGATION    */
-/*---------------------*/
-.primary-header {
-	padding-top: var(--size-700);
-}
-
-.nav-wrapper {
-	display: flex;
-	justify-content: space-between;
-	align-items: center;
-}
-
-.mobile-nav-toggle {
-	display: none;
-}
-
-.nav-list {
-	font-size: var(--fs-nav);
-	font-weight: var(--fw-semi-bold);
-	display: flex;
-	gap: clamp(var(--size-500), 5vw, var(--size-800));
-}
-
-.primary-navigation > ul > li > a {
-	text-decoration: none;
-	color: var(--clr-neutral-400);
-}
-
-.primary-navigation > ul > li > a:hover, 
-.primary-navigation > ul > li > a:focus {
-	color: var(--clr-accent-400)
-}
-
-
-
-/*---------------------*/
 /*       UTILITY       */
 /*---------------------*/
 .srOnly {
