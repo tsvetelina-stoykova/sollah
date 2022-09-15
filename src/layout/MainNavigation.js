@@ -1,40 +1,48 @@
+import { useState } from 'react'
 import classes from './MainNavigation.module.css'
 import { NavLink } from 'react-router-dom'
+import logo from '../assets/logo.png'
+import { FiMenu } from 'react-icons/fi'
+import { MdOutlineClose } from 'react-icons/md'
 
 const MainNavigation = () => {
+	const [navbarOpen, setNavbarOpen] = useState(false);
 	
+	const toggleHandler = () => {
+		setNavbarOpen(!navbarOpen)
+	}
+
+	const closeMenuHandler = () => {
+		setNavbarOpen(false)
+	}
+
 	return(
 		<header className={classes.primaryHeader}>
 			<div className={classes.navContainer}>
 				<div className={classes.navWrapper}>
-					<a href='#'><img src='' alt='Sollah Library' /></a>
-					<nav className={classes.primaryNavigation}>
-						{/* <ul aria-label='Primary' role='list' className={navList}>
-							<li>
-								<NavLink to='/' activeClassName={classes.active}>Home</NavLink>
-							</li>
-							<li>
-								<NavLink to='/assets' activeClassName={classes.active}>Videos</NavLink>
-							</li>
-							<li>
-								<NavLink to='/elearning' activeClassName={classes.active}>Elearning</NavLink>
-							</li>
-							<li>
-								<NavLink to='/ez-start' activeClassName={classes.active}>E-Z Start</NavLink>
-							</li>
-							<li>
-								<NavLink to='/topics' activeClassName={classes.active}>Topics</NavLink>
-							</li>
-							<li>
-								<NavLink to='/recent' activeClassName={classes.active}>What's new</NavLink>
-							</li>
-							<li>
-								<NavLink to='/blog' activeClassName={classes.active}>Blog</NavLink>
-							</li>
-						</ul> */}
-					</nav>
+					<a href='/'><img src={logo} className={classes.logo} alt='Sollah Interactive, LLC' width='247' height='50' /></a>
+					<button onClick={toggleHandler} className={`${classes.mobileNavToggle}`}>{navbarOpen ? (<MdOutlineClose size='2.2rem' color='#000'/>) : (<FiMenu size='2.2rem' color='#000'/>) }</button>					
+					
+					<button className='button displaySmNone displayMdInlineFlex'>Sign In</button>
 				</div>
 			</div>
+			<nav className={`${classes.primaryNavigation} ${classes.navContainer} ${navbarOpen ? `${classes.showMenu}` : ''}`}>
+				<ul aria-label='Primary'  className={classes.navList}>
+					<li>
+						<NavLink to='/' onClick={closeMenuHandler} activeClassName={classes.active}>Assets</NavLink>
+					</li>
+					<li>
+						<NavLink to='/playlists' onClick={closeMenuHandler} activeClassName={classes.active}>Playlists</NavLink>
+					</li>
+					<li>
+						<NavLink to='/blog' onClick={closeMenuHandler} activeClassName={classes.active}>Blog</NavLink>
+					</li>
+					<li>
+						<NavLink to='/messages' onClick={closeMenuHandler} activeClassName={classes.active}>Messages</NavLink>
+					</li>
+
+				</ul>
+			</nav>
 		</header>
 	)
 }

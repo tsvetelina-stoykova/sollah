@@ -7,6 +7,7 @@
 	--clr-accent-200: hsl(0, 0%, 27%);
 
 	--clr-primary-400: hsl(0, 0%, 20%);
+	--clr-primary-100: hsl(0, 0%, 100%);
 
 	--clr-neutral-900: hsl(60, 1%, 40%);
 	--clr-neutral-100: hsl(0, 0%, 60%);
@@ -17,8 +18,7 @@
 	--ff-heading: var(--ff-primary);
 
 	--fw-regular: 400;
-	--fw-semi-bold: 500;
-	--fw-bold: 700;
+	--fw-semi-bold: 600;
 
 	--fs-300: 0.8125rem;
 	--fs-400: 0.875rem;
@@ -136,12 +136,12 @@ body {
 	border: 0;
 	border-radius: 100vmax;
 	padding: 1.25em 2.5em;
-	font-weight: var(--fw-bold);
+	font-weight: var(--fw-semi-bold);
 	font-size: var(--fs-button);
 	line-height: 1;
-	color: var(--clr-neutral-100);
-	background-color: var(--clr-accent-400);
-	box-shadow: 0 1.125em 1em -1em var(--clr-accent-500);
+	color: var(--clr-primary-100);
+	background-color: var(--clr-accent-500);
+	box-shadow: 0 1.125em 1em -1em hsla(312.8, 92.3%, 35.9%, 0.76);
 }
 
 .button[data-type='inverted'] {
@@ -275,7 +275,7 @@ body {
 }
 
 @media (min-width: 50rem) {
-	.display-md-inline-flex {
+	.displayMdInlineFlex {
 		display: inline-flex;
 	}
 }
