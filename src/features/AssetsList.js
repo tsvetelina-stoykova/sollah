@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { getAssets } from './assetsSlice';
 import AssetsExcerpt from './AssetsExcerpt';
+import Pagination from './Pagination';
 
 const AsssetsList = () => {
 	const [page, setPage] = useState(1);
@@ -20,6 +21,7 @@ const AsssetsList = () => {
 		<div>
 			{/* <h3> {content}</h3> */}
 			{content}
+			<Pagination />
 		</div>
 	)
 }
