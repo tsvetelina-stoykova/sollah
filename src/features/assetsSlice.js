@@ -18,27 +18,28 @@ const assetsSlice = createSlice({
 		list: [],
 		count: 0,
 		status: {},
-		pagesize: 10
+		pagesize: 20
 	},
 	extraReducers: {
 		[getAssets.pending]: (state, action) => {
 			const page = action.meta.arg;
-			state.status[page] = 'loading'
+			state.status[page] = 'loading';
+			
 		},
 		[getAssets.fulfilled]: (state, action) => {
 			const page = action.meta.arg;
 			const assets = action.payload.assets;
-			state.status[page] = 'success'
+			state.status[page] = 'success';
 			state.count = action.payload.count;
 			if(state.list.length === 0) {
 				state.list = new Array(state.count);
-				console.log(state.list);
+				state.list.fill(null);
 			}
 			state.list.splice((page-1)*state.pagesize, assets.length, ...assets);
 		},
 		[getAssets.rejected]: (state, action) => {
 			const page = action.meta.arg;
-			state.status[page] = 'failed'
+			state.status[page] = 'failed';
 		},
 	}
 })

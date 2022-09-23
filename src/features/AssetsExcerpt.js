@@ -1,9 +1,9 @@
 import React from 'react'
 
-const AssetsExcerpt = ({l}) => {
+const AssetsExcerpt = ({asset}) => {
   return (
 	<article>
-		<h3>{l.title}</h3>
+		<h3>{asset ? asset.title : 'Loading'}</h3>
 	</article>
   )
 }

@@ -329,3 +329,8 @@ html {
 	border-color: hsl(205, 16%, 27%);
   } */
   
+
+button.selected {
+	background: black;
+	color: white;
+}
