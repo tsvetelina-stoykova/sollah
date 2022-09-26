@@ -10,12 +10,12 @@ const AssetsList = () => {
 	const [filter, setFilter] = useState({
 		page: 1,
 		q: '',
-		type_id: null,
-		topic_id: null,
-		learning_path_id: null,
-		target_audience_id: null,
-		industry_setting_id: null,
-		language_id: null,
+		type_id: '',
+		topic_id: '',
+		learning_path_id: '',
+		target_audience_id: '',
+		industry_setting_id: '',
+		language_id: '',
 	});
 
 	const dispatch = useDispatch();
@@ -45,16 +45,22 @@ const AssetsList = () => {
 	);
 
 	const changeFilter = (id, val) => {
+		dispatch({type:'assets/reset'});
 		setFilter({...filter, [id]: val});
+	}
+
+	const changePage = (page) => {
+		setFilter({...filter, page});
 	}
 
 	return (
 		<div>
-			<AssetsFilter label='Type' options={categories.type.all} selected={filter.type_id} onChange={e => {changeFilter('type_id', e)}}/>
-			<AssetsFilter label='Topic' options={categories.topic.all} selected={filter.topic_id} onChange={e => {changeFilter('topic_id', e)}}/>
-			<AssetsFilter label='Path' options={categories.learning_path.all} selected={filter.learning_path_id} onChange={e => {changeFilter('learning_path_id', e)}}/>
+			<div><label>Search <input value={filter.q} onChange={e => {changeFilter('q', e.target.value)} }/></label></div>
+			<AssetsFilter label='Type' options={categories.type.all} empty={"- ALL "+categories.type.plural+" -"} selected={filter.type_id} onChange={v => {changeFilter('type_id', v)}}/>
+			<AssetsFilter label='Topic' options={categories.topic.all} selected={filter.topic_id} onChange={v => {changeFilter('topic_id', v)}}/>
+			<AssetsFilter label='Path' options={categories.learning_path.all} selected={filter.learning_path_id} onChange={v => {changeFilter('learning_path_id', v)}}/>
 			{page_assets.map((a, idx) => <AssetsItem key={a ? a.id : -idx} asset={a} />)}
-			<Pagination pages={pages} current={filter.page} onClick={p=> {changeFilter('page', p)} }/>
+			<Pagination pages={pages} current={filter.page} onClick={p=> {changePage(p)} }/>
 		</div>
 	)
 }
