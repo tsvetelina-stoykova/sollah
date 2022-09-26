@@ -1,6 +1,6 @@
 import React from 'react'
 
-const AssetsExcerpt = ({asset}) => {
+const AssetsItem = ({asset}) => {
   return (
 	<article>
 		<h3>{asset ? asset.title : 'Loading'}</h3>
@@ -8,4 +8,4 @@ const AssetsExcerpt = ({asset}) => {
   )
 }
 
-export default AssetsExcerpt
+export default AssetsItem

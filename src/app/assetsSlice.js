@@ -2,15 +2,16 @@ import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
 
 export const getAssets = createAsyncThunk(
 	'assets/getAssets',
-	async (page, api) => {
+	async (filter, api) => {
+		console.log(filter);
 		const state = api.getState();
 		const limit = state.assets.pagesize;
-		const offset = (page-1)*limit;
+		const offset = (filter.page-1)*limit;
+
 		return fetch(`https://sollahlibrary.com/mapi/4/assets?offset=${offset}&limit=${limit}`)
 			.then(res => res.json());
 	}
 )
-
 
 const assetsSlice = createSlice({
 	name: 'assets',
@@ -24,7 +25,6 @@ const assetsSlice = createSlice({
 		[getAssets.pending]: (state, action) => {
 			const page = action.meta.arg;
 			state.status[page] = 'loading';
-			
 		},
 		[getAssets.fulfilled]: (state, action) => {
 			const page = action.meta.arg;
