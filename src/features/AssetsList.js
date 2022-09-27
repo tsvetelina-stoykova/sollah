@@ -1,7 +1,8 @@
-import React, { useEffect, useState, useMemo } from 'react'
+import React, { useEffect, useState, useMemo, useCallback } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { getAssets } from '../app/assetsSlice';
 import { getCategories } from '../app/categoriesSlice';
+import debounce from './debounce';
 import AssetsItem from './AssetsItem';
 import Pagination from './Pagination';
 import AssetsFilter from './AssetsFilter'
@@ -34,20 +35,16 @@ const AssetsList = () => {
 		[dispatch, filter]
 	);
 
-	useEffect(
-		() => {dispatch(getCategories())},
-		[dispatch]
-	);
+	useEffect(() => {dispatch(getCategories())}, [dispatch]);
 
-	const page_assets = useMemo(
-		() => assets.list.slice(page_start, page_end),
-		[filter, assets]
-	);
+	const page_assets = useMemo(() => assets.list.slice(page_start, page_end), [filter, assets]);
 
 	const changeFilter = (id, val) => {
 		dispatch({type:'assets/reset'});
-		setFilter({...filter, [id]: val});
+		setFilter({...filter, [id]: val, page: 1});
 	}
+
+	const debouncedSearch = useCallback(debounce(changeFilter), [filter]);
 
 	const changePage = (page) => {
 		setFilter({...filter, page});
@@ -55,7 +52,7 @@ const AssetsList = () => {
 
 	return (
 		<div>
-			<div><label>Search <input value={filter.q} onChange={e => {changeFilter('q', e.target.value)} }/></label></div>
+			<div><label>Search <input defaultValue={filter.q} onChange={(e) => {debouncedSearch('q', e.target.value)}}/></label></div>
 			<AssetsFilter label='Type' options={categories.type.all} empty={"- ALL "+categories.type.plural+" -"} selected={filter.type_id} onChange={v => {changeFilter('type_id', v)}}/>
 			<AssetsFilter label='Topic' options={categories.topic.all} selected={filter.topic_id} onChange={v => {changeFilter('topic_id', v)}}/>
 			<AssetsFilter label='Path' options={categories.learning_path.all} selected={filter.learning_path_id} onChange={v => {changeFilter('learning_path_id', v)}}/>
