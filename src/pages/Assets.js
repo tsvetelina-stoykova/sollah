@@ -1,7 +1,7 @@
 import AssetsList from '../features/AssetsList'
 const Assets = () => {
 	return (
-		<div>
+		<div className='container'>
 			<AssetsList />
 		</div>
 	)

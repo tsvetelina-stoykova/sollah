@@ -1,0 +1,16 @@
+.page-content {
+	padding: 1.5rem 0 0 0;
+}
+
+nav {
+	border: 2px solid blueviolet;
+}
+
+.assets-filter-wrapper {
+	border: 2px solid red;
+	position: static;
+	margin: 2rem 0 0 0;
+	background: #f4f4f4;
+	border: 1px solid #ddd;
+	border-radius: 6px;
+} 

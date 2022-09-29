@@ -23,10 +23,16 @@ const assetsSlice = createSlice({
 	name: 'assets',
 	initialState: {
 		list: [],
+		// filteredList: [],
 		count: 0,
 		status: {},
 		pagesize: 20
 	},
+	// reducers: {
+	// 	changeFilter: (state, action) => {
+
+	// 	},
+	// },
 	extraReducers: {
 		'assets/reset': (state, action) => {
 			state.list = [];
@@ -48,6 +54,7 @@ const assetsSlice = createSlice({
 				state.list.fill(null);
 			}
 			state.list.splice((filter.page-1)*state.pagesize, assets.length, ...assets);
+			// state.filteredList = [...state.list];
 		},
 		[getAssets.rejected]: (state, action) => {
 			const filter = action.meta.arg;
