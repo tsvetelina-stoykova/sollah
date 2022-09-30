@@ -24,18 +24,18 @@ const AssetsList = () => {
 				dispatch(getAssets(filter));
 			}
 		},
-		[dispatch, filter]
+		[dispatch, filter, assets.status]
 	);
 
 	useEffect(() => { dispatch(getCategories()) }, [dispatch]);
 
-	const page_assets = useMemo(() => assets.list.slice(page_start, page_end), [filter, assets]);
+	const page_assets = useMemo(() => assets.list.slice(page_start, page_end), [ assets, page_start, page_end]);
 
 	const changeFilter = (id, val) => {
 		dispatch(getAssets({ ...filter, [id]: val, page: 1 }));
 	}
 
-	const debouncedSearch = useCallback(debounce(changeFilter), [filter]);
+	const debouncedSearch = useCallback(debounce(changeFilter), [changeFilter]);
 
 	const changePage = (page) => {
 		dispatch(getAssets({ ...filter, page }));

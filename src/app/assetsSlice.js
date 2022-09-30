@@ -58,11 +58,9 @@ const assetsSlice = createSlice({
 	},
 	extraReducers: {
 		'assets/filter': (state, action) => {
-			console.log('filter', action);
 			state.filter = action.payload;
 		},
 		'assets/reset': (state, action) => {
-			console.log('reset', action);
 			state.list = [];
 			state.count = 0;
 			state.status = {};

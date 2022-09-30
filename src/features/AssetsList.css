@@ -2,10 +2,6 @@
 	padding: 1.5rem 0 0 0;
 }
 
-nav {
-	border: 2px solid blueviolet;
-}
-
 .assets-filter-wrapper {
 	border: 2px solid red;
 	position: static;

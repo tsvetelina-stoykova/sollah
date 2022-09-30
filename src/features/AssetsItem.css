@@ -17,7 +17,6 @@
 .asset-thumb-image > img {
 	object-fit: contain;
 	height: 100%;
-	border: 2px solid lime
 }
 
 .asset-attributes {
