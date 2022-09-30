@@ -1,5 +1,15 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
 
+function mkurl(path, params) {
+	let query = [];
+	for(let k in params) {
+		if(params[k] !== '' && params[k] !== null) {
+			query.push(`${k}=${params[k]}`);
+		}
+	}
+	return path + '?' + query.join('&');
+}
+
 export const getAssets = createAsyncThunk(
 	'assets/getAssets',
 	async (filter, api) => {
@@ -7,45 +17,63 @@ export const getAssets = createAsyncThunk(
 		const limit = state.assets.pagesize;
 		const offset = (filter.page-1)*limit;
 
-		const params = {...filter, offset, limit};
-		delete params.page;
-		let query = [];
-		for(let k in params) {
-			if(params[k] !== '') query.push(`${k}=${params[k]}`);
+		let diff_criteria = false;
+		if(filter) {
+			for(let k in filter) {
+				if(k !== 'page' && filter[k] !== state.assets.filter[k]) {
+					diff_criteria = true;
+				}
+			}
 		}
 
-		return fetch(`https://sollahlibrary.com/mapi/4/assets?`+query.join('&'))
+		api.dispatch({type:'assets/filter', payload: filter});
+		api.dispatch({type:'assets/pending', payload: filter});
+
+		const result = await fetch(mkurl('https://sollahlibrary.com/mapi/4/assets', {...filter, offset, limit, page:null}))
 			.then(res => res.json());
+
+		if(diff_criteria) api.dispatch({type:'assets/reset'});
+		api.dispatch({type:'assets/success', payload: {assets:result.assets, filter}});
+
 	}
 )
 
 const assetsSlice = createSlice({
 	name: 'assets',
 	initialState: {
+		filter: {
+			page: 1, // does not reset the .list[] prop
+			q: '',
+			type_id: '',
+			topic_id: '',
+			learning_path_id: '',
+			target_audience_id: '',
+			industry_setting_id: '',
+			language_id: '',
+		},
 		list: [],
-		// filteredList: [],
 		count: 0,
 		status: {},
 		pagesize: 20
 	},
-	// reducers: {
-	// 	changeFilter: (state, action) => {
-
-	// 	},
-	// },
 	extraReducers: {
+		'assets/filter': (state, action) => {
+			console.log('filter', action);
+			state.filter = action.payload;
+		},
 		'assets/reset': (state, action) => {
+			console.log('reset', action);
 			state.list = [];
 			state.count = 0;
 			state.status = {};
 			state.pagesize = 20;
 		},
-		[getAssets.pending]: (state, action) => {
-			const filter = action.meta.arg;
+		'assets/pending': (state, action) => {
+			const filter = action.payload;
 			state.status[filter.page] = 'pending';
 		},
-		[getAssets.fulfilled]: (state, action) => {
-			const filter = action.meta.arg;
+		'assets/success': (state, action) => {
+			const filter = action.payload.filter;
 			const assets = action.payload.assets;
 			state.status[filter.page] = 'success';
 			state.count = action.payload.count;
@@ -54,7 +82,6 @@ const assetsSlice = createSlice({
 				state.list.fill(null);
 			}
 			state.list.splice((filter.page-1)*state.pagesize, assets.length, ...assets);
-			// state.filteredList = [...state.list];
 		},
 		[getAssets.rejected]: (state, action) => {
 			const filter = action.meta.arg;
