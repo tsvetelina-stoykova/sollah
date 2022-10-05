@@ -12,21 +12,21 @@ export const getAuth = createAsyncThunk(
 	}
 )
 
-const user = JSON.parse(localStorage.getItem('user'));
+// const user = JSON.parse(localStorage.getItem('user'));
 
 const authSlice = createSlice({
 	name: 'auth',
 	initialState: {
-		user: user,
+		user: '',
 		error: null,
 		status: '',
 	},
 	reducers: {
-		logout(state) {
-			state.user = null;
-			localStorage.removeItem('user');
-			// Todo: Navigate to login
-		}
+		// logout(state) {
+		// 	state.user = null;
+		// 	localStorage.removeItem('user');
+		// 	// Todo: Navigate to login
+		// }
 	},
 	extraReducers: {
 		[getAuth.pending]: (state) => {
@@ -35,8 +35,10 @@ const authSlice = createSlice({
 			state.status = 'pending';
 		},
 		[getAuth.fulfilled]: (state, action) => {
-			localStorage.setItem('user', JSON.stringify(user));
-			state.user = user;
+			console.log(action.payload)
+			// localStorage.setItem('user', JSON.stringify(user));
+			console.log(localStorage)
+			// state.user = user;
 			state.error = null;
 			state.status = 'success'
 		},
