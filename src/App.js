@@ -5,6 +5,7 @@ import Assets from './pages/Assets'
 import Playlists from './pages/Playlists'
 import Blog from './pages/Blog'
 import Messages from './pages/Messages';
+import Login from './pages/Login';
 
 
 function App() {
@@ -13,6 +14,9 @@ function App() {
 	<>
 		<Layout>
 			<Switch>
+				<Route path='/login' exact>
+					<Login />
+				</Route>
 				<Route path='/' exact>
 					<Assets />
 				</Route>

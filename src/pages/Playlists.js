@@ -1,6 +1,6 @@
 const Playlists = () => {
 	return (
-		<div>NewAssets</div>
+		<div>playlists</div>
 	)
 }
 
