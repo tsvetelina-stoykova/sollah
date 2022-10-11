@@ -1,5 +1,4 @@
 import React from 'react'
-import classes from './AssetsFilter.css'
 
 const AssetsFilter = ({label, empty, options, selected, onChange}) => {
 	const onChangeHandler = (e) => {

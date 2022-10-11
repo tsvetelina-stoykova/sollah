@@ -43,7 +43,7 @@ const AssetsList = () => {
 
 	return (
 		<div className='row'>
-			<div className='page-content col-12 order-2 col-lg-9 order-lg-1 page-content-menu'>
+			<div className='page-content col-12 order-2 col-lg-9 order-lg-1'>
 				<div className='assets-list-wrapper'>
 					<div className='assets-list'>
 						{page_assets.map((a, idx) => <AssetsItem key={a ? a.id : -idx} asset={a} />)}

@@ -1,30 +1,40 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getAuth } from "../app/authSlice";
+import { useNavigate, useLocation} from "react-router-dom"
+import { login } from "../app/authSlice";
 
 const Login = () =>  {
+	const navigate = useNavigate();
+	const location = useLocation();
 	const [email, setEmail] = useState('');
 	const [password, setPassword] = useState('');
-
 	const dispatch = useDispatch();
 	const auth = useSelector((state) => state.auth);
+
+	const from = location.state?.from?.pathname || "/";
+
+	useEffect(() => {
+		if (auth.user) navigate(from, {reset: true})
+	}, [auth.user]);
 
 	const emailHandler = (e) => {
 		setEmail(e.target.value);
 	}
 	const passwordHandler = (e) => {
-		console.log(e.target.value);
 		setPassword(e.target.value);
 	}
-	const submitHandler = (e) => {
+	const handleSubmit = (e) => {
 		e.preventDefault();
-		dispatch(getAuth({email, password}));
+		dispatch(login({email, password}));
 	}
+	
+	
+	
 
 	return (
 		<div className="col-md-6 offset-md-3 mt-5">
 			<h4 className="pb-3">Login</h4>
-			<form onSubmit={submitHandler}>
+			<form onSubmit={handleSubmit}>
 				<div className="pb-2">
 					<label className="pr-3">email </label>
 					<input name="email" type="text" value={email} onChange={emailHandler}/>

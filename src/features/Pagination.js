@@ -1,6 +1,7 @@
 import React, {useMemo} from 'react'
 
 const Pagination = ({pages, current, siblings=3, onClick=null}) => {
+
     const visible = useMemo(() => {
         const ls = [];
         const start = Math.max(1, current-siblings);
@@ -18,7 +19,7 @@ const Pagination = ({pages, current, siblings=3, onClick=null}) => {
     }, [pages,current,siblings]);
 
     return (<div className='pagination'>
-        <button onClick={ () => onClick && onClick(current - 1) } disabled={current==1}>
+        <button onClick={ () => onClick && onClick(current - 1) } disabled={current===1}>
             Previous
         </button>
 
@@ -33,7 +34,7 @@ const Pagination = ({pages, current, siblings=3, onClick=null}) => {
         ))}
 
    
-        <button onClick={() => onClick && onClick(current + 1) } disabled={current==pages}>
+        <button onClick={() => onClick && onClick(current + 1) } disabled={current===pages}>
             Next
         </button>
     </div>);

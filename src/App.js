@@ -1,38 +1,37 @@
-import { Switch, Route } from 'react-router-dom' 
-import Layout from './layout/Layout';
+import { Routes, Route} from 'react-router-dom';
+import { RequireAuth } from './features/RequireAuth';
 
+import Layout from './layout/Layout';
 import Assets from './pages/Assets'
 import Playlists from './pages/Playlists'
 import Blog from './pages/Blog'
 import Messages from './pages/Messages';
 import Login from './pages/Login';
 
-
 function App() {
-
-  return (
+	return (
 	<>
-		<Layout>
-			<Switch>
-				<Route path='/login' exact>
-					<Login />
-				</Route>
-				<Route path='/' exact>
-					<Assets />
-				</Route>
-				<Route path='/playlists' exact>
-					<Playlists />
-				</Route>
-				<Route path='/blog' exact>
-					<Blog />
-				</Route>
-				<Route path='/messages' exact>
-					<Messages />
-				</Route>
-			</Switch>
-		</Layout>
+		<Routes>
+			<Route path="/" element={<Layout />}>
+				<Route path="/login" element={<Login />} />
+				<Route index element={<Assets />} />
+				<Route path="/blog" element={<Blog />} />
+				<Route path="/playlists"
+				 	element = {
+						<RequireAuth>
+							<Playlists />
+						</RequireAuth>
+					}/>
+				<Route path="/messages"
+				 	element = {
+						<RequireAuth>
+							<Messages />
+						</RequireAuth>
+					}/>
+			</Route>
+		</Routes>
 	</>
-  );
+	);
 }
 
 export default App;
