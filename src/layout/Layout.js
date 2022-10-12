@@ -4,6 +4,7 @@ import { NavLink, Link, Outlet } from 'react-router-dom'
 import logo from '../assets/logo.png'
 import { FiMenu } from 'react-icons/fi'
 import { MdOutlineClose } from 'react-icons/md'
+import AuthStatus from '../features/AuthStatus'
 
 const Layout = (props) => {
 	const [navbarOpen, setNavbarOpen] = useState(false);
@@ -19,10 +20,7 @@ const Layout = (props) => {
 						<div className={classes.navWrapper}>
 							<a href='/'><img src={logo} className={classes.logo} alt='Sollah Interactive, LLC' width='247' height='50' /></a>
 							<button onClick={toggleHandler} className={`${classes.mobileNavToggle}`}>{navbarOpen ? (<MdOutlineClose size='2.2rem' color='#000'/>) : (<FiMenu size='2.2rem' color='#000'/>) }</button>					
-							
-							<button className='button displaySmNone displayMdInlineFlex'>
-								<Link to='/login' onClick={closeMenuHandler} >Log in</Link>
-							</button>
+						<AuthStatus />
 						</div>
 				</div>
 				<nav className={`${classes.primaryNavigation} ${classes.navContainer} ${navbarOpen ? `${classes.showMenu}` : ''}`}>
