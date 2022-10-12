@@ -1,25 +1,22 @@
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
-import {useNavigate} from "react-router-dom";
-import { useEffect } from "react";
+import "./authstatus.css"
 
 const AuthStatus = () => {
 	const auth = useSelector(state => state.auth);
-	const navigate = useNavigate();
-	
-	const logout = () => {
-		localStorage.removeItem('user');
-		return navigate("/");
-	}
 	
 	if (!auth.user){
-		return (<button className='button displaySmNone displayMdInlineFlex'>
-					<Link to='/login' >Log in</Link>
+		return (<button className='button'>
+					<Link className="auth-button" to='/login' >Log in</Link>
 				</button>)
 	} else {
-		return(	<>
-				<p>Welcome!</p>
-				<button onClick={ logout }>Log out</button>
+		return(<>	
+					<div>
+						<span className="pt-3 pr-1">Welcome, {auth.user.first_name}</span>
+						<button className='button'>
+							<Link className="auth-button" to='/logout' >Log out</Link>
+						</button>
+					</div>
 				</>)
 	}
 

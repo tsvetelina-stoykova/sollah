@@ -7,6 +7,7 @@ import Playlists from './pages/Playlists'
 import Blog from './pages/Blog'
 import Messages from './pages/Messages';
 import Login from './pages/Login';
+import Logout from './features/Logout';
 
 function App() {
 	return (
@@ -14,6 +15,7 @@ function App() {
 		<Routes>
 			<Route path="/" element={<Layout />}>
 				<Route path="/login" element={<Login />} />
+				<Route path="/logout" element={<Logout />} />
 				<Route index element={<Assets />} />
 				<Route path="/blog" element={<Blog />} />
 				<Route path="/playlists"

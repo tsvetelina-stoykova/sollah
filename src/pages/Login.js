@@ -27,9 +27,6 @@ const Login = () =>  {
 		e.preventDefault();
 		dispatch(login({email, password}));
 	}
-	
-	
-	
 
 	return (
 		<div className="col-md-6 offset-md-3 mt-5">

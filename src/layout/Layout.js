@@ -1,6 +1,6 @@
 import classes from './Layout.module.css'
 import { useState } from 'react'
-import { NavLink, Link, Outlet } from 'react-router-dom'
+import { NavLink, Outlet } from 'react-router-dom'
 import logo from '../assets/logo.png'
 import { FiMenu } from 'react-icons/fi'
 import { MdOutlineClose } from 'react-icons/md'
