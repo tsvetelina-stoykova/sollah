@@ -44,15 +44,15 @@ const AssetsList = () => {
 	return (
 		<div className='row'>
 			<div className='page-content col-12 order-2 col-lg-9 order-lg-1'>
-				<div className='assets-list-wrapper'>
+				<div>
 					<div className='assets-list'>
 						{page_assets.map((a, idx) => <AssetsItem key={a ? a.id : -idx} asset={a} />)}
 					</div>
 					<Pagination pages={pages} current={filter.page} onClick={p => { changePage(p) }} />
 				</div>
 			</div>
-			<nav className='col d-none d-lg-block order-1 col-lg-3 order-lg-2'>
-				<div className='assets-filter-wrapper'>
+			<nav className='col d-lg-block order-1 col-lg-3 order-lg-2'>
+				<div className='filter-wrapper'>
 					<div><label>Search <input defaultValue={filter.q} onChange={(e) => { debouncedSearch('q', e.target.value) }} /></label></div>
 					<AssetsFilter label='Learning Paths' options={categories.learning_path.all} empty={"- ALL " + categories.learning_path.plural + " -"} selected={filter.learning_path_id} onChange={v => { changeFilter('learning_path_id', v) }} />
 					<AssetsFilter label='Types' options={categories.type.all} empty={"- ALL " + categories.type.plural + " -"} selected={filter.type_id} onChange={v => { changeFilter('type_id', v) }} />

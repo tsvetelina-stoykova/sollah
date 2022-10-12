@@ -2,14 +2,9 @@
 	padding: 1.5rem 0 0 0;
 }
 
-.assets-list-wrapper {
-	outline: 2px solid lime;
-}
-.assets-filter-wrapper {
-	border: 2px solid red;
+.filter-wrapper {
 	position: static;
-	margin: 2rem 0 0 0;
-	background: #f4f4f4;
-	border: 1px solid #ddd;
-	border-radius: 6px;
+	display: flex;
+	flex-direction: column;
+	gap: 0.5rem;
 } 
