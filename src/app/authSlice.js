@@ -23,18 +23,15 @@ function handleResponse(response){
 	})
 }
 
+
+
+
 const authSlice = createSlice({
 	name: 'auth',
 	initialState: {
 		user: JSON.parse(localStorage.getItem('user')) || null,
 		error: null,
 		status: '',
-	},
-	reducers: {
-		logout(state) {
-		// 	// Todo: Navigate to login
-		}
-			
 	},
 	extraReducers: {
 		[login.pending]: (state) => {
