@@ -1,12 +1,12 @@
 
-.asset {
+/* .asset {
 	padding: 1em 0;
 	vertical-align: top;
 	border-bottom: 1px dotted #ddd;
 	box-sizing: border-box;
 	list-style: none;
-}
-.asset-thumb-image {
+} */
+/* .asset-thumb-image {
 	position: relative;
 	display: block;
 	color: transparent;
@@ -14,10 +14,6 @@
 	overflow: hidden;
 }
 
-.asset-thumb-image > img {
-	object-fit: contain;
-	height: 100%;
-}
 
 .asset-attributes {
 	display: flex;
@@ -25,4 +21,30 @@
 	padding: .3em .5em;
 	border-radius: 4px;
 	background: #f4f4f4;
+} */
+
+.asset-image-wrapper {
+	max-width: 200px;
+}
+
+.asset-thumb-image {
+	width: 100%;
+	height: auto;
+	border-radius: 6px;
+	object-fit: contain;
+}
+
+.asset-title {
+	font-family: var(--ff-secondary);
+	font-size: var(--fs-700);
+	line-height: 25px;
+}
+
+.asset-title > a {
+	text-decoration: none;
+}
+
+.asset-description {
+	font-size: var(--fs-400);
+	line-height: 20px;
 }

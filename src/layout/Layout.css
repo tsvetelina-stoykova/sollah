@@ -1,11 +1,18 @@
 /*---------------------*/
 /*       NAVIGATION    */
 /*---------------------*/
-.primaryHeader {
-	padding-top: var(--size-700);
+.primary-header {
+	/* border: 2px solid red; */
+	background-color: var(--clr-neutral-100);
+	box-shadow: 0 5px 8px rgba(0,0,0,0.08);
+	z-index: 3;
+	position: sticky;
+}
+.nav-container {
+	padding: 15px 0 15px 0;
 }
 
-.navContainer {
+.navbar-open {
 	--max-width: 1110px;
 	--padding: 1rem;
 
@@ -13,76 +20,79 @@
 	margin-inline: auto;
 }
 
-.navWrapper {
+.logo-wrapper {
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
-	padding-bottom: 1rem;
 }
 
-.mobileNavToggle {
+.mobile-nav-toggle {
 	display: none;
 	/* outline: 2px solid red; */
 }
 
-.navList {
-	font-size: var(--fs-nav);
+.primary-navigation {
+	display: flex;
+	align-self: center;
+}
+
+.nav-list {
+	font-size: var(--fs-600);
 	font-weight: var(--fw-semi-bold);
 	display: flex;
 	gap: clamp(var(--size-500), 3.2vw, var(--size-800));
 	list-style-type: none;
 }
 
-
-.primaryNavigation > ul > li > a {
+.nav-list > li > a {
 	text-decoration: none;
+	color: hsl(204, 100%, 18%);
+}
+
+/* .primary-navigation > ul > li > a {
 	color: var(--clr-neutral-400);
 }
 
-.primaryNavigation > ul > li > a:hover, 
-.primaryNavigation > ul > li > a:focus {
-	color: var(--clr-accent-500)
-}
-
+.primary-navigation > ul > li > a:hover,
+.primary-navigation > ul > li > a:focus {
+	color: var(--clr-accent-500);
+} */
 
 /*---------------------*/
 /*       MOBILE        */
 /*---------------------*/
 @media (max-width: 50rem) {
-	.logo{
+	.logo {
 		width: 50%;
 		height: 50%;
 		min-width: 177px;
 	}
-	.navWrapper > a {
+	.logo-wrapper > a {
 		max-width: 50%;
 	}
-	.navWrapper > button {
+	.logo-wrapper > button {
 		border: 0;
 		background: transparent;
 		cursor: pointer;
 	}
-	.mobileNavToggle {
+	.mobile-nav-toggle {
 		display: grid;
 	}
-	.primaryNavigation {
+	.primary-navigation {
 		display: none;
 		inset: 7rem var(--size-400) auto;
 		padding: var(--size-400);
 		margin: 0 auto;
-
 	}
-	.primaryNavigation > ul {
+	.primary-navigation > ul {
 		display: grid;
 		gap: var(--size-400);
 		text-align: center;
 	}
-	.showMenu{
+	.show-menu {
 		display: block;
 	}
-
 }
-
 
 .main {
 	padding-bottom: 1.875rem;

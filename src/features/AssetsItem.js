@@ -3,27 +3,19 @@ import  './AssetsItem.css'
 
 const AssetsItem = ({asset}) => {
   return (
-	<section className='asset row'>
-		<div className='col-12 col-sm-5 col-md-3'>
-			<a href='#'>
-				<div className='asset-thumb-image'>
-					<img src={asset.thumb_url} width='320' height='240'/>
-				</div>
+	<section className='row pb-5'>
+		<div className='col-12 col-lg-3 asset-image-wrapper'>
+			<a href='#'>				
+				<img className='asset-thumb-image' src={asset.thumb_url} />
 			</a>
 		</div>
-		<div className='col-12 col-sm-7 col-md-6'>
-			<h2>
-				<a href='@'>
-					<span>{asset ? asset.title : 'Loading'}</span>
-				</a>
-			</h2>
-			<p>{asset.description}</p>
+		<div className='col-12 col-lg-7'>	
+			<h2 className='asset-title pb-2'><a href='@'><span>{asset ? asset.title : 'Loading'}</span></a></h2>
+			<p className='asset-description'>{asset.description}</p>
 		</div>
-		<div className='col-12 col-md-3'>
-			<div className='asset-attributes'>
-				<span><b>Type: </b>{asset.type}</span>
-				<span><b>Topic: </b>{asset.topic}</span>
-			</div>
+		<div className='col-12 col-lg-2'>
+			<div><span><b>Type: </b>{asset.type}</span></div>
+			<div><span><b>Topic: </b>{asset.topic}</span></div>
 		</div>
 	</section>
   )
