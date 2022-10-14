@@ -30,7 +30,6 @@ const AssetsList = () => {
 	useEffect(() => { dispatch(getCategories()) }, [dispatch]);
 
 	const page_assets = useMemo(() => assets.list.slice(page_start, page_end), [ assets, page_start, page_end]);
-
 	const changeFilter = (id, val) => {
 		dispatch(getAssets({ ...filter, [id]: val, page: 1 }));
 	}

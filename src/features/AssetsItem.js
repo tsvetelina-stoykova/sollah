@@ -1,4 +1,3 @@
-import React from 'react'
 import  './AssetsItem.css'
 
 const AssetsItem = ({asset}) => {
