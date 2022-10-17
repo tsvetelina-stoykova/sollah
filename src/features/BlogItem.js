@@ -1,14 +1,15 @@
 import "./BlogItem.css";
+import { useParams, Navigate, Link } from "react-router-dom";
 
 const BlogItem = ({post}) => {
-	let date = post.scheduled;
-	console.log(Date.parse(date));
+	const date = new Date(post.scheduled * 1000);
+
 	return (
 		<section className="row pb-5">
 			<div className="col-12 col-lg-4 post-image-wrapper">
-				<a href="#">
+				<Link to={`/blog/${post.seo_id}`}>
 					<img className="blog-thumb-image" src={post.thumb_url} alt="Blog post thumbnail"/>
-				</a>
+				</Link>
 			</div>
 			<div className="col-12 col-lg-8">
 				<div className="pb-5">
@@ -16,7 +17,7 @@ const BlogItem = ({post}) => {
 					<p className="blog-description">{post.description}</p>
 				</div>
 				<div className="blog-date-wrapper">
-					<p className="blog.date">{Date.toString(post.scheduled)}</p>
+					<p className="blog.date">{date.toLocaleDateString()}</p>
 				</div>
 			</div>
 

@@ -5,15 +5,16 @@ import BlogItem from "../features/BlogItem";
  
 const Blog = () => {
 	const dispatch = useDispatch();
-	useEffect(() => {dispatch(listAll())}, [dispatch]);
 	const blogs = useSelector((state) => state.blogs);
-	const posts = blogs.posts;
-
+	useEffect(() => {
+		if(blogs.index.length === 0) dispatch(listAll());
+	}, [dispatch]);
+	
 	return (
 		<div className="container">
 		<div className="row">
 			<div className="page-content">
-				{posts.map((post) => <BlogItem key={post.id} post={post}/>)}
+				{blogs.index.map((seo_id) => <BlogItem key={seo_id} post={blogs.map[seo_id]}/>)}
 			</div>
 		</div>
 		</div>

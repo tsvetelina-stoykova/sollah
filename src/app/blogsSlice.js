@@ -8,11 +8,19 @@ export const listAll = createAsyncThunk(
 	}
 )
 
+export const getOne = createAsyncThunk(
+	"blogs/getOne",
+	async ({seo_id}) => {
+		return await fetch(`https://sollahlibrary.com/mapi/4/blogs/${seo_id}`)
+			.then((res) => res.json()) 
+	}
+)
+
 const blogsSlice = createSlice({
 	name: "blogs",
 	initialState: {
-		posts: [],
-		count: 0,
+		index: [],
+		map: {},
 		status: ""
 	},
 	extraReducers: {
@@ -20,12 +28,19 @@ const blogsSlice = createSlice({
 			state.status="pending";
 		},
 		[listAll.fulfilled]: (state, action) => {
+			const {posts} = action.payload;
 			state.status="success";
-			state.posts = action.payload.posts;
-
+			state.index = posts.map(p=>p.seo_id);
+			for(let p of posts) {
+				state.map[p.seo_id] = p;
+			}
 		},
 		[listAll.rejected]: (state) => {
 			state.status="error";
+		},
+		[getOne.fulfilled]: (state, action) => {
+			const {post} = action.payload;
+			state.map[post.seo_id] = post;
 		},
 	}
 })
