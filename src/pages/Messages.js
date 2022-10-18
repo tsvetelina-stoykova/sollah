@@ -1,6 +1,8 @@
 import { useDispatch, useSelector } from "react-redux";
 import { listMessages } from "../app/messagesSlice";
 import { useEffect } from "react";
+import MessageItem from "../features/MessageItem";
+import "./Messages.css";
 
 const Messages = () => {
 	const dispatch = useDispatch();
@@ -8,10 +10,12 @@ const Messages = () => {
 	useEffect(() => { dispatch(listMessages()) }, [dispatch]);
 
 	return (
-		<div className="row">
-			<div className="col-12">
-				<h3 className="pb-3">Messages</h3>
-				{messages.allMessages.map( (msg) => <p key={msg.id}>{msg.subject}</p> )}
+		<div className="container">
+			<div className="row">
+				<div className="col-6 pb-4 align-self-center message-container">
+					<h4 className="py-4">Inbox</h4>
+					{messages.allMessages.map( (msg) => <MessageItem key={msg.id} message={msg} />)}
+				</div>
 			</div>
 		</div>
 	  )

@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useLocation} from "react-router-dom"
 import { login } from "../app/authSlice";
+import "./Login.css";
 
 const Login = () =>  {
 	const navigate = useNavigate();
@@ -29,19 +30,26 @@ const Login = () =>  {
 	}
 
 	return (
-		<div className="col-md-6 offset-md-3 mt-5">
-			<h4 className="pb-3">Login</h4>
-			<form onSubmit={handleSubmit}>
-				<div className="pb-2">
-					<label className="pr-3">email </label>
-					<input name="email" type="text" value={email} onChange={emailHandler}/>
+		<div className="container">
+			<div className="row justify-content-center ">
+				<div className="col-4 py-3 login-wrapper">
+					<form onSubmit={handleSubmit} className="row pt-2 login-form">
+						<div className="col">
+							<div className="pb-3">
+								<label className="pr-4 mr-4">Email </label>
+								<input name="email" type="text" value={email} onChange={emailHandler}/>
+							</div>
+							<div className="pb-3">
+								<label className="pr-1 mr-3">Password </label>
+								<input name="password" type="password" value={password} onChange={passwordHandler}/>
+							</div>
+							<div className="col-7 offset-3 mr-2 ">
+								<button className="form-button " disabled={auth.pending}>Login</button>
+							</div>
+						</div>
+					</form>
 				</div>
-				<div className="pb-3">
-					<label className="pr-4">Password </label>
-					<input name="password" type="password" value={password} onChange={passwordHandler}/>
-				</div>
-				<button disabled={auth.pending}>Login</button>
-			</form>
+			</div>
 		</div>
 	)
 }

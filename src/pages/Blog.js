@@ -8,15 +8,15 @@ const Blog = () => {
 	const blogs = useSelector((state) => state.blogs);
 	useEffect(() => {
 		if(blogs.index.length === 0) dispatch(listAll());
-	}, [dispatch]);
+	}, [dispatch, blogs.index.length]);
 	
 	return (
 		<div className="container">
-		<div className="row">
-			<div className="page-content">
-				{blogs.index.map((seo_id) => <BlogItem key={seo_id} post={blogs.map[seo_id]}/>)}
+			<div className="row">
+				<div className="page-content">
+					{blogs.index.map((seo_id) => <BlogItem key={seo_id} post={blogs.map[seo_id]}/>)}
+				</div>
 			</div>
-		</div>
 		</div>
 	)
 }

@@ -1,0 +1,22 @@
+.post-image {
+	width: 100%;
+	height: auto;
+	object-fit: cover;
+	border-radius: 6px;
+}
+
+.post-heading > h2{
+	font-family: var(--ff-secondary);
+	font-size: var(--fs-750);
+}
+
+.post-date {
+	font-size: var(--fs-300);
+	opacity: 0.6;
+}
+
+
+
+.related-assets > h3 {
+	font-size: var(--fs-700);
+}

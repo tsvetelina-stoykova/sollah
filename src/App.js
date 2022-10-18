@@ -7,6 +7,7 @@ import Playlists from './pages/Playlists'
 import Blog from './pages/Blog'
 import BlogDetails from './pages/BlogDetails'
 import Messages from './pages/Messages';
+import MessageDetails from './pages/MessageDetails';
 import Login from './pages/Login';
 import Logout from './features/Logout';
 
@@ -30,6 +31,12 @@ function App() {
 				 	element = {
 						<RequireAuth>
 							<Messages />
+						</RequireAuth>
+					}/>
+				<Route path="/messages/:id"
+				 	element = {
+						<RequireAuth>
+							<MessageDetails />
 						</RequireAuth>
 					}/>
 			</Route>

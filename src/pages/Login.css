@@ -1,0 +1,22 @@
+.login-wrapper {
+	background-color: var(--clr-accent-700);
+	border-radius: 6px;
+	margin: 2em 0 1.5em 0;
+	padding: 1.2em;
+	color: #fff;
+}
+
+.form-button {
+		width: 100%;
+		cursor: pointer;
+		text-decoration: none;
+		border: 0;
+		border-radius: 8px;
+		padding: 1em 1.5em;
+		font-weight: var(--fw-semi-bold);
+		font-size: var(--fs-button);
+		line-height: 1;
+		color: var(--clr-primary-100);
+		background-color: var(--clr-accent-400);
+		
+}
