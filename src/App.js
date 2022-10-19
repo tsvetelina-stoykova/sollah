@@ -2,7 +2,8 @@ import { Routes, Route} from 'react-router-dom';
 import { RequireAuth } from './features/RequireAuth';
 
 import Layout from './layout/Layout';
-import Assets from './pages/Assets'
+import Assets from './pages/Assets';
+import Profile from './pages/Profile';
 import Playlists from './pages/Playlists'
 import Blog from './pages/Blog'
 import BlogDetails from './pages/BlogDetails'
@@ -21,6 +22,12 @@ function App() {
 				<Route index element={<Assets />} />
 				<Route path="/blog" element={<Blog />}/>
 				<Route path="/blog/:seo_id" element={<BlogDetails />} />
+				<Route path="/profile"
+				 	element = {
+						<RequireAuth>
+							<Profile />
+						</RequireAuth>
+					}/>
 				<Route path="/playlists"
 				 	element = {
 						<RequireAuth>

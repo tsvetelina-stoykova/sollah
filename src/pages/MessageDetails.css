@@ -1,0 +1,23 @@
+.message-subject {
+	font-size: var(--fs-700);
+	font-weight: var(--fw-semi-bold);
+}
+.message-date {
+	font-size: var(--fs-300);
+	opacity: 0.6;
+}
+
+.message-from {
+	font-size: var(--fs-400);
+	opacity: 0.6;
+}
+
+.back-btn-wrapper {
+	padding-top: 5em;
+	margin: 0 auto 0 auto;
+}
+
+.back-btn {
+	display: flex;
+	flex-direction: row;
+}

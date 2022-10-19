@@ -12,7 +12,7 @@ export const getOne = createAsyncThunk(
 	"blogs/getOne",
 	async ({seo_id}) => {
 		return await fetch(`https://sollahlibrary.com/mapi/4/blogs/${seo_id}`)
-			.then((res) => res.json()) 
+			.then((res) => res.json())
 	}
 )
 
@@ -21,7 +21,7 @@ const blogsSlice = createSlice({
 	initialState: {
 		index: [],
 		map: {},
-		status: ""
+		status: "",
 	},
 	extraReducers: {
 		[listAll.pending]: (state) => {

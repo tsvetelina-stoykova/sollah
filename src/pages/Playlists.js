@@ -6,7 +6,7 @@ const Playlists = () => {
 	const dispatch = useDispatch();
 	const playlists = useSelector((state) => state.playlists);
 	useEffect( () => { dispatch(listPlaylists()) }, [dispatch]);
-	// console.log(playlists.);
+	console.log(playlists);
 
 
 

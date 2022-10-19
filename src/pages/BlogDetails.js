@@ -14,7 +14,7 @@ function BlogDetails() {
 	}, [dispatch, post, seo_id]);
 
 	const date = new Date(post.scheduled * 1000);
-	const parser = new DOMParser;
+	const parser = new DOMParser();
 	const bodyHTML = parser.parseFromString(post.body, "text/html");
 	const body = bodyHTML.documentElement.textContent;
 

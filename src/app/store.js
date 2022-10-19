@@ -5,6 +5,7 @@ import authReducer from "./authSlice";
 import messagesReducer from "./messagesSlice";
 import playlistsReducer from "./playlistsSlice";
 import blogsReducer from "./blogsSlice";
+import profileReducer from "./profileSlice";
 
 export const store = configureStore({
 	reducer: {
@@ -14,5 +15,6 @@ export const store = configureStore({
 		messages: messagesReducer,
 		playlists: playlistsReducer,
 		blogs: blogsReducer,
+		profile: profileReducer,
 	},
 })

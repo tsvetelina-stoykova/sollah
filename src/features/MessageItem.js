@@ -3,7 +3,6 @@ import { IoMailOpen, IoMailUnread } from "react-icons/io5";
 import { Link } from "react-router-dom";
 
 const MessageItem = ({message}) => {
-	console.log(message);
 	const date = new Date(message.timestamp * 1000);
 
 	if(!message.read){

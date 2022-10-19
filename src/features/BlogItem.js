@@ -1,5 +1,5 @@
 import "./BlogItem.css";
-import { useParams, Navigate, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 const BlogItem = ({post}) => {
 	const date = new Date(post.scheduled * 1000);

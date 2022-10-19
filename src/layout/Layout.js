@@ -36,6 +36,9 @@ const Layout = () => {
 							<li>
 								<NavLink to='/messages' onClick={closeMenuHandler} >Messages</NavLink>
 							</li>
+							<li>
+								<NavLink to='/profile' onClick={closeMenuHandler} >Profile</NavLink>
+							</li>
 						</ul>
 					</nav>
 					<div><AuthStatus /></div>	

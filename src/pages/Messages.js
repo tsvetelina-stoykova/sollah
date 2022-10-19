@@ -9,6 +9,8 @@ const Messages = () => {
 	const messages = useSelector((state) => state.messages);
 	useEffect(() => { dispatch(listMessages()) }, [dispatch]);
 
+	// TODO: Inbox all messages
+
 	return (
 		<div className="container">
 			<div className="row">
