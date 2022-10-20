@@ -12,3 +12,31 @@
 	background-color: var(--clr-accent-700);
 	border-radius: 5px;
 } 
+
+.assets-button {
+	cursor: pointer;
+	text-decoration: none;
+	border: 1px solid var(--clr-accent-700);
+	padding: 1em 1.5em;
+	font-weight: var(--fw-semi-bold);
+	font-size: var(--fs-button);
+	line-height: 1;
+	color: var(--clr-accent-700);
+	box-shadow: 0 1.125em 1em -1em rgba(223, 223, 223, 0.76);
+}
+
+.assets-button-new {
+	cursor: pointer;
+	text-decoration: none;
+	border: 1px solid var(--clr-accent-700);
+	padding: 1em 2em;
+	font-weight: var(--fw-semi-bold);
+	font-size: var(--fs-button);
+	line-height: 1;
+	color: var(--clr-accent-700);
+	box-shadow: 0 1.125em 1em -1em rgba(223, 223, 223, 0.76);
+}
+
+.buttons-wrapper {
+	margin: auto;
+}

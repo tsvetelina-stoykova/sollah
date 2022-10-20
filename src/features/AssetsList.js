@@ -5,8 +5,11 @@ import { getCategories } from '../app/categoriesSlice';
 import debounce from './debounce';
 import AssetsItem from './AssetsItem';
 import Pagination from './Pagination';
-import AssetsFilter from './AssetsFilter'
+import AssetsFilter from './AssetsFilter';
+import { NavLink } from 'react-router-dom';
 import './AssetsList.css'
+
+// TODO: Thumbnail tags; Liked icon
 
 const AssetsList = () => {
 	const dispatch = useDispatch();
@@ -62,6 +65,13 @@ const AssetsList = () => {
 						<AssetsFilter label='Languages' options={categories.language.all} empty={"- ALL " + categories.language.plural + " -"} selected={filter.language_id} onChange={v => { changeFilter('language_id', v) }} />
 					</div>
 				</div>
+			</div>
+
+			{/* TODO: Fix active link */}
+			
+			<div className="row buttons-wrapper">
+				<NavLink to="/" className="assets-button">Assets</NavLink>
+				<NavLink to="/whats-new" className="assets-button-new">New</NavLink>
 			</div>
 			<div className='page-content col-12'>
 				<div>

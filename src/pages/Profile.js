@@ -8,6 +8,8 @@ const Profile = () => {
 	console.log(profile);
 	useEffect(() => {dispatch(getProfile())}, [dispatch])
 
+	// TODO: Profile page
+	
 	return (
 		<div>{profile.email}</div>
 	)

@@ -6,6 +6,7 @@ import messagesReducer from "./messagesSlice";
 import playlistsReducer from "./playlistsSlice";
 import blogsReducer from "./blogsSlice";
 import profileReducer from "./profileSlice";
+import newassetsReducer from "./newassetsSlice";
 
 export const store = configureStore({
 	reducer: {
@@ -16,5 +17,6 @@ export const store = configureStore({
 		playlists: playlistsReducer,
 		blogs: blogsReducer,
 		profile: profileReducer,
+		newassets: newassetsReducer,
 	},
 })
