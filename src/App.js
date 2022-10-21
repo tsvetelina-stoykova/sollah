@@ -3,6 +3,7 @@ import { RequireAuth } from './features/RequireAuth';
 
 import Layout from './layout/Layout';
 import Assets from './pages/Assets';
+import AssetDetails from './pages/AssetDetails';
 import NewAssets from './pages/NewAssets';
 import Profile from './pages/Profile';
 import Playlists from './pages/Playlists'
@@ -21,6 +22,7 @@ function App() {
 				<Route path="/login" element={<Login />} />
 				<Route path="/logout" element={<Logout />} />
 				<Route index element={<Assets />} />
+				<Route path="/:id" element={<AssetDetails />} />
 				<Route path="/whats-new"  element={<NewAssets />} />
 				<Route path="/blog" element={<Blog />}/>
 				<Route path="/blog/:seo_id" element={<BlogDetails />} />

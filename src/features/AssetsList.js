@@ -15,7 +15,6 @@ const AssetsList = () => {
 	const dispatch = useDispatch();
 	const assets = useSelector((state) => state.assets);
 	const categories = useSelector((state) => state.categories);
-
 	const filter = assets.filter;
 	const pages = Math.ceil(assets.count / assets.pagesize);
 	const page_start = (filter.page - 1) * assets.pagesize;
@@ -32,7 +31,8 @@ const AssetsList = () => {
 
 	useEffect(() => { dispatch(getCategories()) }, [dispatch]);
 
-	const page_assets = useMemo(() => assets.list.slice(page_start, page_end), [ assets, page_start, page_end]);
+	const page_assets = useMemo(() => assets.index.slice(page_start, page_end).map(id=>(assets.map[id])), [ assets, page_start, page_end]);
+
 	const changeFilter = (id, val) => {
 		dispatch(getAssets({ ...filter, [id]: val, page: 1 }));
 	}
