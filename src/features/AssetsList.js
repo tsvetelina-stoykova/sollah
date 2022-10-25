@@ -19,6 +19,7 @@ const AssetsList = () => {
 	const pages = Math.ceil(assets.count / assets.pagesize);
 	const page_start = (filter.page - 1) * assets.pagesize;
 	const page_end = filter.page * assets.pagesize;
+	const activeClassName = "activeBtn";
 
 	useEffect(
 		() => {
@@ -68,10 +69,10 @@ const AssetsList = () => {
 			</div>
 
 			{/* TODO: Fix active link */}
-			
+
 			<div className="row buttons-wrapper">
-				<NavLink to="/" className="assets-button">Assets</NavLink>
-				<NavLink to="/whats-new" className="assets-button-new">New</NavLink>
+				<NavLink to="/" className={({isActive}) => isActive ? activeClassName + " assets-button" : "assets-button"}>Assets</NavLink>
+				<NavLink to="/whats-new"  className="assets-button">New</NavLink>
 			</div>
 			<div className='page-content col-12'>
 				<div>

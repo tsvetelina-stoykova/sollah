@@ -103,6 +103,7 @@ const assetsSlice = createSlice({
 		[getAsset.fulfilled]: (state, action) => {
 			const asset = action.payload;
 			state.map[asset.id] = asset;
+			// console.log(asset);
 		}
 	}
 })

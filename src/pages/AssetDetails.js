@@ -3,16 +3,23 @@ import { useSelector, useDispatch } from "react-redux";
 import { getAsset } from "../app/assetsSlice";
 import { useParams } from "react-router-dom";
 import { IoMdHeartEmpty } from "react-icons/io";
-import { RiPlayList2Fill } from "react-icons/ri"
+import { RiPlayList2Fill } from "react-icons/ri";
+import AssetComponent from "../features/AssetComponent";
 import "./AssetDetails.css";
 
 const AssetDetails = () => {
 	const { id } = useParams();
 	const dispatch = useDispatch();
 	const asset = useSelector((state) => state.assets.map[id]);
+
 	useEffect(() => {
 		if(!(asset && asset.components)) dispatch(getAsset({id}));
 	}, [dispatch, id, asset]);
+
+	// const english = asset.components.filter(function(component) {
+	// 	return component.lang === "English";
+	// });
+	// console.log(english);
 
 	return(
 		<>{ asset ?
@@ -75,8 +82,20 @@ const AssetDetails = () => {
 
 					</div>
 				</div>
+				<div className="row my-4">
+					<div className="col-12 mb-2">
+						<h2>Training files</h2>
+					</div>
+					<div className="col-4">
+						<p>English</p>
+						<p>German</p>
+						<p>Chinese (Simplified)</p>
+					</div>
+				</div>
 				<div className="components-wrapper">
-					<h2>Components</h2>
+					<h2>Components</h2><br/>
+					{/* {english.map(assetDetail => <AssetComponent key={assetDetail.id} assetDetail={assetDetail} />)} */}
+
 				</div>
 			</div>		
 			)

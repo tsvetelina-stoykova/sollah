@@ -1,0 +1,7 @@
+.component-title {
+	font: var(--fs-700) var(--ff-secondary);
+}
+.component-description {
+	font-size: var(--fs-400);
+	opacity: 0.6;
+}
