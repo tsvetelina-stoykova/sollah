@@ -11,16 +11,17 @@ const AssetDetails = () => {
 	const { id } = useParams();
 	const dispatch = useDispatch();
 	const asset = useSelector((state) => state.assets.map[id]);
+	console.log(asset)
 
 	useEffect(() => {
 		if(!(asset && asset.components)) dispatch(getAsset({id}));
 	}, [dispatch, id, asset]);
 
 	// const english = asset.components.filter(function(component) {
-	// 	return component.lang === "English";
+	// 	return component.lang === "English"
 	// });
-	// console.log(english);
-
+	// console.log(english)
+	
 	return(
 		<>{ asset ?
 			(
@@ -47,7 +48,10 @@ const AssetDetails = () => {
 
 							<div>					
 							<h3>Learning Paths</h3>
-							<ul>{asset.learning_paths.map(p => <li key={p}>{p}</li>)}</ul>
+							{ asset.learning_paths ? 
+								<ul>{asset.learning_paths.map(p => <li key={p}>{p}</li>)}</ul> :
+								"Loading "
+							}
 							</div>
 
 							<div>
@@ -57,17 +61,28 @@ const AssetDetails = () => {
 
 							<div>				
 							<h3>Other Topics</h3>
-							<ul>{asset.other_topics.map(t => <li key={t}>{t}</li>)}</ul>
+							{asset.other_topics ?
+								<ul>{asset.other_topics.map(t => <li key={t}>{t}</li>)}</ul> :
+								"Loading"	
+						    }							
 							</div>
 
 							<div>				
 							<h3>Competences</h3>
-							<ul>{asset.competencies.map(c => <li key={c}>{c}</li>)}</ul>
+							{asset.competencies ? 
+								<ul>{asset.competencies.map(c => <li key={c}>{c}</li>)}</ul> :
+								"Loading"
+							}
+							
 							</div>
 
 							<div>					
 							<h3>Suggested Industry Usage</h3>
-							<ul>{asset.industry_settings.map(s => <li key={s}>{s}</li>)}</ul>						
+							{asset.industry_settings ? 
+								<ul>{asset.industry_settings.map(s => <li key={s}>{s}</li>)}</ul> :
+								"Loading"
+							}
+							
 							</div>
 
 							<div>						
@@ -91,10 +106,24 @@ const AssetDetails = () => {
 						<p>German</p>
 						<p>Chinese (Simplified)</p>
 					</div>
+					<div className="col-4">
+						<p>Spanish</p>
+						<p>French</p>
+						<p>Polish</p>
+					</div>
+					<div className="col-4">
+						<p>Portuguese (Brazilian)</p>
+						<p>Czech</p>
+						<p>Turkish</p>
+					</div>
 				</div>
 				<div className="components-wrapper">
 					<h2>Components</h2><br/>
-					{/* {english.map(assetDetail => <AssetComponent key={assetDetail.id} assetDetail={assetDetail} />)} */}
+					{(asset.components) ? 
+						asset.components.map(assetDetail => <AssetComponent key={assetDetail.id} assetDetail={assetDetail}/>) :
+						"Loading"
+					}
+					
 
 				</div>
 			</div>		

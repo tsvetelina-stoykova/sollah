@@ -2,11 +2,17 @@ import { Link } from "react-router-dom";
 import "./AssetComponent.css";
 
 const AssetComponents = ({assetDetail}) => {
+	
 	return (
 		<section className="container">
 			<div className="row my-3">
 				<div className="col-2">
-					<Link>Play</Link>
+				<video width="320" height="240" controls>
+					<source src={`/play/${assetDetail.id}`} type="text/html" />
+					<source src="#" type="video/ogg" />
+					Your browser does not support the video tag.
+				</video> 
+					
 				</div>
 				<div className="col-4">
 					<h3 className="component-title">{assetDetail.title}</h3>

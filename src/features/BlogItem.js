@@ -13,7 +13,9 @@ const BlogItem = ({post}) => {
 			</div>
 			<div className="col-12 col-lg-8">
 				<div className="pb-5">
-					<h2 className="blog-title pb-2"><a href="#"><span>{post ? post.title : "Loading.."}</span></a></h2>
+				<Link to={`/blog/${post.seo_id}`}>
+					<h2 className="blog-title pb-2"><span>{post ? post.title : "Loading.."}</span></h2>
+				</Link>
 					<p className="blog-description">{post.description}</p>
 				</div>
 				<div className="blog-date-wrapper">

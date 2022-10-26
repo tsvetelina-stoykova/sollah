@@ -34,7 +34,6 @@ export const getAssets = createAsyncThunk(
 
 		if(diff_criteria) api.dispatch({type:'assets/reset'});
 		api.dispatch({type:'assets/success', payload: {assets:result.assets, filter}});
-
 	}
 )
 
@@ -42,7 +41,20 @@ export const getAsset = createAsyncThunk(
 	"assets/getAsset",
 	async ({id}) => {
 		return await fetch(`https://sollahlibrary.com/mapi/4/assets/${id}`)
-					.then((res) => res.json());
+			.then((res) => res.json());
+	}
+)
+
+export const getAssetsByIds = createAsyncThunk(
+	"assets/getAssetsByIds",
+	async ({ids}, api) => {
+		const response = await fetch("https://sollahlibrary.com/mapi/4/assets", {
+			method: 'PATCH',
+			mode: 'cors',
+			headers: {'Content-Type': 'application/json'},
+			body: JSON.stringify(ids)
+		}).then((res) => res.json());
+		api.dispatch({type:'assets/bulk', payload: response.assets});
 	}
 )
 
@@ -104,7 +116,11 @@ const assetsSlice = createSlice({
 			const asset = action.payload;
 			state.map[asset.id] = asset;
 			// console.log(asset);
-		}
+		},
+		'assets/bulk': (state, action) => {
+			const assets = action.payload;
+			assets.forEach(a => {state.map[a.id] = a});
+		},
 	}
 })
 
