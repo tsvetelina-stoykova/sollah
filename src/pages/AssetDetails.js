@@ -34,7 +34,7 @@ const AssetDetails = () => {
 							<h2 className="pb-2">{asset.title}</h2>
 							<p className="asset-description">{asset.description}</p>
 							<div className="pt-3 row">
-								<button className="btn-favourites mr-3"><IoMdHeartEmpty className="mr-1" size="1.7em"/><span className="m-auto">Add to Favourites</span></button>
+								<button className="btn-favourites mr-3"><IoMdHeartEmpty className="mr-1" size="1.7em"/><span className="m-auto">Like</span></button>
 								<button className="btn-playlist"><span className="m-auto">Add to Playlist</span></button>
 							</div>
 						</div>

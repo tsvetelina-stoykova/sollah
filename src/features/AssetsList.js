@@ -76,6 +76,7 @@ const AssetsList = () => {
 			</div>
 			<div className='page-content col-12'>
 				<div>
+					<Pagination pages={pages} current={filter.page} onClick={p => { changePage(p) }} />
 					<div className='assets-list'>
 						{page_assets.map((a, idx) => <AssetsItem key={a ? a.id : -idx} asset={a} />)}
 					</div>

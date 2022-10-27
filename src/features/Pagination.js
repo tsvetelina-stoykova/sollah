@@ -6,6 +6,7 @@ const Pagination = ({pages, current, siblings=3, onClick=null}) => {
         const ls = [];
         const start = Math.max(1, current-siblings);
         const end = Math.min(pages, current+siblings);
+		// console.log(end)
         for(let i=start; i<=end; i++) ls.push(i);
         if(start > 1) {
             ls.unshift('e1');
