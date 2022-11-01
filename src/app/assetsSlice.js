@@ -95,6 +95,7 @@ const assetsSlice = createSlice({
 		'assets/success': (state, action) => {
 			const filter = action.payload.filter;
 			const {assets} = action.payload;
+			console.log(assets);
 			state.status[filter.page] = 'success';
 			for(let a of assets) {
 				if(!(state.map[a.id] && state.map[a.id].components)) {
