@@ -7,14 +7,14 @@ const AuthStatus = () => {
 	
 	if (!auth.user){
 		return (<button className='button'>
-					<Link className="auth-button" to='/login' >Log in</Link>
+					<Link className="auth-button" to='/login' >Log In</Link>
 				</button>)
 	} else {
 		return(<>	
 					<div>
 						<span className="pt-3 pr-1">Welcome, {auth.user.first_name}</span>
 						<button className='button'>
-							<Link className="auth-button" to='/logout' >Log out</Link>
+							<Link className="auth-button" to='/logout' >Log Out</Link>
 						</button>
 					</div>
 				</>)

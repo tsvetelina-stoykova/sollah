@@ -44,7 +44,7 @@ const Login = () =>  {
 								<input name="password" type="password" value={password} onChange={passwordHandler}/>
 							</div>
 							<div className="col-7 offset-3 mr-2 ">
-								<button className="form-button " disabled={auth.pending}>Login</button>
+								<button className="form-button " disabled={auth.pending}>Log In</button>
 							</div>
 						</div>
 					</form>
