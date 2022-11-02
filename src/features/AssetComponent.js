@@ -1,13 +1,23 @@
+import { useState } from "react";
 import { Link } from "react-router-dom";
+import {FaPlayCircle} from "react-icons/fa"
 import "./AssetComponent.css";
 
 const AssetComponents = ({assetDetail}) => {
-	
+	// const [currentVideo, setCurrentVideo] = useState();
+	const handlePlayer = (e) => {
+		console.log(e);
+	}
+	// console.log(currentVideo);
 	return (
 		<section className="container">
 			<div className="row my-3">
 				<div className="col-2">
-
+					<a onClick={handlePlayer} className="d-flex video-link">
+						<FaPlayCircle size="3em"/>
+						<span className="pl-2 align-self-center"><b>Demo</b></span>
+					</a>
+					
 					{/* <video width="320" height="240" controls>
 						<source src={`/play/${assetDetail.id}`} type="text/html" />
 						<source src="#" type="video/ogg" />

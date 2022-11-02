@@ -5,3 +5,6 @@
 	font-size: var(--fs-400);
 	opacity: 0.6;
 }
+.video-link {
+	cursor: pointer;
+}

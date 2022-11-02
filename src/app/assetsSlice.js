@@ -94,7 +94,6 @@ const assetsSlice = createSlice({
 		},
 		'assets/success': (state, action) => {
 			const filter = action.payload.filter;
-			console.log(filter)
 			const {assets} = action.payload;
 			state.status[filter.page] = 'success';
 			for(let a of assets) {
@@ -117,7 +116,6 @@ const assetsSlice = createSlice({
 		[getAsset.fulfilled]: (state, action) => {
 			const asset = action.payload;
 			state.map[asset.id] = asset;
-			// console.log(asset);
 		},
 		'assets/bulk': (state, action) => {
 			const assets = action.payload;
