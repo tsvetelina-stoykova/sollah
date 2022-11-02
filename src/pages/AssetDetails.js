@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState, useMemo } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { getAsset } from "../app/assetsSlice";
 import { useParams } from "react-router-dom";
@@ -11,16 +11,27 @@ const AssetDetails = () => {
 	const { id } = useParams();
 	const dispatch = useDispatch();
 	const asset = useSelector((state) => state.assets.map[id]);
-	console.log(asset)
+	const [currentLang, setCurrentLang] = useState("English");
+	
+	const filtered = useMemo(() => {
+		return asset?.components ?
+		asset.components.filter(c => (c.lang === currentLang)) :
+		[];
+	}, [asset?.components, currentLang]);
+
+	const langs = useMemo(() => {
+		return asset?.components ?
+		asset.components.map(c=>c.lang).reduce((langs,l)=>(langs.includes(l) ? langs : [...langs, l]), []) :
+		[];
+	}, [asset?.components]);
 
 	useEffect(() => {
 		if(!(asset && asset.components)) dispatch(getAsset({id}));
 	}, [dispatch, id, asset]);
 
-	// const english = asset.components.filter(function(component) {
-	// 	return component.lang === "English"
-	// });
-	// console.log(english)
+	const handleFilterBtn = (e)  => {
+		setCurrentLang(e.target.value);
+	};
 	
 	return(
 		<>{ asset ?
@@ -97,34 +108,24 @@ const AssetDetails = () => {
 
 					</div>
 				</div>
+
 				<div className="row my-4">
 					<div className="col-12 mb-2">
 						<h2>Training files</h2>
 					</div>
-					<div className="col-4">
-						<p>English</p>
-						<p>German</p>
-						<p>Chinese (Simplified)</p>
-					</div>
-					<div className="col-4">
-						<p>Spanish</p>
-						<p>French</p>
-						<p>Polish</p>
-					</div>
-					<div className="col-4">
-						<p>Portuguese (Brazilian)</p>
-						<p>Czech</p>
-						<p>Turkish</p>
-					</div>
+					{langs.map(lang => (
+						<div className="col-4" key={lang}>
+							<button onClick={handleFilterBtn} type="button" value={lang}>{lang}</button>
+						</div>
+					))}
 				</div>
+
 				<div className="components-wrapper">
 					<h2>Components</h2><br/>
-					{(asset.components) ? 
-						asset.components.map(assetDetail => <AssetComponent key={assetDetail.id} assetDetail={assetDetail}/>) :
+					{filtered.length ? 
+						filtered.map(assetDetail => <AssetComponent key={assetDetail.id} assetDetail={assetDetail}/>) :
 						"Loading"
 					}
-					
-
 				</div>
 			</div>		
 			)

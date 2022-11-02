@@ -7,11 +7,12 @@ const AssetComponents = ({assetDetail}) => {
 		<section className="container">
 			<div className="row my-3">
 				<div className="col-2">
-				<video width="320" height="240" controls>
-					<source src={`/play/${assetDetail.id}`} type="text/html" />
-					<source src="#" type="video/ogg" />
-					Your browser does not support the video tag.
-				</video> 
+
+					{/* <video width="320" height="240" controls>
+						<source src={`/play/${assetDetail.id}`} type="text/html" />
+						<source src="#" type="video/ogg" />
+						Your browser does not support the video tag.
+					</video>  */}
 					
 				</div>
 				<div className="col-4">
