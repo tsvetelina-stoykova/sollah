@@ -36,7 +36,7 @@ export const getAssets = createAsyncThunk(
 		if(diff_criteria) api.dispatch({type:'assets/reset'});
 		api.dispatch({type:'assets/success', payload: {assets:result.assets, count:result.count, filter}});
 	}
-)
+);
 
 export const getAsset = createAsyncThunk(
 	"assets/getAsset",
@@ -44,7 +44,7 @@ export const getAsset = createAsyncThunk(
 		return await fetch(`https://sollahlibrary.com/mapi/4/assets/${id}`)
 			.then((res) => res.json());
 	}
-)
+);
 
 export const getAssetsByIds = createAsyncThunk(
 	"assets/getAssetsByIds",
@@ -57,7 +57,18 @@ export const getAssetsByIds = createAsyncThunk(
 		}).then((res) => res.json());
 		api.dispatch({type:'assets/bulk', payload: response.assets});
 	}
-)
+);
+
+
+export const getPlayUrl = createAsyncThunk(
+	"assets/getPlayUrl",
+	async ({asset_id, play_id}) => {
+		return await fetch(`https://sollahlibrary.com/mapi/4/assets/${asset_id}/play/${play_id}`)
+						.then((res) => res.json());
+	} 
+);
+
+
 
 const assetsSlice = createSlice({
 	name: 'assets',
@@ -77,6 +88,7 @@ const assetsSlice = createSlice({
 		pagesize: 20,
 		index: [],
 		map: {},
+		play: {},
 	},
 	extraReducers: {
 		'assets/filter': (state, action) => {
@@ -102,7 +114,6 @@ const assetsSlice = createSlice({
 				}
 			}
 			state.count = action.payload.count;
-
 			if(state.index.length === 0) {
 				state.index = new Array(state.count);
 				state.index.fill(null);
@@ -116,6 +127,10 @@ const assetsSlice = createSlice({
 		[getAsset.fulfilled]: (state, action) => {
 			const asset = action.payload;
 			state.map[asset.id] = asset;
+		},
+		[getPlayUrl.fulfilled]: (state, action) => {
+			const video = action.payload;
+			
 		},
 		'assets/bulk': (state, action) => {
 			const assets = action.payload;

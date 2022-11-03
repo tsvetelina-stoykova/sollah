@@ -3,7 +3,6 @@ import { useSelector, useDispatch } from "react-redux";
 import { getAsset } from "../app/assetsSlice";
 import { useParams } from "react-router-dom";
 import { IoMdHeartEmpty } from "react-icons/io";
-import { RiPlayList2Fill } from "react-icons/ri";
 import AssetComponent from "../features/AssetComponent";
 import "./AssetDetails.css";
 
@@ -28,6 +27,7 @@ const AssetDetails = () => {
 	useEffect(() => {
 		if(!(asset && asset.components)) dispatch(getAsset({id}));
 	}, [dispatch, id, asset]);
+
 
 	const handleFilterBtn = (e)  => {
 		setCurrentLang(e.target.value);
