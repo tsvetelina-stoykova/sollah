@@ -288,8 +288,3 @@ body {
 		display: inline-flex;
 	}
 }
-
-button.selected {
-	background: black;
-	color: white;
-}
