@@ -11,7 +11,7 @@ const AssetDetails = () => {
 	const dispatch = useDispatch();
 	const asset = useSelector((state) => state.assets.map[id]);
 	const [currentLang, setCurrentLang] = useState("English");
-	
+
 	const filtered = useMemo(() => {
 		return asset?.components ?
 		asset.components.filter(c => (c.lang === currentLang)) :
@@ -123,7 +123,7 @@ const AssetDetails = () => {
 				<div className="components-wrapper">
 					<h2>Components</h2><br/>
 					{filtered.length ? 
-						filtered.map(assetDetail => <AssetComponent key={assetDetail.id} assetDetail={assetDetail}/>) :
+						filtered.map(component => <AssetComponent key={component.id} component={component}/>) :
 						"Loading"
 					}
 				</div>

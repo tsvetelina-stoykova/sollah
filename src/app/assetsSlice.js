@@ -46,6 +46,17 @@ export const getAsset = createAsyncThunk(
 	}
 );
 
+export const getPlayUrl = createAsyncThunk(
+	"assets/getPlayUrl",
+	async ({id, play_id}, api) => {
+		const user_vid = api.getState().auth.user;
+		return await fetch(`https://sollahlibrary.com/mapi/4/assets/${id}/play/${play_id}`, {
+			headers: { "x-authorization-token": user_vid.token },
+			mode: "cors",	
+		}).then((res) => res.json());			
+	} 
+);
+
 export const getAssetsByIds = createAsyncThunk(
 	"assets/getAssetsByIds",
 	async ({ids}, api) => {
@@ -59,14 +70,6 @@ export const getAssetsByIds = createAsyncThunk(
 	}
 );
 
-
-export const getPlayUrl = createAsyncThunk(
-	"assets/getPlayUrl",
-	async ({asset_id, play_id}) => {
-		return await fetch(`https://sollahlibrary.com/mapi/4/assets/${asset_id}/play/${play_id}`)
-						.then((res) => res.json());
-	} 
-);
 
 
 
@@ -129,8 +132,9 @@ const assetsSlice = createSlice({
 			state.map[asset.id] = asset;
 		},
 		[getPlayUrl.fulfilled]: (state, action) => {
-			const video = action.payload;
-			
+			state.play = action.payload;
+			// state.play[play.id] = play;
+			// console.log("play", state.play[play.play_id])
 		},
 		'assets/bulk': (state, action) => {
 			const assets = action.payload;

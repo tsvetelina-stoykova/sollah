@@ -20,7 +20,7 @@ const AssetsList = () => {
 	const page_start = (filter.page - 1) * assets.pagesize;
 	const page_end = filter.page * assets.pagesize;
 	const activeClassName = "activeBtn";
-
+	
 	useEffect(
 		() => {
 			if (['loading', 'success'].indexOf(assets.status[filter.page]) === -1) {
