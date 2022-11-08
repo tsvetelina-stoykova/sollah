@@ -134,7 +134,6 @@ const assetsSlice = createSlice({
 		},
 		[getPlayUrl.fulfilled]: (state, action) => {
 			const p = action.payload;
-			console.log(p);
 			state.play[p.asset_id + '/' + p.component_id] = p.play;
 		},
 		'assets/bulk': (state, action) => {
