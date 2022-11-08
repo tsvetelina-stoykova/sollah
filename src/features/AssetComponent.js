@@ -1,12 +1,10 @@
-import {FaPlayCircle} from "react-icons/fa"
-import "./AssetComponent.css";
-import Video from "../assets/vid1.mp4";
-import { MdClose } from "react-icons/md";
+import { useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
 import { getPlayUrl } from "../app/assetsSlice";
 import { useParams } from "react-router-dom";
-import { useSelector, useDispatch } from "react-redux";
-import { useState } from "react";
-
+import {FaPlayCircle} from "react-icons/fa";
+import { MdClose } from "react-icons/md";
+import "./AssetComponent.css";
 
 const AssetComponents = ({component}) => {
 	const dispatch = useDispatch();
@@ -15,17 +13,16 @@ const AssetComponents = ({component}) => {
 
 	const handlePlayer = (e) => {
 		e.preventDefault();
-		const play_id = component.id; 
-		console.log("id",id, "play_id", play_id);
-		dispatch(getPlayUrl({id, play_id}));
+		dispatch(getPlayUrl({asset_id:id, component_id:component.id}));
 		setSelected(true);
-		console.log("play",play.url)
 	};
-	const play = useSelector( (state) => state.assets.play );
+	
+	const play_key = id + '/' + component.id;
+	const play = useSelector( (state) => state.assets.play[play_key] );
+
 	const handleClose = () => {
 		setSelected(false);
 	}
-
 
 	return (
 		<section className="container">
@@ -48,13 +45,13 @@ const AssetComponents = ({component}) => {
 					<span>{component.lang}</span>
 				</div>
 			</div>
-			<div style={selected == 1 ? {visibility: "visible", opacity: "1"} : undefined} className="video-modal-screen">
+			<div style={selected  ? {visibility: "visible", opacity: "1"} : undefined} className="video-modal-screen">
 				<MdClose className="video-modal-close-btn" onClick={handleClose}/>
 				<div className="video-modal-content">
-					<video className="modal-video" width={play ? play.width : "faafasfaf"} height={play ? play.height : ""} controls>
-						<source src={play ? play.url : "Loading"} type="video/mp4" />
-						Your browser does not support video tag.
-					</video>
+					{ play 	? <video className="modal-video" width={ play.width } height={ play.height } controls>
+								<source src={ play.url } />
+							</video> 
+							: <p>Loading</p>}					
 				</div>
 			</div>
 		</section>

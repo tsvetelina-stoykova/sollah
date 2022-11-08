@@ -38,14 +38,14 @@
 	border-radius: 10px;
 	box-shadow: 0 5px 25px rgba(2, 2, 2, 0.3);
 	overflow: hidden;
-	transform: scale(0.5);
-	transition: transform 0.5s ease;
+	/* transform: scale(0.5);
+	transition: transform 0.5s ease; */
 }
-.modal-video {
+/* .modal-video {
 	max-width: 800px;
 	width: 100%;
 	height: auto;
-}
+} */
 
 .video-modal-close-btn {
 	position: absolute;

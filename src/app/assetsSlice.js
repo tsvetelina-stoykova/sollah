@@ -48,13 +48,13 @@ export const getAsset = createAsyncThunk(
 
 export const getPlayUrl = createAsyncThunk(
 	"assets/getPlayUrl",
-	async ({id, play_id}, api) => {
-		const user_vid = api.getState().auth.user;
-		return await fetch(`https://sollahlibrary.com/mapi/4/assets/${id}/play/${play_id}`, {
-			headers: { "x-authorization-token": user_vid.token },
+	async ({asset_id, component_id}, api) => {
+		const user = api.getState().auth.user;
+		return await fetch(`https://sollahlibrary.com/mapi/4/assets/${asset_id}/play/${component_id}`, {
+			headers: { "x-authorization-token": user.token },
 			mode: "cors",	
-		}).then((res) => res.json());			
-	} 
+		}).then(async (res) => ({asset_id, component_id, play: await res.json()}));
+	}
 );
 
 export const getAssetsByIds = createAsyncThunk(
@@ -116,6 +116,7 @@ const assetsSlice = createSlice({
 					state.map[a.id] = a;
 				}
 			}
+			
 			state.count = action.payload.count;
 			if(state.index.length === 0) {
 				state.index = new Array(state.count);
@@ -132,9 +133,9 @@ const assetsSlice = createSlice({
 			state.map[asset.id] = asset;
 		},
 		[getPlayUrl.fulfilled]: (state, action) => {
-			state.play = action.payload;
-			// state.play[play.id] = play;
-			// console.log("play", state.play[play.play_id])
+			const p = action.payload;
+			console.log(p);
+			state.play[p.asset_id + '/' + p.component_id] = p.play;
 		},
 		'assets/bulk': (state, action) => {
 			const assets = action.payload;
