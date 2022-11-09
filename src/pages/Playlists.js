@@ -12,7 +12,6 @@ const Playlists = () => {
 	const assets = useSelector((state) => state.assets);
 	const playlist = playlists.mine[currentTab];
 	const missing_ids = playlist ? playlist.asset_ids.filter((id)=>!assets.map[id]) : [];
-
 	useEffect(() => { dispatch(listPlaylists()) }, [dispatch]);
 
 	useEffect(() => { 

@@ -18,10 +18,10 @@ const Login = () =>  {
 		if (auth.user) navigate(from, {reset: true})
 	}, [auth.user]);
 
-	const emailHandler = (e) => {
+	const handleEmail = (e) => {
 		setEmail(e.target.value);
 	}
-	const passwordHandler = (e) => {
+	const handlePassword = (e) => {
 		setPassword(e.target.value);
 	}
 	const handleSubmit = (e) => {
@@ -37,11 +37,11 @@ const Login = () =>  {
 						<div className="col">
 							<div className="pb-3">
 								<label className="pr-4 mr-4">Email </label>
-								<input name="email" type="text" value={email} onChange={emailHandler}/>
+								<input name="email" type="text" value={email} onChange={handleEmail}/>
 							</div>
 							<div className="pb-3">
 								<label className="pr-1 mr-3">Password </label>
-								<input name="password" type="password" value={password} onChange={passwordHandler}/>
+								<input name="password" type="password" value={password} onChange={handlePassword}/>
 							</div>
 							<div className="col-7 offset-3 mr-2 ">
 								<button className="form-button " disabled={auth.pending}>Log In</button>

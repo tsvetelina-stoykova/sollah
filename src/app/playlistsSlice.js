@@ -9,6 +9,18 @@ export const listPlaylists = createAsyncThunk(
 			mode: "cors",
 		}).then((res) => res.json());
 	}
+);
+
+export const addLiked = createAsyncThunk(
+	"playlists/addLiked",
+	async ({asset_id}, api) => {
+		const user = api.getState().auth.user;
+		return await fetch(`https://sollahlibrary.com/mapi/4/playlists/liked/assets/${asset_id}`, {
+			method: "PUT",
+			headers: { "x-authorization-token": user.token },
+			mode: "cors",
+		}).then((res) => res.json());
+	}
 )
 
 const playlistsSlice = createSlice({
@@ -16,6 +28,7 @@ const playlistsSlice = createSlice({
 	initialState: {
 		mine: [],
 		shared: [],
+		liked: [],
 		status: "",
 	},
 	extraReducers: {
@@ -29,6 +42,10 @@ const playlistsSlice = createSlice({
 		},
 		[listPlaylists.rejected]: (state) => {
 			state.status = "error";
+		},
+		[addLiked.fulfilled]: (state, action) => {
+			state.status = "success";
+			state.liked = action.payload;
 		},
 	}
 })
