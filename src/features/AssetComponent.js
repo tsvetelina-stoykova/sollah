@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { getPlayUrl } from "../app/assetsSlice";
 import { useParams } from "react-router-dom";
@@ -10,10 +11,12 @@ import Player from "./Player";
 const AssetComponent = ({component}) => {
 	const dispatch = useDispatch();
 	const {id} = useParams();
-
+	const [toggle, setToggle] = useState(false);
 	const handlePlayer = (e) => {
 		e.preventDefault();
 		dispatch(getPlayUrl({asset_id:id, component_id:component.id}));
+		setToggle(!toggle);
+		console.log(toggle);
 	};
 
 	const play_key = id + '/' + component.id;
@@ -24,7 +27,7 @@ const AssetComponent = ({component}) => {
 				<div className="col-2">
 					<a onClick={handlePlayer} className="d-flex video-link">
 						{component.doc === "video" ? <img src={movie}/> : component.doc === "pdf" ? <img src={pdf}/> : <img src={ppt}/>}
-						<span className="pl-2 align-self-center"><b>Demo</b></span>
+						<span className="pl-2 align-self-center"></span>
 					</a>
 				</div>
 				<div className="col-5">
@@ -39,7 +42,7 @@ const AssetComponent = ({component}) => {
 					<span>{component.lang}</span>
 				</div>
 			</div>
-				<Player component={component} play={play}/>
+			{ toggle && <Player component={component} play={play}/> }				
 		</section>
 		
 	)

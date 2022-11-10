@@ -1,0 +1,12 @@
+.pdf-wrapper {
+	margin-left: 20%;
+	border: 1px solid #ccc;
+	border-radius: 6px;
+	box-shadow: 0 6px 12px rgba(0,0,0,.175);
+}
+.video-wrapper {
+	margin-left: 20%;
+	border-radius: 6px;
+	box-shadow: 0 6px 12px rgba(0,0,0,.175);
+	margin-bottom: 2em;
+}
