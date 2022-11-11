@@ -35,7 +35,6 @@ const AssetsList = () => {
 	const page_assets = useMemo(
 		() => assets.index.slice(page_start, page_end).map(id=>(assets.map[id])), 
 		[ assets, page_start, page_end]);
-
 	const changeFilter = (id, val) => {
 		dispatch(getAssets({ ...filter, [id]: val, page: 1 }));
 	}

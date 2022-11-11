@@ -11,15 +11,15 @@ export const listPlaylists = createAsyncThunk(
 	}
 );
 
-export const addLiked = createAsyncThunk(
-	"playlists/addLiked",
-	async ({asset_id}, api) => {
+export const togglePlaylist = createAsyncThunk(
+	"playlists/togglePlaylist",
+	async ({asset_id, playlist_id, add}, api) => {
 		const user = api.getState().auth.user;
-		return await fetch(`https://sollahlibrary.com/mapi/4/playlists/liked/assets/${asset_id}`, {
-			method: "PUT",
+		return await fetch(`https://sollahlibrary.com/mapi/4/playlists/${playlist_id}/assets/${asset_id}`, {
+			method: add ? "PUT" : "DELETE",
 			headers: { "x-authorization-token": user.token },
 			mode: "cors",
-		}).then((res) => res.json());
+		}).then((res) => ({asset_id, playlist_id, add}));
 	}
 )
 
@@ -28,7 +28,7 @@ const playlistsSlice = createSlice({
 	initialState: {
 		mine: [],
 		shared: [],
-		liked: [],
+		map: {},
 		status: "",
 	},
 	extraReducers: {
@@ -37,15 +37,28 @@ const playlistsSlice = createSlice({
 		},
 		[listPlaylists.fulfilled]: (state, action) => {
 			state.status = "success";
-			state.mine = action.payload.mine;
-			state.shared = action.payload.shared;
+			// indices
+			state.mine = action.payload.mine.map(p=>p.id);
+			state.shared = action.payload.shared.map(p=>p.id);
+			// map
+			state.map = {};
+			action.payload.mine.forEach(p=>{state.map[p.id]=p});
+			action.payload.shared.forEach(p=>{state.map[p.id]=p});
 		},
 		[listPlaylists.rejected]: (state) => {
 			state.status = "error";
 		},
-		[addLiked.fulfilled]: (state, action) => {
-			state.status = "success";
-			state.liked = action.payload;
+		[togglePlaylist.fulfilled]: (state, action) => {
+			const {asset_id, playlist_id, add} = action.payload;
+			if(state.map[playlist_id]) {
+				state.status = "success";
+				if(add && !state.map[playlist_id].asset_ids.includes(asset_id)) {
+					state.map[playlist_id].asset_ids.push(asset_id);
+				}
+				else if(!add) {
+					state.map[playlist_id].asset_ids = state.map[playlist_id].asset_ids.filter(id => id!=asset_id);
+				}
+			}
 		},
 	}
 })
