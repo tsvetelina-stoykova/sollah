@@ -2,11 +2,6 @@
 	border-radius: 6px;
 }
 
-.asset-description {
-	font-size: var(--fs-100);
-	opacity: 0.8;
-}
-
 .asset-topics-wrapper {
 	margin: 2em 0 1.5em 0;
 	padding-top: 0.875em;

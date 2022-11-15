@@ -69,8 +69,6 @@ const AssetsList = () => {
 				</div>
 			</div>
 
-			{/* TODO: Fix active link */}
-
 			<div className="row buttons-wrapper">
 				<NavLink to="/" className={({isActive}) => isActive ? activeClassName + " assets-button" : "assets-button"}>Assets</NavLink>
 				<NavLink to="/whats-new"  className="assets-button">New</NavLink>

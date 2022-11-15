@@ -15,12 +15,12 @@ const BlogItem = ({post}) => {
 			<div className="col-12 col-lg-9 blog-description-wrapper">
 				<div className="pb-4">
 					<Link to={`/blog/${post.seo_id}`} className="blog-title">
-						<h2 className="blog-title pb-2">{post ? post.title : "Loading.."}</h2>
+						<h2 className="pb-2">{post ? post.title : "Loading.."}</h2>
 					</Link>
 					<p className="blog-description">{post.description}</p>
 				</div>
 				<div className="mt-2 blog-date-wrapper">
-					<p className="blog-date">{date.toLocaleDateString('en-US', options)}</p>
+					<p>{date.toLocaleDateString('en-US', options)}</p>
 				</div>
 			</div>
 

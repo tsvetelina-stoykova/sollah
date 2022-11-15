@@ -5,19 +5,14 @@
 }
 
 .blog-thumb-image {
-	/* max-width: 274px; */
 	height: auto;
-	border-radius: 5px;
+	border-radius: 6px;
 	object-fit: contain;
 	box-shadow: 0 6px 12px rgba(0,0,0,.175);
 }
 
 .blog-description-wrapper {
 	padding-inline: 1.3rem;
-}
-
-.blog-description-wrapper:first-child {
-	padding-bottom: 1.2rem;
 }
 
 .blog-title {

@@ -16,18 +16,19 @@ const AssetsItem = ({asset, playlist, playlist_id}) => {
 				<img className='asset-thumb-image' src={asset ? asset.thumb_url : "Loading"} />
 			</Link>
 		</div>
-		<div className='col-12 col-lg-7'>
-			<Link to={`/${asset ? asset.id : ""}`}>				
-				<h2 className='asset-title pb-2'>{asset ? asset.title : 'Loading'}</h2>
-			</Link>	
-			<p className='asset-description'>{asset ? asset.description : "Loading"}</p>
+		<div className="col-12 col-lg-9 asset-description-wrapper">
+			<div className="pb-2">
+				<Link to={`/${asset ? asset.id : ""}`} className="asset-title">				
+					<h2 className="pb-2">{asset ? asset.title : 'Loading'}</h2>
+				</Link>
+				<p className="asset-description">{asset ? asset.description : "Loading"}</p>
+			</div>
+			<div className="asset-specifics">
+				<div><span><b>Type: </b>{asset ? asset.type : "Loading"}</span></div>
+				<div><span><b>Topic: </b>{asset ? asset.topic : "Loading"}</span></div>
+			{/* <button onClick={handleDelete} className="button button-delete">Delete Asset</button> */}
+			</div>
 		</div>
-		<div className='col-12 col-lg-2'>
-			<div><span><b>Type: </b>{asset ? asset.type : "Loading"}</span></div>
-			<div><span><b>Topic: </b>{asset ? asset.topic : "Loading"}</span></div>
-			<button onClick={handleDelete} className="button button-delete">Delete Asset</button>
-		</div>
-
 	</section>
   )
 }

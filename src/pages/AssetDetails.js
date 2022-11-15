@@ -56,7 +56,7 @@ const AssetDetails = () => {
 		() => playlists.mine.slice(3).map((id) => playlists.map[id].name),
 		[playlists]
 	)
-	console.log("playlist map", listPlaylistTitles)
+	
 	return (
 		<>{asset ?
 			(
@@ -70,8 +70,7 @@ const AssetDetails = () => {
 							<p className="asset-description">{asset.description}</p>
 							<div className="pt-3 row">
 								<button onClick={handleLike} className="btn-favourites mr-3">
-									{isLiked ? <span className="d-flex align-items-center"><IoMdHeart className="mr-1" size="1.7em" />Liked</span> : <span className="d-flex align-items-center"><IoMdHeartEmpty className="mr-1" size="1.7em" />Like</span>}
-									 
+									{isLiked ? <span className="d-flex align-items-center"><IoMdHeart className="mr-1" size="1.7em" />Liked</span> : <span className="d-flex align-items-center"><IoMdHeartEmpty className="mr-1" size="1.7em" />Like</span>}									 
 								</button>
 								<div className="playlist-dropdown">
 									<button onClick={handleOpen} className="btn-playlist"><span className="m-auto">Add to Playlist</span></button>

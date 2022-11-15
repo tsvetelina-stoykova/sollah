@@ -1,26 +1,35 @@
 .asset-image-wrapper {
 	max-width: 200px;
 }
-
 .asset-thumb-image {
 	width: 100%;
 	height: auto;
 	border-radius: 6px;
 	object-fit: contain;
+	box-shadow: 0 6px 12px rgba(0,0,0,.175);
 }
-
 .asset-title {
-	font-family: var(--ff-secondary);
-	font-size: var(--fs-700);
-	line-height: 25px;
-}
-
-.asset-title > a {
 	text-decoration: none;
+}
+.asset-title:hover {
+	text-decoration: underline;
+	text-decoration-thickness: 1px;
+	text-decoration-color: var(--clr-accent-800);
+}
+.asset-title > h2 {
+	font-family: var(--ff-secondary);
+	font-size: var(--fs-750);
+	line-height: 25px;
 	color: var(--clr-accent-800);
 }
 
 .asset-description {
-	font-size: var(--fs-400);
+	font-size: var(--fs-450);
 	line-height: 20px;
+}
+
+.asset-specifics {
+	font-size: var(--fs-300);
+	opacity: .7;
+	border-top: 1px solid rgb(212, 208, 208);
 }
