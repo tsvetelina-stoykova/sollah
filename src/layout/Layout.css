@@ -48,6 +48,11 @@
 	text-decoration: none;
 	color: hsl(204, 100%, 18%);
 }
+.active {
+	text-decoration: underline!important;
+	text-decoration-thickness: 2px!important;
+	text-decoration-color: var(--clr-accent-800);
+}
 
 /* .primary-navigation > ul > li > a {
 	color: var(--clr-neutral-400);

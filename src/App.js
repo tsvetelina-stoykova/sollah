@@ -19,12 +19,12 @@ function App() {
 	<>
 		<Routes>
 			<Route path="/" element={<Layout />}>
-				<Route path="/login" element={<Login />} />
-				<Route path="/logout" element={<Logout />} />
-				<Route index element={<Assets />} />
+				<Route exact index element={<Assets />} />
+				<Route exact path="/login" element={<Login />} />
+				<Route exact path="/logout" element={<Logout />} />
 				<Route path="/:id" element={<AssetDetails />} />
-				<Route path="/whats-new"  element={<NewAssets />} />
-				<Route path="/blog" element={<Blog />}/>
+				<Route exact path="/whats-new"  element={<NewAssets />} />
+				<Route exact path="/blog" element={<Blog />}/>
 				<Route path="/blog/:seo_id" element={<BlogDetails />} />
 				
 				<Route path="/profile"

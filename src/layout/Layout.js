@@ -23,21 +23,21 @@ const Layout = () => {
 						<button onClick={toggleHandler} className='mobile-nav-toggle'>{'navbar-open' ? (<MdOutlineClose size='2.2rem' color='#000'/>) : (<FiMenu size='2.2rem' color='#000'/>) }</button>					
 					</div>
 					<nav className={navbarOpen ? 'primary-navigation navbar-open show-menu' : 'primary-navigation'}>
-						<ul aria-label='Primary'  className='nav-list'>
+						<ul aria-label='Primary' className='nav-list'>
 							<li>
-								<NavLink to='/' onClick={closeMenuHandler} >Assets</NavLink>
+								<NavLink to='/' end onClick={closeMenuHandler} >Assets</NavLink>
 							</li>
 							<li>
-								<NavLink to='/playlists' onClick={closeMenuHandler} >Playlists</NavLink>
+								<NavLink to='/playlists'  onClick={closeMenuHandler} >Playlists</NavLink>
 							</li>
 							<li>
-								<NavLink to='/blog' onClick={closeMenuHandler} >Blog</NavLink>
+								<NavLink to='/blog'  onClick={closeMenuHandler} >Blog</NavLink>
 							</li>
 							<li>
 								<NavLink to='/messages' onClick={closeMenuHandler} >Messages</NavLink>
 							</li>
 							<li>
-								<NavLink to='/profile' onClick={closeMenuHandler} >Profile</NavLink>
+								<NavLink to='/profile'  onClick={closeMenuHandler} >Profile</NavLink>
 							</li>
 						</ul>
 					</nav>

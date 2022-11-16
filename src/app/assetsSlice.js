@@ -71,8 +71,6 @@ export const getAssetsByIds = createAsyncThunk(
 );
 
 
-
-
 const assetsSlice = createSlice({
 	name: 'assets',
 	initialState: {

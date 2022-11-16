@@ -4,36 +4,37 @@
 
 .tab {
 	float: left;
-	background-color: #f1f1f1;
+	padding: 0;
+	border: 1px solid var(--clr-neutral-100);
+	border-radius: 6px;
 }
 
 .playlists-btn {
 	display: block;
-	padding: 22px 16px;
+	padding: 20px 16px;
 	width: 100%;
-	border: none;
+	border-bottom: 2px solid var(--clr-neutral-100);
 	outline: none;
 	text-align: left;
 	cursor: pointer;
 	font-size: 17px;
 }
 
+.selected-btn {
+	color: var(--clr-accent-800);
+	font-weight: var(--fw-semi-bold);
+	background-color: var(--clr-neutral-100);
+}
+
 .playlists-btn:hover {
-	background-color: #ddd;
+	background-color: var(--clr-neutral-100);
 }
-  
-.playlists-btn.active {
-	background-color: #ccc;
-}
-  
+ 
 .tabcontent {
 	float: left;
-	padding: 0px 12px;
 	width: 70%;
+	padding: 0 2em;
 	border-left: none;
 	height: 300px;
 }
 
-.button-delete {
-	background-color: crimson!important;
-}
