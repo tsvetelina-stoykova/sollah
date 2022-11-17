@@ -13,13 +13,14 @@ export const listPlaylists = createAsyncThunk(
 
 export const togglePlaylist = createAsyncThunk(
 	"playlists/togglePlaylist",
-	async ({asset_id, playlist_id, add}, api) => {
+	async ({ asset_id, playlist_id, add }, api) => {
 		const user = api.getState().auth.user;
+		// api.dispatch({type:"playlists/togglePlaylist/fulfilled", payload:{ asset_id, playlist_id, add }});
 		return await fetch(`https://sollahlibrary.com/mapi/4/playlists/${playlist_id}/assets/${asset_id}`, {
 			method: add ? "PUT" : "DELETE",
 			headers: { "x-authorization-token": user.token },
 			mode: "cors",
-		}).then((res) => ({asset_id, playlist_id, add}));
+		}).then((res) => ({ asset_id, playlist_id, add }));
 	}
 )
 
@@ -38,25 +39,25 @@ const playlistsSlice = createSlice({
 		[listPlaylists.fulfilled]: (state, action) => {
 			state.status = "success";
 			// indices
-			state.mine = action.payload.mine.map(p=>p.id);
-			state.shared = action.payload.shared.map(p=>p.id);
+			state.mine = action.payload.mine.map(p => p.id);
+			state.shared = action.payload.shared.map(p => p.id);
 			// map
 			state.map = {};
-			action.payload.mine.forEach(p=>{state.map[p.id]=p});
-			action.payload.shared.forEach(p=>{state.map[p.id]=p});
+			action.payload.mine.forEach(p => { state.map[p.id] = p });
+			action.payload.shared.forEach(p => { state.map[p.id] = p });
 		},
 		[listPlaylists.rejected]: (state) => {
 			state.status = "error";
 		},
 		[togglePlaylist.fulfilled]: (state, action) => {
-			const {asset_id, playlist_id, add} = action.payload;
-			if(state.map[playlist_id]) {
+			const { asset_id, playlist_id, add } = action.payload;
+			if (state.map[playlist_id]) {
 				state.status = "success";
-				if(add && !state.map[playlist_id].asset_ids.includes(asset_id)) {
+				if (add && !state.map[playlist_id].asset_ids.includes(asset_id)) {
 					state.map[playlist_id].asset_ids.push(asset_id);
 				}
-				else if(!add) {
-					state.map[playlist_id].asset_ids = state.map[playlist_id].asset_ids.filter(id => id!=asset_id);
+				else if (!add) {
+					state.map[playlist_id].asset_ids = state.map[playlist_id].asset_ids.filter(id => id != asset_id);
 				}
 			}
 		},

@@ -4,6 +4,7 @@ import { getAsset } from "../app/assetsSlice";
 import { togglePlaylist, listPlaylists } from "../app/playlistsSlice";
 import { useParams } from "react-router-dom";
 import { IoMdHeart, IoMdHeartEmpty } from "react-icons/io";
+import { MdOutlineKeyboardArrowDown } from "react-icons/md";
 import AssetComponent from "../features/AssetComponent";
 import "./AssetDetails.css";
 
@@ -14,6 +15,7 @@ const AssetDetails = () => {
 	const playlists = useSelector((state) => state.playlists);
 	const [currentLang, setCurrentLang] = useState("English");
 	const [openPlaylist, setOpenPlaylist] = useState(false);
+	const [openPlaylist2, setOpenPlaylist2] = useState(false);
 
 	const filtered = useMemo(() => {
 		return asset?.components ?
@@ -37,25 +39,26 @@ const AssetDetails = () => {
 	};
 
 	useEffect(() => {
-		if (playlists.status == '') dispatch(listPlaylists());
+		if (playlists.status === '') dispatch(listPlaylists());
 	}, [dispatch, playlists]);
 
 	const isLiked = playlists.map.liked ?
 		playlists.map.liked.asset_ids.includes(id) :
 		false;
-
+	
 	const handleLike = () => {
 		dispatch(togglePlaylist({ asset_id: id, playlist_id: 'liked', add: !isLiked }));
 	};
 
 	const handleOpen = () => {
 		setOpenPlaylist(!openPlaylist);
-	}
-
-	const listPlaylistTitles = useMemo(
-		() => playlists.mine.slice(3).map((id) => playlists.map[id].name),
-		[playlists]
-	)
+	};
+	const handleOpen2 = () => {
+		setOpenPlaylist2(!openPlaylist2);
+	};
+	// const handleAddPlaylist = () => {
+	// 	dispatch(togglePlaylist({asset_id: id, playlist_id: playlists.map[id].id, add: !isAdded}))
+	// };
 	
 	return (
 		<>{asset ?
@@ -70,22 +73,33 @@ const AssetDetails = () => {
 							<p className="asset-description">{asset.description}</p>
 							<div className="pt-3 row">
 								<button onClick={handleLike} className="btn-favourites mr-3">
-									{isLiked ? <span className="d-flex align-items-center"><IoMdHeart className="mr-1" size="1.7em" />Liked</span> : <span className="d-flex align-items-center"><IoMdHeartEmpty className="mr-1" size="1.7em" />Like</span>}									 
+									{isLiked ? 
+										<span className="d-flex align-items-center"><IoMdHeart className="mr-1" size="1.7em" />Liked</span> : 
+										<span className="d-flex align-items-center"><IoMdHeartEmpty className="mr-1" size="1.7em" />Like</span>}									 
 								</button>
 								<div className="playlist-dropdown">
-									<button onClick={handleOpen} className="btn-playlist"><span className="m-auto">Add to Playlist</span></button>
+									<button onClick={handleOpen} className=" d-flex btn-playlist">
+										<span className="m-auto">Add to Playlist</span>
+										<MdOutlineKeyboardArrowDown className="ml-1" size="1.7em"/>
+									</button>
 								</div>
 							</div>
 							<div className="playlist-wrapper">
 								{openPlaylist ? 
-									listPlaylistTitles.map((title, idx) =>
-									<div className="playlist-checkbox" key={title ? title : -idx}> 										
-										<input type="checkbox" id={title} name={title} value={title} />
-										<label htmlFor={title}>{title}</label>
-									</div>
-									) :
-									""}
-								</div>
+									playlists.mine.map((pid) => {
+										const p = playlists.map[pid];
+										const added = p.asset_ids.includes(id);
+										return p.id > 0 ? (<div className="playlist-checkbox" key={p.id}>
+											<label>
+												<input type="checkbox" value={p.id} checked={added} onChange={e => {
+													dispatch(togglePlaylist({asset_id:id, playlist_id:pid, add: !added}));
+												}}/>
+												{" "}{p.name}
+											</label>
+										</div>) : null;
+									}) : null
+								}
+							</div>
 						</div>
 					</div>
 					<div className="row asset-topics-wrapper">
