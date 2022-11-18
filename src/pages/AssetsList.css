@@ -1,5 +1,21 @@
-.activeBtn {
+.active-btn {
 	color: red!important;
+}
+
+.buttons-wrapper {
+	margin: 12px auto;
+}
+
+.assets-button:first-child {
+	display: flex;
+	justify-content: end;
+	border-bottom-left-radius: 6px;
+	border-top-left-radius: 6px;
+}
+
+.assets-button:last-child {
+	border-bottom-right-radius: 6px;
+	border-top-right-radius: 6px;
 }
 
 .search-label {
@@ -39,10 +55,6 @@
 	line-height: 1;
 	color: var(--clr-accent-700);
 	box-shadow: 0 1.125em 1em -1em rgba(223, 223, 223, 0.76);
-}
-
-.buttons-wrapper {
-	margin: auto;
 }
 
 .search-box {

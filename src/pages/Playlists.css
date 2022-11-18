@@ -4,30 +4,73 @@
 
 .tab {
 	float: left;
-	padding: 0;
-	border: 1px solid var(--clr-neutral-100);
+	border: 1px solid hsl(205, 44%, 55%, 50%);
 	border-radius: 6px;
+	width: 100%;
+	margin: 0 0 1em 0;
+}
+
+.create-playlist {
+	padding: 1.25em 1em;
+}
+
+.create-playlist input {
+	border: 1px solid hsl(205, 44%, 55%, 100%);
+	border-radius: 6px;
+	padding: 0.125em;
+	width: 100%;
+}
+
+input:focus {
+	outline: none!important;
+}
+
+.create-playlist .button {
+	cursor: pointer;
+	text-decoration: none;
+	border: 0;
+	border-radius: 6px;
+	color: var(--clr-primary-100);
+	background-color: var(--clr-accent-400);
+	box-shadow: 0 1.125em 1em -1em rgba(182, 51, 11, 0.76);
+	padding: 0.5em 0.75em;
+	font-weight: var(--fw-semi-bold);
+	font-size: var(--fs-button);
+	width: 100%;
+	margin-top: 0.25em;
 }
 
 .playlists-btn {
 	display: block;
-	padding: 20px 16px;
+	padding: 1.25em 1em;
 	width: 100%;
-	border-bottom: 2px solid var(--clr-neutral-100);
+	border-bottom: 1px solid hsl(205, 44%, 55%, 50%);
 	outline: none;
 	text-align: left;
 	cursor: pointer;
 	font-size: 17px;
 }
 
-.selected-btn {
-	color: var(--clr-accent-800);
+.shared-title {
+	padding: 0 1em 0 ;
+	text-align: left;
+	font-size: 17px;
 	font-weight: var(--fw-semi-bold);
-	background-color: var(--clr-neutral-100);
+	width: 100%;
+}
+
+.playlists-btn:last-child {
+	border-bottom: none;
+}
+
+.selected-btn {
+	/* color: var(--clr-accent-700); */
+	font-weight: var(--fw-semi-bold);
+	background-color: hsl(205, 44%, 55%, 50%);
 }
 
 .playlists-btn:hover {
-	background-color: var(--clr-neutral-100);
+	background-color: hsl(205, 44%, 55%, 20%);
 }
  
 .tab-content {

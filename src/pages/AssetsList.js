@@ -19,7 +19,7 @@ const AssetsList = () => {
 	const pages = Math.ceil(assets.count / assets.pagesize);
 	const page_start = (filter.page - 1) * assets.pagesize;
 	const page_end = filter.page * assets.pagesize;
-	const activeClassName = "activeBtn";
+	const activeClassName = "active-btn";
 	
 	useEffect(
 		() => {
@@ -47,6 +47,11 @@ const AssetsList = () => {
 
 	return (
 		<div className='container-md'>
+			<div className="row buttons-wrapper pt-3">
+				<NavLink to="/" className={({isActive}) => isActive ? activeClassName + " assets-button col-6" : "assets-button col-6"}>Assets</NavLink>
+				<NavLink to="/whats-new"  className="assets-button col-6">New</NavLink>
+			</div>
+
 			<div className='list-filter-wrapper'>
 				<div className="row">
 					<div className='col pb-3'>
@@ -65,10 +70,6 @@ const AssetsList = () => {
 				</div>
 			</div>
 
-			<div className="row buttons-wrapper">
-				<NavLink to="/" className={({isActive}) => isActive ? activeClassName + " assets-button" : "assets-button"}>Assets</NavLink>
-				<NavLink to="/whats-new"  className="assets-button">New</NavLink>
-			</div>
 			<div className='page-content col-12'>
 				<div>
 					<Pagination pages={pages} current={filter.page} onClick={p => { changePage(p) }} />

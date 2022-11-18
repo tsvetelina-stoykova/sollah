@@ -1,4 +1,4 @@
-import { useEffect, useState, useCallback } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { listPlaylists } from "../app/playlistsSlice";
 import { getAssetsByIds } from "../app/assetsSlice";
@@ -7,6 +7,7 @@ import "./Playlists.css"
 
 const Playlists = () => {
 	const [playlist_id, setCurrentTab] = useState('liked');
+	const [created, setCreated] = useState(null);
 	const dispatch = useDispatch();
 	const playlists = useSelector((state) => state.playlists);
 	const assets = useSelector((state) => state.assets);
@@ -25,22 +26,38 @@ const Playlists = () => {
 	const handleTab = (playlist_id) => {
 		setCurrentTab(playlist_id);
 	}
+
+	const handleCreate = (e) => {
+		e.preventDefault()
+		console.log("newplaylist", created)
+	}
 	
 	return (
-		<div className="row">
-			<div className="container-md page-content">
-				<div className="col-3 tab">
-					{playlists.mine.map((id) => (
-						<a key={id} onClick={()=>{handleTab(id)}} className={`playlists-btn ${playlist_id===id?'selected-btn':''}`}>
-							{playlists.map[id].name}
-						</a>
-					))}
-					<h3>Shared Playlists</h3>								
-					{playlists.shared.map((id) => (
-						<a key={id} onClick={()=>{handleTab(id)}} className={`playlists-btn ${playlist_id===id?'selected-btn':''}`}>
-							{playlists.map[id].name}
-						</a>
-					))}
+		<div className="container-md">
+			<div className="row page-content">
+				<div className="col-3">
+					<div className="tab">
+						<div className="create-playlist">
+							<form onSubmit={handleCreate}>
+								<input defaultValue={created} onChange={(e) => setCreated(e.target.value)}/>
+								<input type="submit" value="Create Playlist" className="button" />
+							</form>
+						</div>
+						{playlists.mine.map((id) => (
+							<a key={id} onClick={()=>{handleTab(id)}} className={`playlists-btn ${playlist_id===id?'selected-btn':''}`}>
+								{playlists.map[id].name}
+							</a>
+						))}
+					</div>
+					<div className="shared-title"><h2>Shared Playlists</h2></div>
+					
+					<div className="tab">								
+						{playlists.shared.map((id) => (
+							<a key={id} onClick={()=>{handleTab(id)}} className={`playlists-btn ${playlist_id===id?'selected-btn':''}`}>
+								{playlists.map[id].name}
+							</a>
+						))}
+					</div>
 				</div>
 				<div className="tab-content">
 					{playlist ? 
