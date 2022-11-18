@@ -1,9 +1,6 @@
 .activeBtn {
 	color: red!important;
 }
-.page-content {
-	padding: 1.5rem 0 0 0;
-}
 
 .search-label {
 	color: var(--clr-primary-100);
@@ -14,7 +11,11 @@
 	padding-top: 0.875em;
 	background-color: var(--clr-accent-700);
 	border-radius: 5px;
-} 
+}
+
+.list-filter-wrapper > .row > * {
+	text-align: center;
+}
 
 .assets-button {
 	cursor: pointer;
@@ -42,4 +43,8 @@
 
 .buttons-wrapper {
 	margin: auto;
+}
+
+.search-box {
+	width: 87%;
 }

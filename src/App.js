@@ -2,7 +2,7 @@ import { Routes, Route} from 'react-router-dom';
 import { RequireAuth } from './features/RequireAuth';
 
 import Layout from './layout/Layout';
-import Assets from './pages/Assets';
+import AssetsList from './pages/AssetsList';
 import AssetDetails from './pages/AssetDetails';
 import NewAssets from './pages/NewAssets';
 import Profile from './pages/Profile';
@@ -19,7 +19,7 @@ function App() {
 	<>
 		<Routes>
 			<Route path="/" element={<Layout />}>
-				<Route exact index element={<Assets />} />
+				<Route exact index element={<AssetsList />} />
 				<Route exact path="/login" element={<Login />} />
 				<Route exact path="/logout" element={<Logout />} />
 				<Route path="/:id" element={<AssetDetails />} />

@@ -2,7 +2,7 @@ import { useEffect, useState, useCallback } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { listPlaylists } from "../app/playlistsSlice";
 import { getAssetsByIds } from "../app/assetsSlice";
-import AssetsItem from '../features/AssetsItem';
+import PlaylistsAssetsItem from '../features/PlaylistsAssetsItem';
 import "./Playlists.css"
 
 const Playlists = () => {
@@ -42,11 +42,11 @@ const Playlists = () => {
 						</a>
 					))}
 				</div>
-				<div className="tabcontent">
+				<div className="tab-content">
 					{playlist ? 
 					<>				 							
 						{playlist.asset_ids.map(id => assets.map[id] ?
-							<AssetsItem key={id} asset={assets.map[id]} playlist={playlist} playlist_id={playlist_id}></AssetsItem> :
+							<PlaylistsAssetsItem key={id} asset={assets.map[id]} playlist={playlist} playlist_id={playlist_id}></PlaylistsAssetsItem> :
 							<p key={id}>Asset missing: {id}</p>
 						)}
 					</> :

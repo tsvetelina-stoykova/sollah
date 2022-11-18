@@ -169,6 +169,10 @@ body {
 	color: var(--clr-accent-300);
 }
 
+.page-content {
+	padding: 1.5rem 0 0 0;
+}
+
 
 /*---------------------*/
 /*       UTILITY       */
@@ -223,25 +227,11 @@ body {
 .bgPrimary400 {
 	background-color: var(--clr-primary-400);
 }
-/* .bgAccent400 {
-	background-color: var(--clr-accent-400);
-}
-.bgAccent100 {
-	background-color: var(--clr-accent-100);
-}
-.bgNneutral100 {
-	background-color: var(--clr-neutral-100);
-}
-.bgNeutral900 {
-	background-color: var(--clr-neutral-900);
-} */
 
 .fwBold {
 	font-weight: var(--fw-bold);
 }
-/* .fw-semi-bold {
-	font-weight: var(--fw-semi-bold);
-} */
+
 .fwRegular {
 	font-weight: var(--fw-regular);
 }
