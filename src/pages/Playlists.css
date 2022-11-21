@@ -31,13 +31,17 @@ input:focus {
 	border: 0;
 	border-radius: 6px;
 	color: var(--clr-primary-100);
-	background-color: var(--clr-accent-400);
-	box-shadow: 0 1.125em 1em -1em rgba(182, 51, 11, 0.76);
-	padding: 0.5em 0.75em;
+	background-color: hsl(210, 71%, 36%);
+	box-shadow: 0 1.125em 1em -1em rgba(5, 44, 77, 0.76);
+	padding: 0.6em 0.75em;
 	font-weight: var(--fw-semi-bold);
 	font-size: var(--fs-button);
 	width: 100%;
 	margin-top: 0.25em;
+}
+
+.create-playlist .button:hover {
+	background-color: var(--clr-accent-800);
 }
 
 .playlists-btn {

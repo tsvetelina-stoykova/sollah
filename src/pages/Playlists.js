@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { listPlaylists } from "../app/playlistsSlice";
+import { listPlaylists, createPlaylist } from "../app/playlistsSlice";
 import { getAssetsByIds } from "../app/assetsSlice";
 import PlaylistsAssetsItem from '../features/PlaylistsAssetsItem';
 import "./Playlists.css"
@@ -29,11 +29,11 @@ const Playlists = () => {
 
 	const handleCreate = (e) => {
 		e.preventDefault()
-		console.log("newplaylist", created)
+		dispatch(createPlaylist({name:created}));
 	}
 	
 	return (
-		<div className="container-md">
+		<div className="container-md p-0">
 			<div className="row page-content">
 				<div className="col-3">
 					<div className="tab">

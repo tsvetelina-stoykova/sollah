@@ -11,6 +11,30 @@ export const listPlaylists = createAsyncThunk(
 	}
 );
 
+export const createPlaylist = createAsyncThunk(
+	"playlists/createPlaylist",
+	async ({name}, api) => {
+		const user = api.getState().auth.user;
+		return await fetch("https://sollahlibrary.com/mapi/4/playlists", {
+			method: "POST",
+			headers: {"x-authorization-token": user.token, 'content-type':'application/json'},
+			body: JSON.stringify({name}),
+			mode: "cors",
+		}).then(handleResponse);
+	}
+);
+
+function handleResponse(response){
+	return response.text().then(text => {
+		const data = text && JSON.parse(text);
+		if(!response.ok){
+			const error = (data && data.message) || response.statusText;
+            return Promise.reject(error);
+		}
+		return data;
+	})
+}
+
 export const togglePlaylist = createAsyncThunk(
 	"playlists/togglePlaylist",
 	async ({ asset_id, playlist_id, add }, api) => {
@@ -22,7 +46,7 @@ export const togglePlaylist = createAsyncThunk(
 			mode: "cors",
 		}).then((res) => ({ asset_id, playlist_id, add }));
 	}
-)
+);
 
 const playlistsSlice = createSlice({
 	name: "playlists",
@@ -61,6 +85,12 @@ const playlistsSlice = createSlice({
 				}
 			}
 		},
+		[createPlaylist.fulfilled]: (state, action) => {
+			state.status = "success";
+			const playlist = action.payload.playlist;
+			state.mine.push(playlist.id);
+			state.map[playlist.id] = playlist;
+		}
 	}
 })
 
