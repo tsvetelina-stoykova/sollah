@@ -1,13 +1,13 @@
-.playlists-wrapper {
-	margin: 2em 0 1.5em 0;
-}
-
 .tab {
-	float: left;
 	border: 1px solid hsl(205, 44%, 55%, 50%);
 	border-radius: 6px;
 	width: 100%;
 	margin: 0 0 1em 0;
+}
+
+.tab a {
+	text-decoration: none;
+	color: var(--clr-accent-700);
 }
 
 .create-playlist {
@@ -76,12 +76,5 @@ input:focus {
 .playlists-btn:hover {
 	background-color: hsl(205, 44%, 55%, 20%);
 }
- 
-.tab-content {
-	float: left;
-	width: 70%;
-	padding: 0 2em;
-	border-left: none;
-	height: 300px;
-}
+
 

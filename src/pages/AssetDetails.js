@@ -7,6 +7,8 @@ import { IoMdHeart, IoMdHeartEmpty } from "react-icons/io";
 import { MdOutlineKeyboardArrowDown } from "react-icons/md";
 import AssetComponent from "../features/AssetComponent";
 import "./AssetDetails.css";
+import { Dropdown } from "react-bootstrap"; 
+import { DropdownButton } from "react-bootstrap"; 
 
 const AssetDetails = () => {
 	const { id } = useParams();
@@ -15,7 +17,6 @@ const AssetDetails = () => {
 	const playlists = useSelector((state) => state.playlists);
 	const [currentLang, setCurrentLang] = useState("English");
 	const [openPlaylist, setOpenPlaylist] = useState(false);
-	const [openPlaylist2, setOpenPlaylist2] = useState(false);
 
 	const filtered = useMemo(() => {
 		return asset?.components ?
@@ -53,12 +54,6 @@ const AssetDetails = () => {
 	const handleOpen = () => {
 		setOpenPlaylist(!openPlaylist);
 	};
-	const handleOpen2 = () => {
-		setOpenPlaylist2(!openPlaylist2);
-	};
-	// const handleAddPlaylist = () => {
-	// 	dispatch(togglePlaylist({asset_id: id, playlist_id: playlists.map[id].id, add: !isAdded}))
-	// };
 	
 	return (
 		<>{asset ?
@@ -77,14 +72,29 @@ const AssetDetails = () => {
 										<span className="d-flex align-items-center"><IoMdHeart className="mr-1" size="1.7em" />Liked</span> : 
 										<span className="d-flex align-items-center"><IoMdHeartEmpty className="mr-1" size="1.7em" />Like</span>}									 
 								</button>
+
 								<div className="playlist-dropdown">
 									<button onClick={handleOpen} className=" d-flex btn-playlist">
 										<span className="m-auto">Add to Playlist</span>
 										<MdOutlineKeyboardArrowDown className="ml-1" size="1.7em"/>
 									</button>
 								</div>
+								<DropdownButton  id="dropdown-basic-button" title="Add to Playlist">
+								{ 
+									playlists.mine.map((pid) => {
+										const p = playlists.map[pid];
+										const added = p.asset_ids.includes(id);
+										return p.id > 0 ? 
+										(
+											<Dropdown.Item key={p.id} onChange={(e) => { 
+												dispatch(togglePlaylist({asset_id:id, playlist_id:pid, add: !added}));
+											}}>{p.name}</Dropdown.Item>
+										) : null;
+									}) 
+								}
+								</DropdownButton>
 							</div>
-							<div className="playlist-wrapper">
+							{/* <div className="playlist-wrapper">
 								{openPlaylist ? 
 									playlists.mine.map((pid) => {
 										const p = playlists.map[pid];
@@ -99,7 +109,7 @@ const AssetDetails = () => {
 										</div>) : null;
 									}) : null
 								}
-							</div>
+							</div> */}
 						</div>
 					</div>
 					<div className="row asset-topics-wrapper">

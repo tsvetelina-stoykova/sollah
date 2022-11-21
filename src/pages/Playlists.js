@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { listPlaylists, createPlaylist } from "../app/playlistsSlice";
 import { getAssetsByIds } from "../app/assetsSlice";
 import PlaylistsAssetsItem from '../features/PlaylistsAssetsItem';
+import { Container, Row, Col } from "react-bootstrap"
 import "./Playlists.css"
 
 const Playlists = () => {
@@ -33,9 +34,9 @@ const Playlists = () => {
 	}
 	
 	return (
-		<div className="container-md p-0">
-			<div className="row page-content">
-				<div className="col-3">
+		<Container>
+			<Row className="page-content">
+				<Col sm={3} xxs={12}>
 					<div className="tab">
 						<div className="create-playlist">
 							<form onSubmit={handleCreate}>
@@ -58,8 +59,8 @@ const Playlists = () => {
 							</a>
 						))}
 					</div>
-				</div>
-				<div className="tab-content">
+				</Col>
+				<Col sm={9} xxs={12}>
 					{playlist ? 
 					<>				 							
 						{playlist.asset_ids.map(id => assets.map[id] ?
@@ -69,9 +70,9 @@ const Playlists = () => {
 					</> :
 					<p>Loading</p>
 					}	
-				</div>
-			</div>
-		</div>
+				</Col>
+			</Row>
+		</Container>
 	)
 }
 
