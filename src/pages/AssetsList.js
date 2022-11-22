@@ -7,6 +7,7 @@ import AssetsItem from '../features/AssetsItem';
 import Pagination from '../features/Pagination';
 import AssetsFilter from '../features/AssetsFilter';
 import { NavLink } from 'react-router-dom';
+import { Container, Row, Col, Stack } from 'react-bootstrap';
 import './AssetsList.css'
 
 // TODO: Thumbnail tags; Liked icon
@@ -19,7 +20,7 @@ const AssetsList = () => {
 	const pages = Math.ceil(assets.count / assets.pagesize);
 	const page_start = (filter.page - 1) * assets.pagesize;
 	const page_end = filter.page * assets.pagesize;
-	const activeClassName = "active-btn";
+	const activeClassName = "btn-active";
 	
 	useEffect(
 		() => {
@@ -46,41 +47,35 @@ const AssetsList = () => {
 	}
 
 	return (
-		<div className='container-md'>
-			<div className="row buttons-wrapper pt-3">
-				<NavLink to="/" className={({isActive}) => isActive ? activeClassName + " assets-button col-6" : "assets-button col-6"}>Assets</NavLink>
-				<NavLink to="/whats-new"  className="assets-button col-6">New</NavLink>
-			</div>
+		<Container>
+			<Stack direction="horizontal" gap={3} className="justify-content-center my-3 py-4">
+				<NavLink to="/" className={({isActive}) => isActive ? activeClassName + " assets-toggle" : "assets-toggle"}>
+					Assets</NavLink> /
+				<NavLink to="/whats-new"  className="assets-toggle">New</NavLink>
+			</Stack>
 
-			<div className='list-filter-wrapper'>
-				<div className="row">
-					<div className='col pb-3'>
-						<label className='search-label'>Search <input className='search-box' defaultValue={filter.q} onChange={(e) => { debouncedSearch('q', e.target.value) }} /></label>
-					</div>
-				</div>
-				<div className='row'>
+			<Row>
+				<Col sm={8}>
+					<Pagination pages={pages} current={filter.page} onClick={p => { changePage(p) }} />
+						
+							{page_assets.map((a, idx) => <AssetsItem key={a ? a.id : -idx} asset={a} />)}
+					
+					<Pagination pages={pages} current={filter.page} onClick={p => { changePage(p) }} />
+				</Col>
+				<Col sm={2}>
+					<div>
+						<label>Search <input defaultValue={filter.q} onChange={(e) => { debouncedSearch('q', e.target.value) }} /></label>
+					</div>		
 					<div className='col'><AssetsFilter label='Learning Paths' options={categories.learning_path.all} empty={"- ALL " + categories.learning_path.plural + " -"} selected={filter.learning_path_id} onChange={v => { changeFilter('learning_path_id', v) }} /></div>
 					<div className='col'><AssetsFilter label='Types' options={categories.type.all} empty={"- ALL " + categories.type.plural + " -"} selected={filter.type_id} onChange={v => { changeFilter('type_id', v) }} /></div>
 					<div className='col'><AssetsFilter label='Topics' options={categories.topic.all} empty={"- ALL " + categories.topic.plural + " -"} selected={filter.topic_id} onChange={v => { changeFilter('topic_id', v) }} /></div>
-				</div>					
-				<div className='row'>						
 					<div className='col'><AssetsFilter label='Suggested Industry Usage' options={categories.industry_setting.all} empty={"- ALL " + categories.industry_setting.plural + " -"} selected={filter.industry_setting_id} onChange={v => { changeFilter('industry_setting_id', v) }} /></div>
 					<div className='col'><AssetsFilter label='Target Audiences' options={categories.target_audience.all} empty={"- ALL " + categories.target_audience.plural + " -"} selected={filter.target_audience_id} onChange={v => { changeFilter('target_audience_id', v) }} /></div>
 					<div className='col'><AssetsFilter label='Languages' options={categories.language.all} empty={"- ALL " + categories.language.plural + " -"} selected={filter.language_id} onChange={v => { changeFilter('language_id', v) }} /></div>
-				</div>
-			</div>
+				</Col>
+			</Row>
 
-			<div className='page-content col-12'>
-				<div>
-					<Pagination pages={pages} current={filter.page} onClick={p => { changePage(p) }} />
-					<div className='assets-list'>
-						{page_assets.map((a, idx) => <AssetsItem key={a ? a.id : -idx} asset={a} />)}
-					</div>
-					<Pagination pages={pages} current={filter.page} onClick={p => { changePage(p) }} />
-				</div>
-			</div>
-
-		</div>
+		</Container>
 	)
 }
 

@@ -1,23 +1,16 @@
-import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
-import "./authstatus.css"
+import { Button, Stack } from "react-bootstrap"; 
 
 const AuthStatus = () => {
 	const auth = useSelector(state => state.auth);
 	
 	if (!auth.user){
-		return (<button className='button'>
-					<Link className="auth-button" to='/login' >Log In</Link>
-				</button>)
+		return (<Button href="login" className='btn-cta'>Log In</Button>)
 	} else {
-		return(<>	
-					<div>
-						<span className="pt-3 pr-1">Welcome, {auth.user.first_name}</span>
-						<button className='button'>
-							<Link className="auth-button" to='/logout' >Log Out</Link>
-						</button>
-					</div>
-				</>)
+		return(	<Stack direction="horizontal" gap={2}>	
+					<span style={{fontWeight: 600}}>Welcome, {auth.user.first_name}! </span>
+					<Button className="btn-cta" href="/logout">Log Out</Button>
+				</Stack>	)
 	}
 
 }

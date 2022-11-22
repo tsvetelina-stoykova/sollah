@@ -2,15 +2,12 @@
 	--clr-accent-800: hsl(210, 71%, 44%);
 	--clr-accent-700: hsl(204, 100%, 18%);
 	--clr-accent-500: hsl(317, 60%, 18%);
-	--clr-accent-400: hsl(21, 71%, 49%);
+	--clr-accent-301: hsl(21, 71%, 49%);
 	--clr-accent-300: hsl(21, 85%, 55%);
 	--clr-accent-200: hsl(205, 44%, 55%);
 	--clr-accent-100: hsl(315, 43%, 46%);
-
 	--clr-primary-400: hsl(0, 0%, 20%);
 	--clr-primary-100: hsl(0, 0%, 100%);
-
-	/* --clr-neutral-900: hsl(60, 1%, 40%); */
 	--clr-neutral-100: hsl(24, 38%, 95%);
 
 	--ff-primary: 'Roboto', sans-serif;
@@ -21,6 +18,9 @@
 
 	--fw-regular: 400;
 	--fw-semi-bold: 600;
+
+	--txt-shadow: 0 0 .25em rgba(0,0,0,.3);
+	--box-shadow: 0 1.125em 1em -1em rgba(182, 51, 11, 0.76);
 
 	--fs-300: 0.8125rem;
 	--fs-400: 0.875rem;
@@ -35,7 +35,7 @@
 	--fs-primary-heading: var(--fs-800);
 	--fs-secondary-heading: var(--fs-700);
 	--fs-nav: var(--fs-500);
-	--fs-button: var(--fs-300);
+	--fs-button: var(--fs-400);
 
 	--size-100: 0.25rem;
 	--size-200: 0.5rem;
@@ -137,7 +137,29 @@ body {
 	color: var(--clr-primary-400);
 }
 
-.button {
+.btn-cta {
+	border-color: var(--clr-accent-301);
+	background: var(--clr-accent-301);
+	color: var(--clr-primary-100);
+	text-shadow: var(--txt-shadow);
+	font-weight: var(--fw-semi-bold);
+	font-size: var(--fs-button);
+	line-height: 1;
+	letter-spacing: 0.02em;
+	padding: 0.7em 1.3em;
+	box-shadow: var(--box-shadow);
+}
+.btn-cta:hover,
+.btn-cta:focus,
+.btn-cta:active {
+	border-color: var(--clr-accent-300)!important;
+	background-color: var(--clr-accent-300)!important;
+	background: var(--clr-accent-300);
+	color: var(--clr-primary-100);
+	text-shadow: var(--txt-shadow);
+}
+
+/* .button {
 	cursor: pointer;
 	text-decoration: none;
 	border: 0;
@@ -158,15 +180,12 @@ body {
 
 .button:hover,
 .button:focus-visible {
-	/* background-color: #ee702d; */
-	background-color: var(--clr-accent-300);
-}
 
 .button[data-type='inverted']:hover,
 .button[data-type='inverted']:focus-visible {
 	background-color: var(--clr-neutral-100);
 	color: var(--clr-accent-300);
-}
+} */
 
 .page-content {
 	padding: 1.5rem 0 0 0;

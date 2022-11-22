@@ -22,7 +22,7 @@
 .active {
 	text-decoration: underline!important;
 	text-decoration-thickness: 2px!important;
-	text-decoration-color: var(--clr-accent-800);
+	color: var(--clr-accent-700)!important;
 }
 .navbar-toggler {
 	border: none!important;

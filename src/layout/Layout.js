@@ -17,7 +17,7 @@ const Layout = () => {
 					</Navbar.Brand>
 					<Navbar.Toggle aria-controls="responsive-navbar-nav" />
 					<Navbar.Collapse id="responsive-navbar-nav">
-						<Nav className="mx-auto navbar-list">
+						<Nav defaultActiveKey="/" className="mx-auto navbar-list">
 							<Nav.Link eventKey="1" as={Link}  to="/" >Assets</Nav.Link>
 							<Nav.Link eventKey="2" as={Link} to="/playlists" >Playlists</Nav.Link>
 							<Nav.Link eventKey="3" as={Link} to="/blog" >Blog</Nav.Link>
