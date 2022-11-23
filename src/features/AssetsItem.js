@@ -1,29 +1,44 @@
 import { Link } from "react-router-dom";
-import { Row, Col } from "react-bootstrap";
+import { Row, Col, Image, Card, Placeholder } from "react-bootstrap";
 import  "./AssetsItem.css";
 
 const AssetsItem = ({asset}) => {
-  return (
-	<Row>
-		<Col>
-			<Link to={`/${asset ? asset.id : "Loading"}`}>				
-				<img  alt="Asset thumbnail" src={asset ? asset.thumb_url : "Loading"} />
-			</Link>
-		</Col>
-		<Col>
-			<div className="pb-2">
-				<Link to={`/${asset ? asset.id : ""}`}>				
-					<h2 className="pb-2">{asset ? asset.title : 'Loading'}</h2>
-				</Link>
-				<p >{asset ? asset.description : "Loading"}</p>
-			</div>
-			<div >
-				<div><span><b>Type: </b>{asset ? asset.type : "Loading"}</span></div>
-				<div><span><b>Topic: </b>{asset ? asset.topic : "Loading"}</span></div>
-			</div>
-		</Col>
-	</Row>
-  )
-}
+		return (
+			<Row>
+				<Col>
+					{asset  
+						? <Link to={asset.id}><Image src={asset.thumb_url ? asset.thumb_url : asset.thumb_bg } rounded fluid width="200" height="150"/></Link>
+						: <Placeholder as={Image} animation="glow" rounded fluid width="200" height="150"></Placeholder>	
+					}
+				</Col>
+				<Col sm={9}>
+					<Card>
+						<Card.Body>
+							<Card.Title className="asset-title">
+								{asset
+									? <Link to={asset.id}>{asset.title}</Link>
+									: <Placeholder sm={9} animation="wave"/>  
+								}
+							</Card.Title>
+							<Card.Text className="asset-description">
+								{asset
+									? <p>{asset.description}</p>
+									: <Placeholder sm={7} />
+								}
+							</Card.Text>
+						</Card.Body>
+						<Card.Footer className="asset-specifics">
+							{asset 
+								? <div><span><b>Type: </b>{asset.type}</span>
+								  <span><b>Topic: </b>{asset.topic}</span></div>
+								: <Placeholder sm={7} />
+							}
+							
+						</Card.Footer>
+					</Card>
+				</Col>
+			</Row>
+		)
+	}
 
 export default AssetsItem
