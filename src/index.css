@@ -137,17 +137,6 @@ body {
 	font-family: var(--ff-body);
 	color: var(--clr-primary-400);
 }
-.card {
-	padding: 0 0 2.5em 0!important;
-	border: none!important;
-}
-.card-body {
-	padding: 0 0 0.5em 0!important;
-}
-.card-footer {
-	padding: 0.5em 0!important;
-}
-
 .btn-cta {
 	border-color: var(--clr-accent-301);
 	background: var(--clr-accent-301);
@@ -169,6 +158,25 @@ body {
 	color: var(--clr-primary-100);
 	text-shadow: var(--txt-shadow);
 }
+
+
+/*-Bootstrap Replacement--*/
+
+.card {
+	border: none!important;
+}
+.card-body {
+	padding: 0 0 0.5em 0!important;
+}
+.card-footer {
+	padding: 0.5em 0!important;
+}
+.placeholder {
+	opacity: 0.1!important;
+}
+/*---------------------*/
+
+
 
 /* .button {
 	cursor: pointer;

@@ -1,5 +1,36 @@
 .asset-thumb-image {
+	display: block;
+	margin: 0.3em auto;
+	width: fit-content;
 	box-shadow: 0 6px 12px rgba(0,0,0,.175);
+	border: none;
+	border-radius: 6px;
+	text-decoration: none;
+}
+.asset-thumb-image > img {
+	border-top-left-radius: 6px;
+	border-top-right-radius: 6px;
+}
+.image-border {
+	border-bottom-left-radius: 6px;
+	border-bottom-right-radius: 6px;
+}
+.asset-badge {
+	width: 100%;
+	padding: 0.3em 0;
+	display: flex;
+	justify-content: center;
+	border-bottom-left-radius: 6px;
+	border-bottom-right-radius: 6px;
+	color: white;
+	font-size: var(--fs-400);
+	text-decoration: transparent !important;
+}
+.asset-popular{
+	background-color: var(--clr-accent-800);
+}
+.asset-new {
+	background-color:var(--clr-accent-301);
 }
 .asset-title > a {
 	font-family: var(--ff-secondary);
