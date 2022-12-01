@@ -1,10 +1,14 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { listPlaylists, createPlaylist } from "../app/playlistsSlice";
+import { listPlaylists, createPlaylist, updatePlaylist } from "../app/playlistsSlice";
 import { getAssetsByIds } from "../app/assetsSlice";
 import PlaylistsAssetsItem from '../features/PlaylistsAssetsItem';
-import { Container, Row, Col } from "react-bootstrap"
-import "./Playlists.css"
+import { Container, Row, Col, Badge } from "react-bootstrap";
+import PlaceholderAsset from "../features/PlaceholderAsset";
+import EmptyPlaylist from "../features/EmptyPlaylist";
+import { MdDelete, MdModeEdit, MdShare } from "react-icons/md";
+import { IoIosCopy } from "react-icons/io";
+import "./Playlists.css";
 
 const Playlists = () => {
 	const [playlist_id, setCurrentTab] = useState('liked');
@@ -32,7 +36,11 @@ const Playlists = () => {
 		e.preventDefault()
 		dispatch(createPlaylist({name:created}));
 	}
-	
+
+	const handlePlaylistDelete = () => {
+		dispatch(updatePlaylist({playlist_id, update: false}));
+	}
+
 	return (
 		<Container>
 			<Row className="page-content">
@@ -45,31 +53,42 @@ const Playlists = () => {
 							</form>
 						</div>
 						{playlists.mine.map((id) => (
-							<a key={id} onClick={()=>{handleTab(id)}} className={`playlists-btn ${playlist_id===id?'selected-btn':''}`}>
-								{playlists.map[id].name}
-							</a>
+							<div key={id} className={` playlists-btn ${playlist_id===id ? "selected-btn" : null}`}>							
+								<a href="#" onClick={()=>{handleTab(id)}}>
+									{playlists.map[id].name}
+									<Badge className="ms-1" pill bg="secondary">{playlist.asset_ids.length}</Badge>
+								</a>											
+								<div className="pt-2">
+									{(playlist_id===id) 
+										? <div className="d-flex playlist-actions">
+											<span className="d-flex align-items-center me-1"><MdShare size="1.3em" color="grey"/>Share</span>
+											<span className="d-flex align-items-center me-1"><MdModeEdit size="1.3em" color="grey"/>Rename</span> 
+											<span className="d-flex align-items-center me-2"><IoIosCopy size="1.3em" color="grey"/>Copy</span>
+											<MdDelete onClick={handlePlaylistDelete} size="1.3em" color="red"/>
+										  </div> 
+										: null}
+								</div>
+							</div>
 						))}
 					</div>
 					<div className="shared-title"><h2>Shared Playlists</h2></div>
 					
 					<div className="tab">								
 						{playlists.shared.map((id) => (
-							<a key={id} onClick={()=>{handleTab(id)}} className={`playlists-btn ${playlist_id===id?'selected-btn':''}`}>
+							<a key={id} href="#" onClick={()=>{handleTab(id)}} className={`playlists-btn ${playlist_id===id?'selected-btn':''}`}>
 								{playlists.map[id].name}
 							</a>
 						))}
 					</div>
 				</Col>
 				<Col sm={9} xxs={12}>
-					{playlist ? 
-					<>				 							
-						{playlist.asset_ids.map(id => assets.map[id] ?
-							<PlaylistsAssetsItem key={id} asset={assets.map[id]} playlist={playlist} playlist_id={playlist_id}></PlaylistsAssetsItem> :
-							<p key={id}>Asset missing: {id}</p>
-						)}
-					</> :
-					<p>Loading</p>
-					}	
+					{playlist?.asset_ids.length === 0 
+						? <EmptyPlaylist/>
+						: playlist?.asset_ids.map(id => assets.map[id] 
+							? <PlaylistsAssetsItem key={id} asset={assets.map[id]} playlist={playlist} playlist_id={playlist_id}></PlaylistsAssetsItem>
+							: <PlaceholderAsset key={id} />
+						)
+					}
 				</Col>
 			</Row>
 		</Container>

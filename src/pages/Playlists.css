@@ -51,7 +51,7 @@ input:focus {
 	border-bottom: 1px solid hsl(205, 44%, 55%, 50%);
 	outline: none;
 	text-align: left;
-	cursor: pointer;
+	/* cursor: pointer; */
 	font-size: 17px;
 }
 
@@ -73,8 +73,15 @@ input:focus {
 	background-color: hsl(205, 44%, 55%, 50%);
 }
 
-.playlists-btn:hover {
-	background-color: hsl(205, 44%, 55%, 20%);
+.playlist-actions > span {
+	font-size: 0.8em;
+	font-weight: 400;
+	color: grey;
+	cursor: pointer;
 }
+
+/* .playlists-btn:hover {
+	background-color: hsl(205, 44%, 55%, 20%);
+} */
 
 

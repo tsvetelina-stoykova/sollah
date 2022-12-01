@@ -5,13 +5,13 @@ import  "./AssetsItem.css";
 const AssetsItem = ({asset}) => {
 		return (
 			<Row className="py-3">
-				<Col sm={3} justify-content-center>
+				<Col sm={3} className="justify-content-center">
 					{asset  
 						? <Link to={asset.id} className={asset.thumb_url ? "asset-thumb-image" : null} style={ asset ? {backgroundColor: asset.thumb_bg} : null}>
 							<Image src={asset.thumb_url ? asset.thumb_url : null}  className={asset.popular || asset.new ? null : "image-border"} fluid width="200" height="150" />
 							<span className={asset.popular ? "asset-badge asset-popular" : asset.new ? "asset-badge asset-new" : "asset-badge"}>{asset.popular ? "Most Popular" : asset.new ? "New Asset" : null}</span>
 						</Link>
-						: <Placeholder className="asset-thumb-image" animation="glow" rounded fluid width="200" height="150"></Placeholder>	
+						: <Placeholder className="asset-thumb-image" animation="glow"  width="200" height="150"></Placeholder>	
 					}
 				</Col>
 				<Col sm={9}>
@@ -27,16 +27,14 @@ const AssetsItem = ({asset}) => {
 								{asset
 									? <Card.Text className="asset-description">{asset.description}</Card.Text>
 									: <Card.Text className="asset-description"><Placeholder sm={7} /></Card.Text>
-								}
-							
+								}						
 						</Card.Body>
 						<Card.Footer className="asset-specifics">
 							{asset 
 								? <div><span><b>Type: </b>{asset.type}</span><br/>
 								  <span><b>Topic: </b>{asset.topic}</span></div>
 								: <Placeholder sm={7} />
-							}
-							
+							}							
 						</Card.Footer>
 					</Card>
 				</Col>

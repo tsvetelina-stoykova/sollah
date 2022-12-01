@@ -48,6 +48,18 @@ export const togglePlaylist = createAsyncThunk(
 	}
 );
 
+export const updatePlaylist = createAsyncThunk(
+	"playlists/updatePlaylist",
+	async({playlist_id, update}, api) => {
+		const user = api.getState().auth.user;
+		return await fetch(`https://sollahlibrary.com/mapi/4/playlists/${playlist_id}`, {
+			method: update ? "PUT" : "DELETE",
+			headers: { "x-authorization-token": user.token },
+			mode: "cors",
+		}).then((res) => ({playlist_id, update}));
+	}
+);
+
 const playlistsSlice = createSlice({
 	name: "playlists",
 	initialState: {
@@ -83,6 +95,15 @@ const playlistsSlice = createSlice({
 				else if (!add) {
 					state.map[playlist_id].asset_ids = state.map[playlist_id].asset_ids.filter(id => id != asset_id);
 				}
+			}
+		},
+		[updatePlaylist.fulfilled]: (state, action) => {
+			const { playlist_id, update } = action.payload;
+			if(!update) {
+				const m = {...state.map};
+				delete m[playlist_id];
+				state.map = m;
+				state.mine = state.mine.filter(id => id != playlist_id);
 			}
 		},
 		[createPlaylist.fulfilled]: (state, action) => {
