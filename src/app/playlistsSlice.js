@@ -24,6 +24,19 @@ export const createPlaylist = createAsyncThunk(
 	}
 );
 
+export const clonePlaylist = createAsyncThunk(
+	"playlists/clonePlaylist",
+	async ({name, asset_ids}, api) => {
+		const user = api.getState().auth.user;
+		return await fetch("https://sollahlibrary.com/mapi/4/playlists", {
+			method: "POST",
+			headers: {"x-authorization-token": user.token, 'content-type':'application/json'},
+			body: JSON.stringify({name, asset_ids}),
+			mode: "cors",
+		}).then(handleResponse)
+	}
+)
+
 function handleResponse(response){
 	return response.text().then(text => {
 		const data = text && JSON.parse(text);
@@ -50,13 +63,26 @@ export const togglePlaylist = createAsyncThunk(
 
 export const updatePlaylist = createAsyncThunk(
 	"playlists/updatePlaylist",
-	async({playlist_id, update}, api) => {
+	async({playlist_id, name}, api) => {
 		const user = api.getState().auth.user;
-		return await fetch(`https://sollahlibrary.com/mapi/4/playlists/${playlist_id}`, {
-			method: update ? "PUT" : "DELETE",
-			headers: { "x-authorization-token": user.token },
+		return fetch(`https://sollahlibrary.com/mapi/4/playlists/${playlist_id}`, {
+			method: "PUT",
+			headers: {"x-authorization-token": user.token, 'content-type':'application/json'},
 			mode: "cors",
-		}).then((res) => ({playlist_id, update}));
+			body: JSON.stringify({name}),
+		}).then((res) => ({playlist_id, name}));
+	}
+);
+
+export const deletePlaylist = createAsyncThunk(
+	"playlists/deletePlaylist",
+	async({playlist_id}, api) => {
+		const user = api.getState().auth.user;
+		return fetch(`https://sollahlibrary.com/mapi/4/playlists/${playlist_id}`, {
+			method: "DELETE",
+			headers: {"x-authorization-token": user.token},
+			mode: "cors",
+		}).then((res) => ({playlist_id}));
 	}
 );
 
@@ -79,8 +105,8 @@ const playlistsSlice = createSlice({
 			state.shared = action.payload.shared.map(p => p.id);
 			// map
 			state.map = {};
-			action.payload.mine.forEach(p => { state.map[p.id] = p });
-			action.payload.shared.forEach(p => { state.map[p.id] = p });
+			action.payload.mine.forEach(p => {state.map[p.id] = p });
+			action.payload.shared.forEach(p => {state.map[p.id] = p });
 		},
 		[listPlaylists.rejected]: (state) => {
 			state.status = "error";
@@ -98,20 +124,30 @@ const playlistsSlice = createSlice({
 			}
 		},
 		[updatePlaylist.fulfilled]: (state, action) => {
-			const { playlist_id, update } = action.payload;
-			if(!update) {
-				const m = {...state.map};
-				delete m[playlist_id];
-				state.map = m;
-				state.mine = state.mine.filter(id => id != playlist_id);
-			}
+			const { playlist_id, name} = action.payload;
+			state.map[playlist_id].name = name;
+		},
+		[deletePlaylist.fulfilled]: (state, action) => {
+			const { playlist_id } = action.payload;
+			const m = {...state.map};
+			delete m[playlist_id];
+			state.map = m;
+			state.mine = state.mine.filter(id => id != playlist_id);
 		},
 		[createPlaylist.fulfilled]: (state, action) => {
 			state.status = "success";
 			const playlist = action.payload.playlist;
 			state.mine.push(playlist.id);
 			state.map[playlist.id] = playlist;
-		}
+		
+		},
+		[clonePlaylist.fulfilled]: (state, action) => {
+			state.status = "success";
+			const new_playlist = action.payload.playlist;
+			state.mine.push(new_playlist.id);
+			state.mine[new_playlist.id] = new_playlist;
+		},
+
 	}
 })
 

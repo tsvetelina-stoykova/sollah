@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { listPlaylists, createPlaylist, updatePlaylist } from "../app/playlistsSlice";
+import { listPlaylists, createPlaylist, updatePlaylist, deletePlaylist, clonePlaylist } from "../app/playlistsSlice";
 import { getAssetsByIds } from "../app/assetsSlice";
 import PlaylistsAssetsItem from '../features/PlaylistsAssetsItem';
-import { Container, Row, Col, Badge } from "react-bootstrap";
+import { Container, Row, Col, Badge, InputGroup, Button, Form } from "react-bootstrap";
 import PlaceholderAsset from "../features/PlaceholderAsset";
 import EmptyPlaylist from "../features/EmptyPlaylist";
 import { MdDelete, MdModeEdit, MdShare } from "react-icons/md";
@@ -13,6 +13,7 @@ import "./Playlists.css";
 const Playlists = () => {
 	const [playlist_id, setCurrentTab] = useState('liked');
 	const [created, setCreated] = useState(null);
+	const [showEdit, setShowEdit] = useState(false);
 	const dispatch = useDispatch();
 	const playlists = useSelector((state) => state.playlists);
 	const assets = useSelector((state) => state.assets);
@@ -30,16 +31,32 @@ const Playlists = () => {
 
 	const handleTab = (playlist_id) => {
 		setCurrentTab(playlist_id);
-	}
+	};
 
 	const handleCreate = (e) => {
 		e.preventDefault()
 		dispatch(createPlaylist({name:created}));
-	}
+	};
+
+	// const handleClonePlaylist = () => {
+	// 	dispatch(clonePlaylist({name: "asd", asset_ids: 0}))
+	// }
 
 	const handlePlaylistDelete = () => {
-		dispatch(updatePlaylist({playlist_id, update: false}));
-	}
+		dispatch(deletePlaylist({playlist_id}));
+	};	
+
+	const showEditField = () => {
+		setShowEdit(!showEdit);
+	};
+
+	const handlePlaylistRename = (e) => {
+		e.preventDefault();
+		const obj = {};
+		Array.from(new FormData(e.target)).forEach(f => { obj[f[0]] = f[1]; });
+		dispatch(updatePlaylist({playlist_id, name: obj.name}));
+		setShowEdit(false);
+	};
 
 	return (
 		<Container>
@@ -55,18 +72,35 @@ const Playlists = () => {
 						{playlists.mine.map((id) => (
 							<div key={id} className={` playlists-btn ${playlist_id===id ? "selected-btn" : null}`}>							
 								<a href="#" onClick={()=>{handleTab(id)}}>
-									{playlists.map[id].name}
-									<Badge className="ms-1" pill bg="secondary">{playlist.asset_ids.length}</Badge>
-								</a>											
+									{playlists.map[id].name}									
+								</a>
+								<Badge className="ms-1" pill bg="secondary">{playlists.map[id].asset_ids.length}</Badge>				
 								<div className="pt-2">
-									{(playlist_id===id) 
-										? <div className="d-flex playlist-actions">
-											<span className="d-flex align-items-center me-1"><MdShare size="1.3em" color="grey"/>Share</span>
-											<span className="d-flex align-items-center me-1"><MdModeEdit size="1.3em" color="grey"/>Rename</span> 
-											<span className="d-flex align-items-center me-2"><IoIosCopy size="1.3em" color="grey"/>Copy</span>
-											<MdDelete onClick={handlePlaylistDelete} size="1.3em" color="red"/>
-										  </div> 
+									{(playlist_id===id)									
+										? <> 
+											<div className="d-flex playlist-actions">
+												<span className="d-flex align-items-center me-1"><MdShare size="1.3em" color="grey"/>Share</span>
+												<span onClick={showEditField} className="d-flex align-items-center me-1"><MdModeEdit size="1.3em" color="grey"/>Rename</span> 
+												<span className="d-flex align-items-center me-2"><IoIosCopy size="1.3em" color="grey"/>Copy</span>
+												<MdDelete onClick={handlePlaylistDelete} size="1.3em" color="red"/>						
+										  	</div>
+										  	{showEdit && 
+											<Form onSubmit={handlePlaylistRename}>
+												<InputGroup  className="mb-3">													
+													<Form.Control
+														aria-label="Recipient's username"
+														aria-describedby="basic-addon2"
+														name="name"
+													/>
+													<Button variant="secondary" type="submit" id="button-addon2">
+														Save
+													</Button>													
+												</InputGroup>
+											</Form>
+											} 
+										</>
 										: null}
+										
 								</div>
 							</div>
 						))}
