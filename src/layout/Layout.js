@@ -1,4 +1,4 @@
-import { Link, Outlet } from "react-router-dom";
+import { Link, NavLink, Outlet } from "react-router-dom";
 import logo from "../assets/logo.png";
 import AuthStatus from "../features/AuthStatus";
 import "./Layout.css";
@@ -18,11 +18,15 @@ const Layout = () => {
 					<Navbar.Toggle aria-controls="responsive-navbar-nav" />
 					<Navbar.Collapse id="responsive-navbar-nav">
 						<Nav defaultActiveKey="/" className="mx-auto navbar-list">
-							<Nav.Link eventKey="1" as={Link}  to="/" >Assets</Nav.Link>
-							<Nav.Link eventKey="2" as={Link} to="/playlists" >Playlists</Nav.Link>
-							<Nav.Link eventKey="3" as={Link} to="/blog" >Blog</Nav.Link>
-							<Nav.Link eventKey="4" as={Link} to="/messages" >Messages</Nav.Link>
-							<Nav.Link eventKey="5" as={Link} to="/profle" >Profile</Nav.Link>
+							<ul>
+								<li>
+									<NavLink to="/" end>Assets</NavLink>
+									<NavLink to="/playlists">Playlists</NavLink>
+									<NavLink to="/blog" >Blog</NavLink>
+									<NavLink to="/messages">Messages</NavLink>
+									<NavLink to="/profile">Profile</NavLink>
+								</li>
+							</ul>
 						</Nav>
 						<Nav>
 							<AuthStatus />

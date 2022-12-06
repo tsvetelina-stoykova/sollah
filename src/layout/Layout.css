@@ -11,11 +11,18 @@
 	font-size: var(--fs-600);
 	font-weight: var(--fw-semi-bold);
 }
-.navbar-list > a {
+.navbar-list > ul {
+	margin-bottom: 0!important;
+}
+.navbar-list > ul > li{
+	list-style: none;
+}
+.navbar-list > ul > li > a{
 	text-decoration: none;
 	color: var(--clr-accent-700);
-	padding-right: 1.5em;
+	padding-left: 1em;
 }
+
 .navbar-list > a:hover {
 	color: var(--clr-accent-700);
 }
