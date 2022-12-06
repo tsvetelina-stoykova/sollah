@@ -8,6 +8,7 @@ import Pagination from '../features/Pagination';
 import AssetsFilter from '../features/AssetsFilter';
 import { NavLink } from 'react-router-dom';
 import { Container, Row, Col, Stack } from 'react-bootstrap';
+import { MdSearch } from "react-icons/md";
 import './AssetsList.css'
 
 // TODO: Thumbnail tags; Liked icon
@@ -61,9 +62,10 @@ const AssetsList = () => {
 					<Pagination pages={pages} current={filter.page} onClick={p => { changePage(p) }} />
 				</Col>
 				<Col sm={3}>
-					
-						<label>Search <input defaultValue={filter.q} onChange={(e) => { debouncedSearch('q', e.target.value) }} /></label>
-						
+					<label className="search-bar mb-2">
+						<MdSearch size="2em" color="#ccc"/>
+						<input placeholder="Keywords" defaultValue={filter.q} onChange={(e) => { debouncedSearch('q', e.target.value) }} />
+					</label>	
 					<div><AssetsFilter label='Learning Paths' options={categories.learning_path.all} empty={"- ALL " + categories.learning_path.plural + " -"} selected={filter.learning_path_id} onChange={v => { changeFilter('learning_path_id', v) }} /></div>
 					<div><AssetsFilter label='Types' options={categories.type.all} empty={"- ALL " + categories.type.plural + " -"} selected={filter.type_id} onChange={v => { changeFilter('type_id', v) }} /></div>
 					<div><AssetsFilter label='Topics' options={categories.topic.all} empty={"- ALL " + categories.topic.plural + " -"} selected={filter.topic_id} onChange={v => { changeFilter('topic_id', v) }} /></div>
