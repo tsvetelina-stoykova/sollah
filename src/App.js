@@ -2,15 +2,15 @@ import { Routes, Route} from 'react-router-dom';
 import { RequireAuth } from './features/RequireAuth';
 
 import Layout from './layout/Layout';
-import AssetsList from './pages/AssetsList';
-import AssetDetails from './pages/AssetDetails';
-import NewAssets from './pages/NewAssets';
-import Profile from './pages/Profile';
-import Playlists from './pages/Playlists'
-import Blog from './pages/Blog'
-import BlogDetails from './pages/BlogDetails'
-import Messages from './pages/Messages';
-import MessageDetails from './pages/MessageDetails';
+import AssetsList from './pages/Assets/AssetsList';
+import AssetDetails from './pages/Assets/AssetDetails';
+import NewAssets from './pages/Assets/NewAssets';
+import Profile from './pages/Profile/Profile';
+import Playlists from './pages/Playlists/Playlists'
+import Blog from './pages/Blog/Blog'
+import BlogDetails from './pages/Blog/BlogDetails'
+import Messages from './pages/Messages/Messages';
+import MessageDetails from './pages/Messages/MessageDetails';
 import Login from './pages/Login';
 import Logout from './features/Logout';
 

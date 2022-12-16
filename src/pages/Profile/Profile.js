@@ -1,5 +1,5 @@
 import { useSelector, useDispatch } from "react-redux";
-import { getProfile } from "../app/profileSlice";
+import { getProfile } from "../../app/profileSlice";
 import { useEffect } from "react";
 import "./Profile.css";
 

@@ -1,11 +1,11 @@
-import React, { useEffect, useMemo, useCallback } from 'react'
+import { useEffect, useMemo, useCallback } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
-import { getAssets } from '../app/assetsSlice';
-import { getCategories } from '../app/categoriesSlice';
-import debounce from '../features/debounce';
-import AssetsItem from '../features/AssetsItem';
-import Pagination from '../features/Pagination';
-import AssetsFilter from '../features/AssetsFilter';
+import { getAssets } from '../../app/assetsSlice';
+import { getCategories } from '../../app/categoriesSlice';
+import debounce from '../../features/debounce';
+import AssetsItem from '../../features/AssetsItem';
+import Pagination from '../../features/Pagination';
+import AssetsFilter from '../../features/AssetsFilter';
 import { NavLink } from 'react-router-dom';
 import { Container, Row, Col, Stack } from 'react-bootstrap';
 import { MdSearch } from "react-icons/md";

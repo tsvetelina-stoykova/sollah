@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { listPlaylists, createPlaylist, updatePlaylist, deletePlaylist, clonePlaylist } from "../app/playlistsSlice";
-import { getAssetsByIds } from "../app/assetsSlice";
-import PlaylistsAssetsItem from '../features/PlaylistsAssetsItem';
+import { listPlaylists, createPlaylist, updatePlaylist, deletePlaylist, clonePlaylist } from "../../app/playlistsSlice";
+import { getAssetsByIds } from "../../app/assetsSlice";
+import PlaylistsAssetsItem from '../../features/PlaylistsAssetsItem';
 import { Container, Row, Col, Badge, InputGroup, Button, Form } from "react-bootstrap";
-import PlaceholderAsset from "../features/PlaceholderAsset";
-import EmptyPlaylist from "../features/EmptyPlaylist";
+import PlaceholderAsset from "../../features/PlaceholderAsset";
+import EmptyPlaylist from "../../features/EmptyPlaylist";
 import { MdDelete, MdModeEdit, MdShare } from "react-icons/md";
 import { IoIosCopy } from "react-icons/io";
 import "./Playlists.css";

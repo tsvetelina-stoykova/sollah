@@ -1,11 +1,11 @@
 import { useEffect, useState, useMemo } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { getAsset } from "../app/assetsSlice";
-import { togglePlaylist, listPlaylists } from "../app/playlistsSlice";
+import { getAsset } from "../../app/assetsSlice";
+import { togglePlaylist, listPlaylists } from "../../app/playlistsSlice";
 import { useParams } from "react-router-dom";
 import { IoMdHeart, IoMdHeartEmpty } from "react-icons/io";
 import { MdOutlineKeyboardArrowDown } from "react-icons/md";
-import AssetComponent from "../features/AssetComponent";
+import AssetComponent from "../../features/AssetComponent";
 import "./AssetDetails.css";
 import { Dropdown } from "react-bootstrap"; 
 import { DropdownButton } from "react-bootstrap"; 

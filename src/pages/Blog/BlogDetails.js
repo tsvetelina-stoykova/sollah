@@ -1,9 +1,9 @@
 import { useParams } from "react-router-dom";
 import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { getOne } from "../app/blogsSlice";
-import { getAssetsByIds } from "../app/assetsSlice";
-import AssetsItem from '../features/AssetsItem';
+import { getOne } from "../../app/blogsSlice";
+import { getAssetsByIds } from "../../app/assetsSlice";
+import AssetsItem from '../../features/AssetsItem';
 import "./BlogDetails.css"
 
 function BlogDetails() {

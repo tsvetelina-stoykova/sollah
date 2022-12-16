@@ -1,6 +1,7 @@
 import "./MessageItem.css";
 import { IoMailOpen, IoMailUnread } from "react-icons/io5";
 import { Link } from "react-router-dom";
+import { Table } from "react-bootstrap";
 
 const MessageItem = ({message}) => {
 	const date = new Date(message.timestamp * 1000);
@@ -20,13 +21,22 @@ const MessageItem = ({message}) => {
 	} else {
 		return (
 			<Link className="message-link" to={`/messages/${message.id}`}>
-				<div className="message-item-wrapper">
+				{/* <div className="message-item-wrapper">
 					<div className="row ">
 						<IoMailOpen className="icon-read" size="1.2rem"/>
 						<h3>{message.subject}</h3>
 					</div>
 					<p>{date.toLocaleDateString()}</p>
-				</div>
+				</div> */}
+				<Table striped>
+					<tbody>
+						<tr>
+							<td><IoMailOpen className="icon-read" size="1.2rem"/></td>
+							<td>{message.subject}</td>
+							<td>{date.toLocaleDateString()}</td>
+						</tr>
+					</tbody>
+				</Table>
 			</Link>
 		)
 	}

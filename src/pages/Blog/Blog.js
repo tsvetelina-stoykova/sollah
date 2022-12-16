@@ -1,7 +1,7 @@
 import { useSelector, useDispatch } from "react-redux";
-import { listAll } from "../app/blogsSlice";
+import { listAll } from "../../app/blogsSlice";
 import { useEffect } from "react";
-import BlogItem from "../features/BlogItem";
+import BlogItem from "../../features/BlogItem";
  
 const Blog = () => {
 	const dispatch = useDispatch();

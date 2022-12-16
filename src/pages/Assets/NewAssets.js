@@ -1,11 +1,11 @@
 import { useEffect, useMemo, useCallback } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { getNew } from "../app/newassetsSlice";
-import { getCategories } from '../app/categoriesSlice';
-import debounce from '../features/debounce';
-import AssetsItem from "../features/AssetsItem";
-import Pagination from '../features/Pagination';
-import AssetsFilter from '../features/AssetsFilter';
+import { getNew } from "../../app/newassetsSlice";
+import { getCategories } from '../../app/categoriesSlice';
+import debounce from '../../features/debounce';
+import AssetsItem from "../../features/AssetsItem";
+import Pagination from '../../features/Pagination';
+import AssetsFilter from '../../features/AssetsFilter';
 import { NavLink } from "react-router-dom";
 import "./NewAssets.css";
 import { calculateNewValue } from "@testing-library/user-event/dist/utils";
