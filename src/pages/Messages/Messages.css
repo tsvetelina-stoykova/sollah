@@ -5,6 +5,12 @@
 	margin: 0.875em auto;
 }
 
+.message-container > * {
+	text-transform: uppercase;
+	font-size: 0.9rem;
+	font-weight: bold;
+}
+
 .message-synopsis {
 	width: 100%;
 	align-items: baseline!important;
@@ -33,3 +39,5 @@
 .icon-read {
 	min-width: 2rem;
 }
+
+
