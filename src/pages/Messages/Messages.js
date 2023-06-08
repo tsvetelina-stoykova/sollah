@@ -1,7 +1,6 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { listMessages } from "../../app/messagesSlice";
-import { Link } from "react-router-dom";
 import { Container, Badge, Accordion, Stack, Row, Col } from "react-bootstrap";
 import { IoMailOpen, IoMailUnread } from "react-icons/io5";
 import "./Messages.css";
@@ -21,32 +20,28 @@ const Messages = () => {
 				</Col>
 				<Col sm={3}>From</Col>
 			</Row>
-			<Row className="justify-content-md-center">
-				<Col  sm={10}>
+			<Row className="justify-content-md-center">		
 					<Accordion defaultActiveKey={['0']} alwaysOpen>
-						{messages.allMessages.map( (msg) =>	
-							<Accordion.Item key={msg.id} eventKey={msg.id}>
-								<Accordion.Header>
-									<Stack direction="horizontal" gap={3} className="message-synopsis">
-										<IoMailOpen className="icon-read" size="1.2rem"/>
-										<h5>{msg.subject}</h5>
-										<p>{msg.from}</p>
-										<span>{new Date(msg.timestamp * 1000).toLocaleDateString('en-US', options)}</span>
-									</Stack>
-								</Accordion.Header>
-								<Accordion.Body>
-								Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-								eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
-								minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-								aliquip ex ea commodo consequat. Duis aute irure dolor in
-								reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
-								pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
-								culpa qui officia deserunt mollit anim id est laborum.
-								</Accordion.Body>
-						</Accordion.Item>
+						{messages.allMessages.map( (msg) =>											
+								<Accordion.Item className="w-100" key={msg.id} eventKey={msg.id}>
+									<Accordion.Header>
+										<Stack direction="horizontal" gap={3} className="message-synopsis">
+											<IoMailOpen className="icon-read" size="1.2rem"/>
+											<h5>{msg.subject}</h5>
+											<p>{msg.from}</p>
+											<span>{new Date(msg.timestamp * 1000).toLocaleDateString('en-US', options)}</span>
+										</Stack>
+									</Accordion.Header>
+									<Accordion.Body>
+										<Row className="justify-content-md-center">
+											<Col sm={11}>
+												<p className="message-text">{new DOMParser().parseFromString(msg.message, "text/html").documentElement.textContent}</p>
+											</Col>
+										</Row>
+									</Accordion.Body>
+								</Accordion.Item>
 						)}
 					</Accordion>
-				</Col>
 			</Row>
 			
 				

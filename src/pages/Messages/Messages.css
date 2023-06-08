@@ -36,6 +36,13 @@
 	color: var(--clr-accent-700);
 }
 
+.message-text {
+	font-family: var(--ff-primary);
+	font-size: var(--fs-400);
+	text-transform: none;
+	font-weight: var(--fw-regular);
+}
+
 .icon-read {
 	min-width: 2rem;
 }
