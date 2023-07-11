@@ -1,0 +1,10 @@
+.account-name {
+    color: var(--clr-neutral-100);
+    font-weight: 400;
+}
+
+.account-cta, .account-cta:hover {
+    color: var(--clr-neutral-100);
+    text-decoration: none;
+    padding: var(--size-200) 0 var(--size-200) var(--size-400);
+}

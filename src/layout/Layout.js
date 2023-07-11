@@ -1,4 +1,4 @@
-import { Link, NavLink, Outlet } from "react-router-dom";
+import { NavLink, Outlet } from "react-router-dom";
 import logo from "../assets/logo.png";
 import AuthStatus from "../features/AuthStatus";
 import "./Layout.css";
@@ -10,26 +10,29 @@ const Layout = () => {
 			breakpoints={["xxs", "sm"]}
 			minBreakpoint="xxs"
 		>
+			<Navbar expand="lg" className="secondary-header">
+				<Container className="justify-content-end">
+					<AuthStatus />
+				</Container>
+			</Navbar>
 			<Navbar collapseOnSelect className="primary-header" expand="lg">
 				<Container>
 					<Navbar.Brand href="/">
 						<img src={logo} alt='Sollah Interactive, LLC' width='230' height='46' />
 					</Navbar.Brand>
-					<Navbar.Toggle aria-controls="responsive-navbar-nav" />
-					<Navbar.Collapse id="responsive-navbar-nav">
-						<Nav defaultActiveKey="/" className="mx-auto navbar-list">
+					<Navbar.Toggle aria-controls="responsive-navbar" />
+					<Navbar.Collapse id="responsive-navbar" className="justify-content-end">
+						<Nav defaultActiveKey="/" className="navbar-list">
 							<ul>
 								<li>
-									<NavLink to="/" end>Assets</NavLink>
+									<NavLink to="/" end>All Assets</NavLink>
+									<NavLink to="/whats-new">New</NavLink>
 									<NavLink to="/playlists">Playlists</NavLink>
 									<NavLink to="/blog" >Blog</NavLink>
 									<NavLink to="/messages">Messages</NavLink>
 									<NavLink to="/profile">Profile</NavLink>
 								</li>
 							</ul>
-						</Nav>
-						<Nav>
-							<AuthStatus />
 						</Nav>
 					</Navbar.Collapse>
 				</Container>

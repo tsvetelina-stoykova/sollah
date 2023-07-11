@@ -6,8 +6,7 @@ import debounce from '../../features/debounce';
 import AssetsItem from '../../features/AssetsItem';
 import Pagination from '../../features/Pagination';
 import AssetsFilter from '../../features/AssetsFilter';
-import { NavLink } from 'react-router-dom';
-import { Container, Row, Col, Stack } from 'react-bootstrap';
+import { Container, Row, Col } from 'react-bootstrap';
 import { MdSearch } from "react-icons/md";
 import './AssetsList.css'
 
@@ -21,7 +20,6 @@ const AssetsList = () => {
 	const pages = Math.ceil(assets.count / assets.pagesize);
 	const page_start = (filter.page - 1) * assets.pagesize;
 	const page_end = filter.page * assets.pagesize;
-	const activeClassName = "btn-active";
 	
 	useEffect(
 		() => {
@@ -49,14 +47,9 @@ const AssetsList = () => {
 
 	return (
 		<Container>
-			<Stack direction="horizontal" gap={3} className="justify-content-center my-3 py-4">
-				<NavLink to="/" className={({isActive}) => isActive ? activeClassName + " assets-toggle" : "assets-toggle"}>
-					Assets</NavLink> /
-				<NavLink to="/whats-new"  className="assets-toggle">New</NavLink>
-			</Stack>
-
 			<Row>
 				<Col sm={9}>
+				<h1>Complete Video Library</h1>
 					<Pagination pages={pages} current={filter.page} onClick={p => { changePage(p) }} />
 						{page_assets.map((a, idx) => <AssetsItem key={a ? a.id : -idx} asset={a} />)}					
 					<Pagination pages={pages} current={filter.page} onClick={p => { changePage(p) }} />
@@ -74,7 +67,6 @@ const AssetsList = () => {
 					<div><AssetsFilter label='Languages' options={categories.language.all} empty={"- ALL " + categories.language.plural + " -"} selected={filter.language_id} onChange={v => { changeFilter('language_id', v) }} /></div>
 				</Col>
 			</Row>
-
 		</Container>
 	)
 }

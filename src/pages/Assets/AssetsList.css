@@ -1,14 +1,6 @@
 .btn-active {
 	opacity: 1!important;
 }
-.assets-toggle {
-	color: var(--clr-accent-700)!important;
-	text-decoration: none;
-	font-weight: var(--fw-semi-bold);
-	font-size: var(--fs-button);
-	line-height: 1;
-	opacity: 0.6;
-}
 
 .list-filter-wrapper{
 	margin: 2em 0 1.5em 0;

@@ -1,15 +1,16 @@
 import { useSelector } from "react-redux";
-import { Button, Stack } from "react-bootstrap"; 
+import { Button, Stack } from "react-bootstrap";
+import "./AuthStatus.css";
 
 const AuthStatus = () => {
 	const auth = useSelector(state => state.auth);
 	
 	if (!auth.user){
-		return (<Button href="login" className='btn-cta'>Log In</Button>)
+		return (<a className="account-cta" href="/login">Log In</a>)
 	} else {
-		return(	<Stack direction="horizontal" gap={2}>	
-					<span style={{fontWeight: 600}}>Welcome, {auth.user.first_name}! </span>
-					<Button className="btn-cta" href="/logout">Log Out</Button>
+		return(	<Stack direction="horizontal">	
+					<span className="account-name">Welcome, {auth.user.first_name}! </span>
+					<a className="account-cta" href="/logout">Log Out</a>
 				</Stack>	)
 	}
 
