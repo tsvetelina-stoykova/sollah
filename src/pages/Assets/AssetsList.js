@@ -51,7 +51,7 @@ const AssetsList = () => {
 				<Col sm={9}>
 				<h1>Complete Video Library</h1>
 					<Pagination pages={pages} current={filter.page} onClick={p => { changePage(p) }} />
-						{page_assets.map((a, idx) => <AssetsItem key={a ? a.id : -idx} asset={a} />)}					
+						{page_assets.map((a, idx) => <AssetsItem key={a ? a.id : -idx} asset={a} filter={filter}/>)}					
 					<Pagination pages={pages} current={filter.page} onClick={p => { changePage(p) }} />
 				</Col>
 				<Col sm={3}>

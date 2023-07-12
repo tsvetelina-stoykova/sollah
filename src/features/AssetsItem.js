@@ -2,8 +2,21 @@ import { Link } from "react-router-dom";
 import { Row, Col, Image, Card, Placeholder } from "react-bootstrap";
 import  "./AssetsItem.css";
 
-const AssetsItem = ({asset}) => {
-		return (
+function escapeRegExp(s) {
+    return s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'); // $& means the whole matched string
+}
+
+function mark(s) {
+	return `<mark>${s}</mark>`;
+}
+
+const AssetsItem = ({asset, filter }) => {
+	const words = filter.q.trim().split(/\s+/).filter(s=>s.length).map(escapeRegExp);
+	const regex = words.length ? new RegExp(`(${words.join("|")})`, "gi") : null;
+	const title = regex ? asset.title.replace(regex, mark) : asset.title;
+	const description = regex ? asset.description.replace(regex, mark) : asset.description;
+ 
+	return (
 			<Row className="py-3">
 				<Col sm={3} className="justify-content-center">
 					{asset  
@@ -19,13 +32,13 @@ const AssetsItem = ({asset}) => {
 						<Card.Body>
 							<Card.Title className="asset-title">
 								{asset
-									? <Link to={asset.id}>{asset.title}</Link>
+									? <Link to={asset.id} dangerouslySetInnerHTML={{__html: title}}></Link>
 									: <Placeholder sm={9} animation="wave"/>  
 								}
 							</Card.Title>
 							
 								{asset
-									? <Card.Text className="asset-description">{asset.description}</Card.Text>
+									? <Card.Text className="asset-description" dangerouslySetInnerHTML={{__html: description}}></Card.Text>
 									: <Card.Text className="asset-description"><Placeholder sm={7} /></Card.Text>
 								}						
 						</Card.Body>
