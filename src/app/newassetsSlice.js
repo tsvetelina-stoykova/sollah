@@ -73,7 +73,6 @@ const newassetsSlice = createSlice({
 		},
 		"newassets/success": (state, action) => {
 			const filter = action.payload.filter;
-			console.log(filter)
 			const newassets = action.payload.assets;
 			state.status[filter.page] = "success";
 			for(let n of newassets) {

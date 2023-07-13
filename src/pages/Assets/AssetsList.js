@@ -20,7 +20,7 @@ const AssetsList = () => {
 	const pages = Math.ceil(assets.count / assets.pagesize);
 	const page_start = (filter.page - 1) * assets.pagesize;
 	const page_end = filter.page * assets.pagesize;
-	
+
 	useEffect(
 		() => {
 			if (['loading', 'success'].indexOf(assets.status[filter.page]) === -1) {
@@ -51,10 +51,10 @@ const AssetsList = () => {
 				<Col sm={8} style={{margin: 'var(--size-400) 0'}}>
 					<div className="heading-wrapper">
 						<h1 className="main-heading">Complete Video Library</h1>
-						<p>(12345 results)</p>
+						{assets.count > 1 ? <p>{assets.count} results</p> : <p>{assets.count}result</p>} 						
 					</div>
 					<Pagination pages={pages} current={filter.page} onClick={p => { changePage(p) }} />
-						{page_assets.map((a, idx) => <AssetsItem key={a ? a.id : -idx} asset={a} filter={filter}/>)}					
+					{page_assets.map((a, idx) => <AssetsItem key={a ? a.id : -idx} asset={a} filter={filter}/>)}					
 					<Pagination pages={pages} current={filter.page} onClick={p => { changePage(p) }} />
 				</Col>
 				<Col sm={4} style={{margin: 'var(--size-400) 0'}}>

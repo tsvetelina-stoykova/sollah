@@ -13,9 +13,18 @@ function mark(s) {
 const AssetsItem = ({asset, filter }) => {
 	const words = filter.q.trim().split(/\s+/).filter(s=>s.length).map(escapeRegExp);
 	const regex = words.length ? new RegExp(`(${words.join("|")})`, "gi") : null;
-	const title = regex ? asset.title.replace(regex, mark) : asset.title;
-	const description = regex ? asset.description.replace(regex, mark) : asset.description;
- 
+
+	let title = '';
+	let description = '';
+	if(asset) {
+		title = asset.title;
+		description = asset.description;
+		if(regex) {
+			title = asset.title.replace(regex, mark);
+			description = asset.description.replace(regex, mark);
+		}
+	}
+
 	return (
 			<Row className="py-3">
 				<Col sm={3} className="justify-content-center">
@@ -32,7 +41,7 @@ const AssetsItem = ({asset, filter }) => {
 						<Card.Body>
 							<Card.Title className="asset-title">
 								{asset
-									? <Link to={asset.id} dangerouslySetInnerHTML={{__html: title}}></Link>
+									? <Link to={asset.id}    dangerouslySetInnerHTML={{__html: title}}></Link>
 									: <Placeholder sm={9} animation="wave"/>  
 								}
 							</Card.Title>
