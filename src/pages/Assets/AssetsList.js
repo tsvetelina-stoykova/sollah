@@ -6,7 +6,7 @@ import debounce from '../../features/debounce';
 import AssetsItem from '../../features/AssetsItem';
 import Pagination from '../../features/Pagination';
 import AssetsFilter from '../../features/AssetsFilter';
-import { Container, Row, Col} from 'react-bootstrap';
+import { Container, Row, Col, Form} from 'react-bootstrap';
 import { MdSearch } from "react-icons/md";
 import './AssetsList.css'
 
@@ -61,9 +61,21 @@ const AssetsList = () => {
 					<div className="filter-wrapper"> 
 						<label className="search-bar mb-3">
 							<MdSearch size="2em" color="#ccc"/>
-							<input placeholder="Keywords" defaultValue={filter.q} onChange={(e) => { debouncedSearch('q', e.target.value) }} />
+							<input 
+								placeholder="Keywords" 
+								defaultValue={filter.q} 
+								onChange={(e) => { debouncedSearch('q', e.target.value) }} 
+							/>
 						</label>	
-						<div><AssetsFilter label='Learning Paths' options={categories.learning_path.all} empty={"- ALL " + categories.learning_path.plural + " -"} selected={filter.learning_path_id} onChange={v => { changeFilter('learning_path_id', v) }} /></div>
+						<div>
+							<AssetsFilter 
+								label='Learning Paths' 
+								options={categories.learning_path.all} 
+								empty={"- ALL " + categories.learning_path.plural + " -"} 
+								selected={filter.learning_path_id} 
+								onChange={v => { changeFilter('learning_path_id', v) }} 
+							/>
+						</div>
 						<div><AssetsFilter label='Types' options={categories.type.all} empty={"- ALL " + categories.type.plural + " -"} selected={filter.type_id} onChange={v => { changeFilter('type_id', v) }} /></div>
 						<div><AssetsFilter label='Topics' options={categories.topic.all} empty={"- ALL " + categories.topic.plural + " -"} selected={filter.topic_id} onChange={v => { changeFilter('topic_id', v) }} /></div>
 						<div><AssetsFilter label='Suggested Industry Usage' options={categories.industry_setting.all} empty={"- ALL " + categories.industry_setting.plural + " -"} selected={filter.industry_setting_id} onChange={v => { changeFilter('industry_setting_id', v) }} /></div>
@@ -71,6 +83,10 @@ const AssetsList = () => {
 						<div><AssetsFilter label='Languages' options={categories.language.all} empty={"- ALL " + categories.language.plural + " -"} selected={filter.language_id} onChange={v => { changeFilter('language_id', v) }} /></div>
 					</div>
 				</Col>
+
+				<Form>
+					
+				</Form>
 			</Row>
 		</Container>
 	)

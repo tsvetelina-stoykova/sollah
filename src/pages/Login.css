@@ -1,11 +1,8 @@
-.login-wrapper {
-	max-width: 500px;
-	width: 100%;
+.form-wrapper {
+	color: #fff; 
 	background-color: var(--clr-accent-700);
-	border-radius: 6px;
-	margin: 2em 0 1.5em 0;
 	padding: 1.2em;
-	color: #fff;
+	border-radius: 6px;
 }
 
 .form-button {
