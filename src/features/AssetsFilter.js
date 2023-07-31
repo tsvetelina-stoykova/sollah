@@ -8,15 +8,15 @@ const AssetsFilter = ({label, empty, options, selected, onChange}) => {
 
 	return(
 		<Form.Group className="mb-3" controlId="formFilter">
-		<Form.Label className="filter-label">{label}</Form.Label>
-		<Form.Select value={selected} onChange={onChangeHandler}>
-			<option>{empty}</option>
-			{options.map(o => 
-						<option key={o.id} value={o.id}>
-						{o.name} {o.cnt ? `(${o.cnt})` : ''}
-					</option>)}
-		</Form.Select>
-	</Form.Group>
+			<Form.Label className="filter-label">{label}</Form.Label>
+			<Form.Select value={selected} onChange={onChangeHandler}>
+				<option>{empty}</option>
+				{options.map(o => 
+							<option key={o.id} value={o.id}>
+							{o.name} {o.cnt ? `(${o.cnt})` : ''}
+						</option>)}
+			</Form.Select>
+		</Form.Group>
 	)
 }
 

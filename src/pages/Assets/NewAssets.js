@@ -60,7 +60,11 @@ const NewAssets = () => {
 					<div className="filter-wrapper">
 						<label className="search-bar mb-3">
 							<MdSearch size="2em" color="#ccc"/>
-							<input placeholder="Keywords" defaultValue={filter.q} onChange={(e) => { debouncedSearch('q', e.target.value) }} />
+							<input 
+								placeholder="Keywords" 
+								defaultValue={filter.q} 
+								onChange={(e) => { debouncedSearch('q', e.target.value) }} 
+							/>
 						</label>
 						<div><AssetsFilter label='Learning Paths' options={categories.learning_path.all} empty={"- ALL " + categories.learning_path.plural + " -"} selected={filter.learning_path_id} onChange={v => { changeFilter('learning_path_id', v) }} /></div>
 						<div><AssetsFilter label='Types' options={categories.type.all} empty={"- ALL " + categories.type.plural + " -"} selected={filter.type_id} onChange={v => { changeFilter('type_id', v) }} /></div>

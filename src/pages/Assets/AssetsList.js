@@ -6,7 +6,7 @@ import debounce from '../../features/debounce';
 import AssetsItem from '../../features/AssetsItem';
 import Pagination from '../../features/Pagination';
 import AssetsFilter from '../../features/AssetsFilter';
-import { Container, Row, Col, Form} from 'react-bootstrap';
+import { Container, Row, Col, Form, InputGroup} from 'react-bootstrap';
 import { MdSearch } from "react-icons/md";
 import './AssetsList.css'
 
@@ -35,6 +35,7 @@ const AssetsList = () => {
 	const page_assets = useMemo(
 		() => assets.index.slice(page_start, page_end).map(id=>(assets.map[id])), 
 		[ assets, page_start, page_end]);
+
 	const changeFilter = (id, val) => {
 		dispatch(getAssets({ ...filter, [id]: val, page: 1 }));
 	}
@@ -59,14 +60,16 @@ const AssetsList = () => {
 				</Col>
 				<Col sm={4} style={{margin: 'var(--size-400) 0'}}>
 					<div className="filter-wrapper"> 
-						<label className="search-bar mb-3">
-							<MdSearch size="2em" color="#ccc"/>
-							<input 
-								placeholder="Keywords" 
+						<InputGroup className="mb-2">
+           					<InputGroup.Text>
+								<MdSearch size="2em" color="#ccc"/>
+							</InputGroup.Text>
+            				<Form.Control placeholder="Keywords" 
 								defaultValue={filter.q} 
 								onChange={(e) => { debouncedSearch('q', e.target.value) }} 
 							/>
-						</label>	
+          				</InputGroup>
+
 						<div>
 							<AssetsFilter 
 								label='Learning Paths' 
@@ -83,10 +86,6 @@ const AssetsList = () => {
 						<div><AssetsFilter label='Languages' options={categories.language.all} empty={"- ALL " + categories.language.plural + " -"} selected={filter.language_id} onChange={v => { changeFilter('language_id', v) }} /></div>
 					</div>
 				</Col>
-
-				<Form>
-					
-				</Form>
 			</Row>
 		</Container>
 	)

@@ -324,9 +324,9 @@ body {
 }
 
 /* selects every child except the first */
-.flow * + * {
+/* .flow * + * {
 
-}
+} */
 
 @media (min-width: 50rem) {
 	.displayMdInlineFlex {
