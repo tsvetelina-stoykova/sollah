@@ -1,23 +1,29 @@
 import { useEffect, useState, useMemo } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { getAsset } from "../../app/assetsSlice";
+import { getCategories } from '../../app/categoriesSlice';
 import { togglePlaylist, listPlaylists } from "../../app/playlistsSlice";
 import { useParams } from "react-router-dom";
+import AssetComponent from "../../features/AssetComponent";
+import debounce from '../../features/debounce';
+import AssetsFilter from "../../features/AssetsFilter";
+import { DropdownButton, Col, Row, Container, Dropdown, Stack, Button, InputGroup, Form } from "react-bootstrap"; 
+import { MdSearch } from "react-icons/md";
 import { IoMdHeart, IoMdHeartEmpty } from "react-icons/io";
 import { MdOutlineKeyboardArrowDown } from "react-icons/md";
-import AssetComponent from "../../features/AssetComponent";
 import "./AssetDetails.css";
-import { DropdownButton, Col, Row, Container, Dropdown, Stack, Button, ListGroup  } from "react-bootstrap"; 
 
 const AssetDetails = () => {
 	const { id } = useParams();
 	const dispatch = useDispatch();
 	const asset = useSelector((state) => state.assets.map[id]);
+	const assets = useSelector((state) => state.assets);
 	const playlists = useSelector((state) => state.playlists);
+	const categories = useSelector((state) => state.categories);
 	const [currentLang, setCurrentLang] = useState("English");
 	const [openPlaylist, setOpenPlaylist] = useState(false);
 
-	const filtered = useMemo(() => {
+	const filtered_components = useMemo(() => {
 		return asset?.components ?
 			asset.components.filter(c => (c.lang === currentLang)) :
 			[];
@@ -91,7 +97,6 @@ const AssetDetails = () => {
 										</DropdownButton>									
 									</Stack>
 								</Col>
-							
 									<Col sm={3} className="mt-5">
 										<h5>Learning Path & Details</h5>
 										<ul>
@@ -129,36 +134,75 @@ const AssetDetails = () => {
 									
 									<h5>Training files</h5>
 									{langs.map((lang) => (
-										<Col sm={4} >
-											<Button variant="link" key={lang} onClick={handleFilterBtn} value={lang}>{lang}</Button>
+										<Col key={lang} sm={4} >
+											<Button variant="link"  onClick={handleFilterBtn} value={lang}>{lang}</Button>
 										</Col>
-									))}
-								
-								
+									))}								
+							</Row>
+							<Row>
+								<h5>Components</h5><br />
+								{filtered_components.length ?
+									filtered_components.map(component => <AssetComponent key={component.id} component={component} />) :
+									"Loading"
+								}
 							</Row>
 						</Col>
-						<Col sm={4}></Col>
-					</Row>
-					<br/><br/><br/>
-
-					<div className="row my-4">
-						<div className="col-12 mb-2">
-							<h2>Training files</h2>
-						</div>
-						{langs.map(lang => (
-							<div className="col-4" key={lang}>
-								<button onClick={handleFilterBtn} type="button" value={lang}>{lang}</button>
+						<Col sm={4}>
+							<div className="filter-wrapper">
+								<h5>Search Assets</h5>
+								<InputGroup className="mb-2">
+									<InputGroup.Text>
+										<MdSearch size="2em" color="#ccc"/>
+									</InputGroup.Text>
+									<Form.Control placeholder="Keywords"
+									/>
+								</InputGroup>
+							
+								<div>
+									<AssetsFilter
+										label="Learning Paths"
+										options={categories.learning_path.all}
+										empty={"- ALL " + categories.learning_path.plural + " -"}
+									/>
+								</div>
+								<div>
+									<AssetsFilter
+										label="Types"
+										options={categories.type.all}
+										empty={"- ALL " + categories.type.plural + " -"}
+									/>
+								</div>
+								<div>
+									<AssetsFilter
+										label="Topics"
+										options={categories.topic.all}
+										empty={"- ALL " + categories.topic.plural + " -"}
+									/>
+								</div>
+								<div>
+									<AssetsFilter
+										label="Suggested Industry Usage"
+										options={categories.industry_setting.all}
+										empty={"- ALL " + categories.industry_setting.plural + " -"}
+									/>
+								</div>
+								<div>
+									<AssetsFilter
+										label="Target Audiences"
+										options={categories.target_audience.all}
+										empty={"- ALL " + categories.target_audience.plural + " -"}
+									/>
+								</div>
+								<div>
+									<AssetsFilter
+										label="Languages"
+										options={categories.language.all}
+										empty={"- ALL " + categories.language.plural + " -"}
+									/>
+								</div>
 							</div>
-						))}
-					</div>
-
-					<div className="components-wrapper">
-						<h2>Components</h2><br />
-						{filtered.length ?
-							filtered.map(component => <AssetComponent key={component.id} component={component} />) :
-							"Loading"
-						}
-					</div>
+						</Col>
+					</Row>
 				</Container>
 			)
 			:

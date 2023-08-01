@@ -16,11 +16,9 @@ const AssetComponent = ({component}) => {
 		e.preventDefault();
 		dispatch(getPlayUrl({asset_id:id, component_id:component.id}));
 		setToggle(!toggle);
-		console.log(toggle);
 	};
-
 	const play_key = id + '/' + component.id;
-	const play = useSelector( (state) => state.assets.play[play_key] );
+	const play = useSelector((state) => state.assets.play[play_key]);
 	return (
 		<section className="container asset-component">
 			<div className="row my-3">

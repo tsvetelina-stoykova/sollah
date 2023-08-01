@@ -6,8 +6,7 @@ import debounce from '../../features/debounce';
 import AssetsItem from "../../features/AssetsItem";
 import Pagination from '../../features/Pagination';
 import AssetsFilter from "../../features/AssetsFilter";
-import { NavLink } from "react-router-dom";
-import { Container, Col, Row } from "react-bootstrap";
+import { Container, Col, Row, InputGroup, Form } from "react-bootstrap";
 import { MdSearch } from "react-icons/md";
 import "./AssetsList.css";
 
@@ -58,14 +57,15 @@ const NewAssets = () => {
 				</Col>
 				<Col sm={4} style={{margin: 'var(--size-400) 0'}}>
 					<div className="filter-wrapper">
-						<label className="search-bar mb-3">
-							<MdSearch size="2em" color="#ccc"/>
-							<input 
-								placeholder="Keywords" 
+						<InputGroup className="mb-2">
+           					<InputGroup.Text>
+								<MdSearch size="2em" color="#ccc"/>
+							</InputGroup.Text>
+            				<Form.Control placeholder="Keywords" 
 								defaultValue={filter.q} 
 								onChange={(e) => { debouncedSearch('q', e.target.value) }} 
 							/>
-						</label>
+          				</InputGroup>
 						<div><AssetsFilter label='Learning Paths' options={categories.learning_path.all} empty={"- ALL " + categories.learning_path.plural + " -"} selected={filter.learning_path_id} onChange={v => { changeFilter('learning_path_id', v) }} /></div>
 						<div><AssetsFilter label='Types' options={categories.type.all} empty={"- ALL " + categories.type.plural + " -"} selected={filter.type_id} onChange={v => { changeFilter('type_id', v) }} /></div>
 						<div><AssetsFilter label='Topics' options={categories.topic.all} empty={"- ALL " + categories.topic.plural + " -"} selected={filter.topic_id} onChange={v => { changeFilter('topic_id', v) }} /></div>
