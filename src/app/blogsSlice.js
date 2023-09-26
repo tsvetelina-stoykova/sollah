@@ -34,6 +34,7 @@ const blogsSlice = createSlice({
 			for(let p of posts) {
 				state.map[p.seo_id] = p;
 			}
+			console.log(state.map)
 		},
 		[listAll.rejected]: (state) => {
 			state.status="error";

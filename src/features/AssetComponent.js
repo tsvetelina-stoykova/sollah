@@ -2,11 +2,12 @@ import { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { getPlayUrl } from "../app/assetsSlice";
 import { useParams } from "react-router-dom";
+import Player from "./Player";
 import  movie from "../assets/icons/mov-cc.png"
 import  pdf from "../assets/icons/pdf.png"
 import  ppt from "../assets/icons/ppt.png"
 import "./AssetComponent.css";
-import Player from "./Player";
+
 
 const AssetComponent = ({component}) => {
 	const dispatch = useDispatch();

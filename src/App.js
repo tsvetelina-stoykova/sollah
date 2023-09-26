@@ -10,6 +10,7 @@ import Playlists from './pages/Playlists/Playlists'
 import Blog from './pages/Blog/Blog'
 import BlogDetails from './pages/Blog/BlogDetails'
 import Messages from './pages/Messages/Messages';
+import Frame from './pages/Frame/Frame';
 import MessageDetails from './pages/Messages/MessageDetails';
 import Login from './pages/Login';
 import Logout from './features/Logout';
@@ -26,6 +27,7 @@ function App() {
 				<Route exact path="/whats-new"  element={<NewAssets />} />
 				<Route exact path="/blog" element={<Blog />}/>
 				<Route path="/blog/:seo_id" element={<BlogDetails />} />
+				<Route path="/frame" element={<Frame />} />
 				
 				<Route path="/profile"
 				 	element = {

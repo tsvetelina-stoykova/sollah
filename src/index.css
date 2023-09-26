@@ -1,3 +1,16 @@
+@font-face {
+	font-family: "Roboto";
+	src: url(/src/assets/roboto/Roboto-Regular.woff2);
+	font-weight: 400;
+  }
+@font-face {
+font-family: "Roboto Slab";
+src: url(/src/assets/roboto-slab/RobotoSlab.woff2);
+font-weight: 400;
+}
+
+
+
 :root {
 	--clr-accent-800: hsl(210, 71%, 44%);
 	--clr-accent-700: hsl(204, 100%, 18%);

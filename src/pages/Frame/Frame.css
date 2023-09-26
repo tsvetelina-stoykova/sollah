@@ -1,0 +1,30 @@
+.container-frame {
+  
+}
+
+.card-frame{
+    width: 100%;
+    height: 18rem;
+}
+
+
+.div-frame {
+    
+}
+
+.header-frame {
+    background-color: #54B4FD!important;
+    backdrop-filter: opacity(10%);
+    padding: 0.5rem 0.75em;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    border-bottom: 1px solid grey; 
+}
+
+
+.body-frame {
+    border: 1px solid #54B4FD!important;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+}
+
