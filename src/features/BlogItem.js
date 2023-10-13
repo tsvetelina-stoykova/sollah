@@ -23,7 +23,6 @@ const BlogItem = ({post}) => {
 					<p>{date.toLocaleDateString('en-US', options)}</p>
 				</div>
 			</div>
-
 		</section>
 	)
 }

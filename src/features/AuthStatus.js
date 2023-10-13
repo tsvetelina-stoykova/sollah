@@ -1,5 +1,5 @@
 import { useSelector } from "react-redux";
-import { Button, Stack } from "react-bootstrap";
+import { Stack } from "react-bootstrap";
 import "./AuthStatus.css";
 
 const AuthStatus = () => {
