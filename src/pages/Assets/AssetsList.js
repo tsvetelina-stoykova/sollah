@@ -20,7 +20,6 @@ const AssetsList = () => {
 	const pages = Math.ceil(assets.count / assets.pagesize);
 	const page_start = (filter.page - 1) * assets.pagesize;
 	const page_end = filter.page * assets.pagesize;
-
 	useEffect(
 		() => {
 			if (['loading', 'success'].indexOf(assets.status[filter.page]) === -1) {
@@ -52,7 +51,7 @@ const AssetsList = () => {
 				<Col sm={8} style={{margin: 'var(--size-400) 0'}}>
 					<div className="heading-wrapper">
 						<h1 className="main-heading">Complete Video Library</h1>
-						{assets.count > 1 ? <p>{assets.count} results</p> : <p>{assets.count}result</p>} 						
+						{assets.count > 1 ? <p>{assets.count} results</p> : <p>{assets.count} result</p>} 						
 					</div>
 					<Pagination pages={pages} current={filter.page} onClick={p => { changePage(p) }} />
 					{page_assets.map((a, idx) => <AssetsItem key={a ? a.id : -idx} asset={a} filter={filter}/>)}					
@@ -61,9 +60,7 @@ const AssetsList = () => {
 				<Col sm={4} style={{margin: 'var(--size-400) 0'}}>
 					<div className="filter-wrapper"> 
 						<InputGroup className="mb-2">
-           					<InputGroup.Text>
-								<MdSearch size="2em" color="#ccc"/>
-							</InputGroup.Text>
+           					<InputGroup.Text><MdSearch size="2em" color="#ccc"/></InputGroup.Text>															
             				<Form.Control placeholder="Keywords" 
 								defaultValue={filter.q} 
 								onChange={(e) => { debouncedSearch('q', e.target.value) }} 

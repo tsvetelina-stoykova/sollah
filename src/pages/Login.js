@@ -12,12 +12,11 @@ const Login = () =>  {
 	const [password, setPassword] = useState('');
 	const dispatch = useDispatch();
 	const auth = useSelector((state) => state.auth);
-
 	const from = location.state?.from?.pathname || "/";
 
 	useEffect(() => {
 		if (auth.user) navigate(from, {reset: true})
-	}, [auth.user]);
+	}, [auth.user, from, navigate] );
 
 	const handleEmail = (e) => {
 		setEmail(e.target.value);

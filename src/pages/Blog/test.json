@@ -1,0 +1,20 @@
+const posts = [
+    {
+        "id": "17",
+        "seo_id": "use-a-mediator-to-help-stalemates",
+        "title": "Use a Mediator to Help Stalemates",
+        "description": "Differences between colleagues ....",
+        "body": "<h2>A referee job requires them ironments...",
+        "scheduled": 1699509600,
+        "asset_ids": [ 1458,2787,2117]
+    },
+    {
+        "id": "14",
+        "seo_id": "be-open-to-how-work-gets-done",
+        "title": "Be Open to How Work Gets Done",
+        "description": "Discriminating against ideas...",
+        "body": "<p>Sled dogs such as huskies and malamutes ...",
+        "scheduled": 1696914000,
+        "asset_ids": [2718, 2602, 2676, 2084],
+    }
+]

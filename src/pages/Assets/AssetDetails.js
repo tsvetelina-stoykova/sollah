@@ -22,7 +22,7 @@ const AssetDetails = () => {
 	const categories = useSelector((state) => state.categories);
 	const [currentLang, setCurrentLang] = useState("English");
 	const [openPlaylist, setOpenPlaylist] = useState(false);
-
+	console.log(asset)
 
 	const filtered_components = useMemo(() => {
 		return asset?.components ?

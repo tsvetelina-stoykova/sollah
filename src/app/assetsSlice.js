@@ -30,11 +30,11 @@ export const getAssets = createAsyncThunk(
 		api.dispatch({type:'assets/pending', payload: filter});
 
 		const result = await fetch(mkurl('https://sollahlibrary.com/mapi/4/assets', 
-		{...filter, offset, limit, page:null,}))
+		{...filter, offset, limit, page:null}))
 			.then(res => res.json());
 
 		if(diff_criteria) api.dispatch({type:'assets/reset'});
-		api.dispatch({type:'assets/success', payload: {assets:result.assets, count:result.count, filter}});
+		api.dispatch({type:'assets/success',  payload: {assets:result.assets, count:result.count, filter}});
 	}
 );
 

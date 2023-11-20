@@ -6,6 +6,7 @@ import BlogItem from "../../features/BlogItem";
 const Blog = () => {
 	const dispatch = useDispatch();
 	const blogs = useSelector((state) => state.blogs);
+	console.log("blog",blogs)
 	useEffect(() => {
 		if(blogs.index.length === 0) dispatch(listAll());
 	}, [dispatch, blogs.index.length]);
