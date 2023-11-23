@@ -8,10 +8,13 @@ import "./Login.css";
 const Login = () =>  {
 	const navigate = useNavigate();
 	const location = useLocation();
+
 	const [email, setEmail] = useState('');
 	const [password, setPassword] = useState('');
+	
 	const dispatch = useDispatch();
 	const auth = useSelector((state) => state.auth);
+
 	const from = location.state?.from?.pathname || "/";
 
 	useEffect(() => {

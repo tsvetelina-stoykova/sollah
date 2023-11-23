@@ -20,6 +20,8 @@ const AssetsList = () => {
 	const pages = Math.ceil(assets.count / assets.pagesize);
 	const page_start = (filter.page - 1) * assets.pagesize;
 	const page_end = filter.page * assets.pagesize;
+
+
 	useEffect(
 		() => {
 			if (['loading', 'success'].indexOf(assets.status[filter.page]) === -1) {

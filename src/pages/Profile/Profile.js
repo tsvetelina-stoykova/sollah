@@ -1,13 +1,12 @@
 import { useSelector, useDispatch } from "react-redux";
 import { getProfile } from "../../app/profileSlice";
 import { useEffect } from "react";
-import { Container, Row, Col, Card, Stack } from "react-bootstrap";
 import "./Profile.css";
 
 const Profile = () => {
 	const dispatch = useDispatch();
 	const profile = useSelector((state) => state.profile.profile);
-	useEffect(() => {dispatch(getProfile())}, [dispatch])
+	useEffect(() => {dispatch(getProfile())}, [dispatch]);
 	const user_name = profile.first_name + " " + profile.last_name
 	return (
 		<div className="container">

@@ -27,14 +27,14 @@ const blogsSlice = createSlice({
 		[listAll.pending]: (state) => {
 			state.status="pending";
 		},
-[listAll.fulfilled]: (state, action) => {
-	const {posts} = action.payload;
-	state.status="success";
-	state.index = posts.map(p=>p.seo_id);
-	for(let p of posts) {
-		state.map[p.seo_id] = p;
-	}
-},
+	[listAll.fulfilled]: (state, action) => {
+		const {posts} = action.payload;
+		state.status="success";
+		state.index = posts.map(p=>p.seo_id);
+		for(let p of posts) {
+			state.map[p.seo_id] = p;
+		}
+	},
 		[listAll.rejected]: (state) => {
 			state.status="error";
 		},

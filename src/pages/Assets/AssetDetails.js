@@ -1,28 +1,21 @@
 import { useEffect, useState, useMemo } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { getAsset } from "../../app/assetsSlice";
-import { getCategories } from '../../app/categoriesSlice';
 import { togglePlaylist, listPlaylists } from "../../app/playlistsSlice";
 import { useParams } from "react-router-dom";
 import AssetComponent from "../../features/AssetComponent";
-import debounce from '../../features/debounce';
-import AssetsFilter from "../../features/AssetsFilter";
-import { DropdownButton, Col, Row, Container, Image, Breadcrumb, Dropdown, Stack, Button, InputGroup, Form } from "react-bootstrap"; 
-import { MdSearch } from "react-icons/md";
+import { DropdownButton, Col, Row, Container, Image, Dropdown, Stack, Button } from "react-bootstrap"; 
 import { IoMdHeart, IoMdHeartEmpty } from "react-icons/io";
-import { MdOutlineKeyboardArrowDown } from "react-icons/md";
 import "./AssetDetails.css";
 
 const AssetDetails = () => {
 	const { id } = useParams();
 	const dispatch = useDispatch();
 	const asset = useSelector((state) => state.assets.map[id]);
-	const assets = useSelector((state) => state.assets);
 	const playlists = useSelector((state) => state.playlists);
-	const categories = useSelector((state) => state.categories);
 	const [currentLang, setCurrentLang] = useState("English");
-	const [openPlaylist, setOpenPlaylist] = useState(false);
-	console.log(asset)
+
+console.log(asset)
 
 	const filtered_components = useMemo(() => {
 		return asset?.components ?
@@ -37,6 +30,7 @@ const AssetDetails = () => {
 			asset.components.map(c => c.lang).reduce((langs, l) => (langs.includes(l) ? langs : [...langs, l]), []) :
 			[];
 	}, [asset?.components]);
+
 
 	useEffect(() => {
 		if (!(asset && asset.components)) dispatch(getAsset({ id }));
@@ -59,24 +53,12 @@ const AssetDetails = () => {
 		dispatch(togglePlaylist({ asset_id: id, playlist_id: 'liked', add: !isLiked }));
 	};
 
-	const handleOpen = () => {
-		setOpenPlaylist(!openPlaylist);
-	};
-	
 	return (
 		<>{asset ?
 			(
 				<Container>
-					<Row style={{paddingBottom: "1em"}}>
-						<Breadcrumb>
-							<Breadcrumb.Item href="http://dev.stoikova.com:3000/">
-								Video Library
-							</Breadcrumb.Item>
-							<Breadcrumb.Item active>{ asset.title }</Breadcrumb.Item>
-						</Breadcrumb>
-					</Row>
 					<Row>
-						<Col sm={8}>
+						<Col>
 							<Row>
 								<Col sm={4}>
 									<img className="asset-thumbnail" src={asset.thumb_url_big} alt="thumbnail" />		
@@ -90,21 +72,21 @@ const AssetDetails = () => {
 												<span className="d-flex justifycontent-center"><IoMdHeart className="pe-1" size="1.5em"/>Liked</span> :
 												<span className="d-flex justifycontent-center"><IoMdHeartEmpty className="mr-2" size="1.5em"/>Like</span> }
 										</Button>
-										<DropdownButton  id="dropdown-basic-button" title="Add to Playlist">
-											{ 
-												openPlaylist ?											
-												playlists.mine.map((pid) => {
-													const p = playlists.map[pid];
-													const added = p.asset_id.includes(id);
-													return p.id > 0 ? (
-														<div key={p.id}>
-															<label><input type="checkbox" value={p.id} checked={added} onChange={e => {
-																dispatch(togglePlaylist({asset_id:id, playlist_id:pid, add: !added}));
-															}}/>{" "}{p.name}</label>
-														</div>
-													) : null
-												}) : null
-											}
+										<DropdownButton id="dropdown-basic-button" title="Add to Playlist">
+										{ 
+											playlists.mine.map((pid) => {
+												const p = playlists.map[pid];
+												const added = p.asset_ids.includes(id);
+												return p.id > 0 ? ( // skip non-numeric IDs
+													<Dropdown.Item 
+														key={p.id} 
+														onClick={() => dispatch(togglePlaylist({asset_id:id, playlist_id:pid, add: !added}))}
+													>
+														<label><input type="checkbox" value={p.id} checked={added} readOnly/>{" "}{p.name}</label>
+													</Dropdown.Item>
+												) : null
+											})
+										}
 										</DropdownButton>									
 									</Stack>
 								</Col>
@@ -149,7 +131,7 @@ const AssetDetails = () => {
 							<Row className="section-content-bg">				
 								{langs.map((lang) => (
 									<Col key={lang} sm={4} >
-										<Button variant="link"  onClick={handleFilterBtn} value={lang}>{lang}</Button>
+										<Button variant="link" className="btn-lang" onClick={handleFilterBtn} value={lang}>{lang}</Button>
 									</Col>
 								))}	
 								<h5>Components</h5><br />
@@ -165,13 +147,13 @@ const AssetDetails = () => {
 								{	asset.related_assets 
 									? asset.related_assets.map( related => <Col key={related.id} className="related-asset-tile">
 											<div className="related-asset-img">
-												<a href={'http://dev.stoikova.com:3000/' + related.id}>
+												<a href={'/' + related.id}>
 													<Image src={related.thumb_url} alt="Related Asset" />
 												</a>
 												
 											</div>								
 											<div className="related-asset-desc">
-												<a href={'http://dev.stoikova.com:3000/' + related.id}>{related.title}</a>
+												<a href={'/' + related.id}>{related.title}</a>
 												<small>{related.type}</small>
 											</div>
 										</Col>
@@ -182,63 +164,7 @@ const AssetDetails = () => {
 								
 							</Row>
 						</Col>	
-						<Col sm={4}>
-							<div className="filter-wrapper">
-								<h5>Search Assets</h5>
-								<InputGroup className="mb-2">
-									<InputGroup.Text>
-										<MdSearch size="2em" color="#ccc"/>
-									</InputGroup.Text>
-									<Form.Control placeholder="Keywords"
-									/>
-								</InputGroup>
-							
-								<div>
-									<AssetsFilter
-										label="Learning Paths"
-										options={categories.learning_path.all}
-										empty={"- ALL " + categories.learning_path.plural + " -"}
-									/>
-								</div>
-								<div>
-									<AssetsFilter
-										label="Types"
-										options={categories.type.all}
-										empty={"- ALL " + categories.type.plural + " -"}
-									/>
-								</div>
-								<div>
-									<AssetsFilter
-										label="Topics"
-										options={categories.topic.all}
-										empty={"- ALL " + categories.topic.plural + " -"}
-									/>
-								</div>
-								<div>
-									<AssetsFilter
-										label="Suggested Industry Usage"
-										options={categories.industry_setting.all}
-										empty={"- ALL " + categories.industry_setting.plural + " -"}
-									/>
-								</div>
-								<div>
-									<AssetsFilter
-										label="Target Audiences"
-										options={categories.target_audience.all}
-										empty={"- ALL " + categories.target_audience.plural + " -"}
-									/>
-								</div>
-								<div>
-									<AssetsFilter
-										label="Languages"
-										options={categories.language.all}
-										empty={"- ALL " + categories.language.plural + " -"}
-									/>
-								</div>
-							</div>
-						</Col>
 					</Row>
-
 				</Container>
 			)
 			:

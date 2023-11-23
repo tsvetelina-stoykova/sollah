@@ -26,7 +26,7 @@ const Layout = () => {
 							<ul>
 								<li>
 									<NavLink to="/" end>All Assets</NavLink>
-									<NavLink to="/whats-new">New</NavLink>
+									{/* <NavLink to="/whats-new">New</NavLink> */}
 									<NavLink to="/playlists">Playlists</NavLink>
 									<NavLink to="/blog" >Blog</NavLink>
 									<NavLink to="/messages">Messages</NavLink>

@@ -1,13 +1,12 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { listPlaylists, createPlaylist, updatePlaylist, deletePlaylist, clonePlaylist } from "../../app/playlistsSlice";
+import { listPlaylists, createPlaylist, updatePlaylist, deletePlaylist } from "../../app/playlistsSlice";
 import { getAssetsByIds } from "../../app/assetsSlice";
 import PlaylistsAssetsItem from '../../features/PlaylistsAssetsItem';
 import { Container, Row, Col, Badge, InputGroup, Button, Form } from "react-bootstrap";
 import PlaceholderAsset from "../../features/PlaceholderAsset";
 import EmptyPlaylist from "../../features/EmptyPlaylist";
-import { MdDelete, MdModeEdit, MdShare } from "react-icons/md";
-import { IoIosCopy } from "react-icons/io";
+import { MdDelete, MdModeEdit } from "react-icons/md";
 import "./Playlists.css";
 
 const Playlists = () => {
@@ -16,15 +15,16 @@ const Playlists = () => {
 	const [showEdit, setShowEdit] = useState(false);
 	const dispatch = useDispatch();
 	const playlists = useSelector((state) => state.playlists);
+	console.log("playlists", playlists)
 	const assets = useSelector((state) => state.assets);
+
 	const playlist = playlist_id ? playlists.map[playlist_id] : null;
 
 	const missing_ids = playlist ? playlist.asset_ids.filter((id)=>!assets.map[id]) : [];
-	// const missing_ids = useCallback(() => {
-	// 	return playlist ? playlist.asset_ids.filter((id)=>!assets.map[id]) : [];
-	// }, [playlist, assets.map]) 
+
 
 	useEffect(() => { dispatch(listPlaylists()) }, [dispatch]);
+
 	useEffect(() => { 
 		if(missing_ids.length) dispatch(getAssetsByIds({ids:missing_ids}));
 		}, [dispatch, missing_ids]);
@@ -38,9 +38,6 @@ const Playlists = () => {
 		dispatch(createPlaylist({name:created}));
 	};
 
-	// const handleClonePlaylist = () => {
-	// 	dispatch(clonePlaylist({name: "asd", asset_ids: 0}))
-	// }
 
 	const handlePlaylistDelete = () => {
 		dispatch(deletePlaylist({playlist_id}));
@@ -79,9 +76,7 @@ const Playlists = () => {
 									{(playlist_id===id)									
 										? <> 
 											<div className="d-flex playlist-actions">
-												<span className="d-flex align-items-center me-1"><MdShare size="1.3em" color="grey"/>Share</span>
 												<span onClick={showEditField} className="d-flex align-items-center me-1"><MdModeEdit size="1.3em" color="grey"/>Rename</span> 
-												<span className="d-flex align-items-center me-2"><IoIosCopy size="1.3em" color="grey"/>Copy</span>
 												<MdDelete onClick={handlePlaylistDelete} size="1.3em" color="red"/>						
 										  	</div>
 										  	{showEdit && 

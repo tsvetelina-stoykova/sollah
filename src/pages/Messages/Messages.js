@@ -2,14 +2,14 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { listMessages } from "../../app/messagesSlice";
 import { Container, Badge, Accordion, Stack, Row, Col } from "react-bootstrap";
-import { IoMailOpen, IoMailUnread } from "react-icons/io5";
+import { IoMailOpen} from "react-icons/io5";
 import "./Messages.css";
-import {createElement} from 'react';
 
 const Messages = () => {
 const dispatch = useDispatch();
 const messages = useSelector((state) => state.messages);
 useEffect(() => { dispatch(listMessages()) }, [dispatch]);
+
 const options = { year: 'numeric', month: 'short', day: 'numeric' };
 	return (
 		<Container className="message-container">

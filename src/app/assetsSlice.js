@@ -16,7 +16,6 @@ export const getAssets = createAsyncThunk(
 		const state = api.getState();
 		const limit = state.assets.pagesize;
 		const offset = (filter.page-1)*limit;
-
 		let diff_criteria = false;
 		if(filter) {
 			for(let k in filter) {
@@ -72,7 +71,7 @@ export const getAssetsByIds = createAsyncThunk(
 
 
 const assetsSlice = createSlice({
-	name: 'assets',
+	name: "assets",
 	initialState: {
 		filter: {
 			page: 1, // does not reset the .list[] prop

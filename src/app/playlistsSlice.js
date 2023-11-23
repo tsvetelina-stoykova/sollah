@@ -24,18 +24,18 @@ export const createPlaylist = createAsyncThunk(
 	}
 );
 
-export const clonePlaylist = createAsyncThunk(
-	"playlists/clonePlaylist",
-	async ({name, asset_ids}, api) => {
-		const user = api.getState().auth.user;
-		return await fetch("https://sollahlibrary.com/mapi/4/playlists", {
-			method: "POST",
-			headers: {"x-authorization-token": user.token, 'content-type':'application/json'},
-			body: JSON.stringify({name, asset_ids}),
-			mode: "cors",
-		}).then(handleResponse)
-	}
-)
+// export const clonePlaylist = createAsyncThunk(
+// 	"playlists/clonePlaylist",
+// 	async ({name, asset_ids}, api) => {
+// 		const user = api.getState().auth.user;
+// 		return await fetch("https://sollahlibrary.com/mapi/4/playlists", {
+// 			method: "POST",
+// 			headers: {"x-authorization-token": user.token, 'content-type':'application/json'},
+// 			body: JSON.stringify({name, asset_ids}),
+// 			mode: "cors",
+// 		}).then(handleResponse)
+// 	}
+// )
 
 function handleResponse(response){
 	return response.text().then(text => {
@@ -141,12 +141,12 @@ const playlistsSlice = createSlice({
 			state.map[playlist.id] = playlist;
 		
 		},
-		[clonePlaylist.fulfilled]: (state, action) => {
-			state.status = "success";
-			const new_playlist = action.payload.playlist;
-			state.mine.push(new_playlist.id);
-			state.mine[new_playlist.id] = new_playlist;
-		},
+		// [clonePlaylist.fulfilled]: (state, action) => {
+		// 	state.status = "success";
+		// 	const new_playlist = action.payload.playlist;
+		// 	state.mine.push(new_playlist.id);
+		// 	state.mine[new_playlist.id] = new_playlist;
+		// },
 
 	}
 })
