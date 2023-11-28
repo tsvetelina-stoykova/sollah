@@ -19,7 +19,7 @@ function App() {
 	<>
 		<Routes>
 			<Route path="/" element={<Layout />}>
-				<Route exact index element={<AssetsList />} />
+				<Route index element={<AssetsList />} />
 				
 				<Route exact path="/login" element={<Login />} />
 				

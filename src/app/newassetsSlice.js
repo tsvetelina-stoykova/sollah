@@ -86,7 +86,6 @@ const newassetsSlice = createSlice({
 				state.index.fill(null);
 			}
 			state.index.splice((filter.page-1)*state.pagesize, newassets.length, ...newassets.map(n => n.id));
-			console.log(state.map)
 		},
 		[getNew.rejected]: (state, action) => {
 			const filter = action.meta.arg;

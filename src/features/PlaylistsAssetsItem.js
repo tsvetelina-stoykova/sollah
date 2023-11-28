@@ -15,7 +15,7 @@ const PlaylistsAssetsItem = ({asset, playlist, playlist_id}) => {
  	<Row className="py-3">
 		<Col sm={3} className="justify-content-center">
 			{asset  
-				? <Link to={asset.id} className={asset.thumb_url ? "asset-thumb-image" : null} style={ asset ? {backgroundColor: asset.thumb_bg} : null}>
+				? <Link to={'/' + asset.id} className={asset.thumb_url ? "asset-thumb-image" : null} style={ asset ? {backgroundColor: asset.thumb_bg} : null}>
 					<Image src={asset.thumb_url ? asset.thumb_url : null}  className={asset.popular || asset.new ? null : "image-border"}  width="200" height="150" />
 					<span className={asset.popular ? "asset-badge asset-popular" : asset.new ? "asset-badge asset-new" : "asset-badge"}>{asset.popular ? "Most Popular" : asset.new ? "New Asset" : null}</span>
 				</Link>
@@ -27,7 +27,7 @@ const PlaylistsAssetsItem = ({asset, playlist, playlist_id}) => {
 				<Card.Body>
 					<Card.Title className="asset-title d-flex justify-content-between">
 						{asset
-							? <Link to={asset.id}>{asset.title}</Link>
+							? <Link to={'/' + asset.id}>{asset.title}</Link>
 							: <Placeholder sm={9} animation="wave"/>  
 						}
 						{ (playlist.owner == undefined)  

@@ -15,8 +15,6 @@ const AssetDetails = () => {
 	const playlists = useSelector((state) => state.playlists);
 	const [currentLang, setCurrentLang] = useState("English");
 
-console.log(asset)
-
 	const filtered_components = useMemo(() => {
 		return asset?.components ?
 			asset.components.filter(c => (c.lang === currentLang)) :

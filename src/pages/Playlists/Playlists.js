@@ -15,7 +15,6 @@ const Playlists = () => {
 	const [showEdit, setShowEdit] = useState(false);
 	const dispatch = useDispatch();
 	const playlists = useSelector((state) => state.playlists);
-	console.log("playlists", playlists)
 	const assets = useSelector((state) => state.assets);
 
 	const playlist = playlist_id ? playlists.map[playlist_id] : null;

@@ -21,17 +21,21 @@ const AssetsList = () => {
 	const page_start = (filter.page - 1) * assets.pagesize;
 	const page_end = filter.page * assets.pagesize;
 
-
 	useEffect(
 		() => {
 			if (['loading', 'success'].indexOf(assets.status[filter.page]) === -1) {
+				console.log('get assets');
 				dispatch(getAssets(filter));
 			}
 		},
-		[dispatch, filter, assets.status]
+		[dispatch, filter.page, assets.status]
 	);
 
-	useEffect(() => { dispatch(getCategories()) }, [dispatch]);
+	useEffect(() => { 
+		if(['loading', 'success'].indexOf(categories.status) === -1) {
+			dispatch(getCategories());
+		}
+	}, [dispatch, categories]);
 
 	const page_assets = useMemo(
 		() => assets.index.slice(page_start, page_end).map(id => (assets.map[id])), 
@@ -91,4 +95,3 @@ const AssetsList = () => {
 }
 
 export default AssetsList
-
