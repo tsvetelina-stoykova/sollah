@@ -21,14 +21,14 @@ const AssetsList = () => {
 	const page_start = (filter.page - 1) * assets.pagesize;
 	const page_end = filter.page * assets.pagesize;
 
-		useEffect(
+	useEffect(
 		() => {
-			if (['loading', 'success'].indexOf(assets.status[filter.page]) === -1) {
+			if (['loading', 'success'].indexOf(assets.pagestatus[filter.page]) === -1) {
 				console.log('get assets');
 				dispatch(getAssets(filter));
 			}
 		},
-		[dispatch, filter.page, assets.status]
+		[dispatch, filter, assets.pagestatus]
 	);
 
 	useEffect(() => { 
