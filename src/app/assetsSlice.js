@@ -127,6 +127,11 @@ const assetsSlice = createSlice({
 		},
 		[getAsset.fulfilled]: (state, action) => {
 			const asset = action.payload;
+			const related_assets = asset.related_assets;
+			related_assets.forEach(a => {
+				if(!(a.id in state.map)) state.map[a.id] = a;
+			});
+			asset.related_assets = related_assets.map(a => a.id);
 			state.map[asset.id] = asset;
 		},
 		[getPlayUrl.fulfilled]: (state, action) => {

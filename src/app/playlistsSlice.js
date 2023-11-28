@@ -6,7 +6,6 @@ export const listPlaylists = createAsyncThunk(
 		const user = api.getState().auth.user;
 		return await fetch("https://sollahlibrary.com/mapi/4/playlists", {
 			headers: { "x-authorization-token": user.token },
-			mode: "cors",
 		}).then((res) => res.json());
 	}
 );

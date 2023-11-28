@@ -6,11 +6,13 @@ import { useParams } from "react-router-dom";
 import AssetComponent from "../../features/AssetComponent";
 import { DropdownButton, Col, Row, Container, Image, Dropdown, Stack, Button } from "react-bootstrap"; 
 import { IoMdHeart, IoMdHeartEmpty } from "react-icons/io";
+import AssetsItem from '../../features/AssetsItem';
 import "./AssetDetails.css";
 
 const AssetDetails = () => {
 	const { id } = useParams();
 	const dispatch = useDispatch();
+	const assets = useSelector((state) => state.assets);
 	const asset = useSelector((state) => state.assets.map[id]);
 	const playlists = useSelector((state) => state.playlists);
 	const [currentLang, setCurrentLang] = useState("English");
@@ -136,18 +138,9 @@ const AssetDetails = () => {
 							<Row className="section-related-title"><h5>Related Programs & Training Ideas</h5></Row>
 							<Row xs="4" sm={3} style={{backgroundColor: "#f4f4f4"}}>
 								{	asset.related_assets 
-									? asset.related_assets.map( related => <Col key={related.id} className="related-asset-tile">
-											<div className="related-asset-img">
-												<a href={'/' + related.id}>
-													<Image src={related.thumb_url} alt="Related Asset" />
-												</a>
-												
-											</div>								
-											<div className="related-asset-desc">
-												<a href={'/' + related.id}>{related.title}</a>
-												<small>{related.type}</small>
-											</div>
-										</Col>
+									? asset.related_assets.map(id => assets.map[id] ?
+									<AssetsItem key={id} asset={assets.map[id]}/> :
+									<p key={id}>Asset missing: {id}</p>
 									 )
 									: ""
 								}

@@ -1,4 +1,4 @@
-import { NavLink, Outlet } from "react-router-dom";
+import { NavLink, Link, Outlet } from "react-router-dom";
 import logo from "../assets/logo.png";
 import AuthStatus from "../features/AuthStatus";
 import "./Layout.css";
@@ -17,8 +17,10 @@ const Layout = () => {
 			</Navbar>
 			<Navbar collapseOnSelect className="primary-header" expand="lg">
 				<Container>
-					<Navbar.Brand href="/">
-						<img src={logo} alt='Sollah Interactive, LLC' width='230' height='46' />
+					<Navbar.Brand>
+						<Link to="/">
+							<img src={logo} alt='Sollah Interactive, LLC' width='230' height='46' />
+						</Link>
 					</Navbar.Brand>
 					<Navbar.Toggle aria-controls="responsive-navbar" />
 					<Navbar.Collapse id="responsive-navbar" className="justify-content-end">
