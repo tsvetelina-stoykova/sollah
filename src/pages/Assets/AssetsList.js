@@ -21,7 +21,7 @@ const AssetsList = () => {
 	const page_start = (filter.page - 1) * assets.pagesize;
 	const page_end = filter.page * assets.pagesize;
 
-	useEffect(
+		useEffect(
 		() => {
 			if (['loading', 'success'].indexOf(assets.status[filter.page]) === -1) {
 				console.log('get assets');

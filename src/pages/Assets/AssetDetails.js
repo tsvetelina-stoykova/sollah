@@ -21,19 +21,15 @@ const AssetDetails = () => {
 			[];
 	}, [asset?.components, currentLang]);
 
-
-
 	const langs = useMemo(() => {
 		return asset?.components ?
 			asset.components.map(c => c.lang).reduce((langs, l) => (langs.includes(l) ? langs : [...langs, l]), []) :
 			[];
 	}, [asset?.components]);
 
-
 	useEffect(() => {
 		if (!(asset && asset.components)) dispatch(getAsset({ id }));
 	}, [dispatch, id, asset]);
-
 
 	const handleFilterBtn = (e) => {
 		setCurrentLang(e.target.value);
@@ -121,9 +117,7 @@ const AssetDetails = () => {
 										<ul>{asset.competencies.map(c => <li key={c}>{c}</li>)}</ul> :
 										"Loading"
 									}
-								</Col>
-									
-															
+								</Col>					
 							</Row>
 							<Row className="section-title-bg"><h5>Training files</h5></Row>
 							<Row className="section-content-bg">				
@@ -132,13 +126,12 @@ const AssetDetails = () => {
 										<Button variant="link" className="btn-lang" onClick={handleFilterBtn} value={lang}>{lang}</Button>
 									</Col>
 								))}	
-								<h5>Components</h5><br />
-								
-									{filtered_components.length ?
-										filtered_components.map(component => <AssetComponent key={component.id} component={component} />) :
-										"Loading"
-									}
-								
+								<h5>Components</h5>
+								<br />
+								{filtered_components.length ?
+									filtered_components.map(component => <AssetComponent key={component.id} component={component} />) :
+									"Loading"
+								}
 							</Row>
 							<Row className="section-related-title"><h5>Related Programs & Training Ideas</h5></Row>
 							<Row xs="4" sm={3} style={{backgroundColor: "#f4f4f4"}}>
@@ -158,8 +151,6 @@ const AssetDetails = () => {
 									 )
 									: ""
 								}
-							
-								
 							</Row>
 						</Col>	
 					</Row>

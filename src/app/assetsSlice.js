@@ -26,7 +26,7 @@ export const getAssets = createAsyncThunk(
 		}
 
 		api.dispatch({type:'assets/filter', payload: filter});
-		api.dispatch({type:'assets/pending', payload: filter});
+		api.dispatch({type:'assets/loading', payload: filter});
 
 		const result = await fetch(mkurl('https://sollahlibrary.com/mapi/4/assets', 
 		{...filter, offset, limit, page:null}))
@@ -84,7 +84,7 @@ const assetsSlice = createSlice({
 			language_id: '',
 		},
 		count: 0,
-		status: {},
+		pagestatus: {}, // every page has status
 		pagesize: 20,
 		index: [],
 		map: {},
@@ -97,17 +97,17 @@ const assetsSlice = createSlice({
 		'assets/reset': (state, action) => {
 			state.index = [];
 			state.count = 0;
-			state.status = {};
+			state.pagestatus = {};
 			state.pagesize = 20;
 		},
 		'assets/pending': (state, action) => {
 			const filter = action.payload;
-			state.status[filter.page] = 'pending';
+			state.pagestatus[filter.page] = 'pending';
 		},
 		'assets/success': (state, action) => {
 			const filter = action.payload.filter;
 			const {assets} = action.payload;
-			state.status[filter.page] = 'success';
+			state.pagestatus[filter.page] = 'success';
 			for(let a of assets) {
 				if(!(state.map[a.id] && state.map[a.id].components)) {
 					state.map[a.id] = a;
@@ -123,7 +123,7 @@ const assetsSlice = createSlice({
 		},
 		[getAssets.rejected]: (state, action) => {
 			const filter = action.meta.arg;
-			state.status[filter.page] = 'failed';
+			state.pagestatus[filter.page] = 'failed';
 		},
 		[getAsset.fulfilled]: (state, action) => {
 			const asset = action.payload;
