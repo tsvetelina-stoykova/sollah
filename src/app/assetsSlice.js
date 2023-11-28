@@ -25,7 +25,6 @@ export const getAssets = createAsyncThunk(
 			}
 		}
 
-		api.dispatch({type:'assets/filter', payload: filter});
 		api.dispatch({type:'assets/loading', payload: filter});
 
 		const result = await fetch(mkurl('https://sollahlibrary.com/mapi/4/assets', 
@@ -91,18 +90,19 @@ const assetsSlice = createSlice({
 		play: {},
 	},
 	extraReducers: {
-		'assets/filter': (state, action) => {
-			state.filter = action.payload;
-		},
 		'assets/reset': (state, action) => {
 			state.index = [];
 			state.count = 0;
 			state.pagestatus = {};
 			state.pagesize = 20;
 		},
-		'assets/pending': (state, action) => {
+		'assets/filter': (state, action) => {
+			state.filter = action.payload;
+		},
+		'assets/loading': (state, action) => {
 			const filter = action.payload;
-			state.pagestatus[filter.page] = 'pending';
+			state.filter = filter;
+			state.pagestatus[filter.page] = 'loading';
 		},
 		'assets/success': (state, action) => {
 			const filter = action.payload.filter;

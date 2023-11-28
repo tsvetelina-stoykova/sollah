@@ -24,7 +24,6 @@ const AssetsList = () => {
 	useEffect(
 		() => {
 			if (['loading', 'success'].indexOf(assets.pagestatus[filter.page]) === -1) {
-				console.log('get assets');
 				dispatch(getAssets(filter));
 			}
 		},
@@ -42,13 +41,17 @@ const AssetsList = () => {
 		[ assets, page_start, page_end]);
 
 	const changeFilter = (id, val) => {
-		dispatch(getAssets({ ...filter, [id]: val, page: 1 }));
+		if(filter[id] !== val || filter.page !== 1) {
+			dispatch(getAssets({ ...filter, [id]: val, page: 1 }));
+		}
 	}
 
 	const debouncedSearch = useCallback(debounce(changeFilter), [changeFilter]);
 
 	const changePage = (page) => {
-		dispatch(getAssets({ ...filter, page }));
+		if(filter.page !== page) {
+			dispatch({type:'assets/filter', payload: {...filter, page }});
+		}
 	}
 
 	return (
