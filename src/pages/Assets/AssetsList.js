@@ -41,7 +41,7 @@ const AssetsList = () => {
 		[ assets, page_start, page_end]);
 
 	const changeFilter = (id, val) => {
-		if(filter[id] !== val || filter.page !== 1) {
+		if(filter[id] !== val) {
 			dispatch(getAssets({ ...filter, [id]: val, page: 1 }));
 		}
 	}
